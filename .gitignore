@@ -1,0 +1,56 @@
+# =============== #
+# Unity generated #
+# =============== #
+Temp/
+Obj/
+UnityGenerated/
+Library/
+Logs/
+MemoryCaptures/
+
+# ============ #
+# Visual Studio #
+# ============ #
+.vscode/
+.vs/
+*.csproj
+*.pidb
+*.suo
+*.user
+*.userprefs
+*.unityproj
+*.dll
+*.exe
+*.mdb
+*.opendb
+*.VC.db
+*.pdb
+
+# ============== #
+# OS generated #
+# ============== #
+.DS_Store
+Thumbs.db
+
+# ============ #
+# Rider files #
+# ============ #
+.idea/
+.idea_modules/
+
+# ============ #
+# Builds #
+# ============ #
+Build/
+Builds/
+build/
+
+# ==================== #
+# Unity Asset Store #
+# ==================== #
+*.unitypackage
+
+# ==================== #
+# Auto-generated meta #
+# ==================== #
+*.meta
