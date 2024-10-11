@@ -398,7 +398,7 @@ GameObject:
   - component: {fileID: 102070515}
   - component: {fileID: 102070517}
   - component: {fileID: 102070516}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Calculator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -484,7 +484,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad478c0148caf44f9b5df047c45fab6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  calculatorUI: {fileID: 1230573915}
+  interactionUI: {fileID: 1230573915}
+  clickableLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  highlightColor: {r: 1, g: 0.9, b: 0.9, a: 1}
+  defalutColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!60 &102070517
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -6429,7 +6434,7 @@ GameObject:
   - component: {fileID: 1850775642}
   - component: {fileID: 1850775641}
   - component: {fileID: 1850775644}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Radio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6463,7 +6468,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c329c0a88845f54096ec6834ad94192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radioUI: {fileID: 2120569611}
+  interactionUI: {fileID: 2120569611}
+  clickableLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  highlightColor: {r: 1, g: 0.9, b: 0.9, a: 1}
+  defalutColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!60 &1850775642
 PolygonCollider2D:
   m_ObjectHideFlags: 0
