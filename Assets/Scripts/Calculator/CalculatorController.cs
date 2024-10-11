@@ -1,10 +1,10 @@
 using UnityEngine;
 
-namespace Radio
+namespace Calculator
 {
-    public class RadioController : MonoBehaviour
+    public class CalculatorController : MonoBehaviour
     {
-        [SerializeField] private GameObject radioUI;
+        [SerializeField] GameObject calculatorUI;
         
         private SpriteRenderer _spriteRenderer;
         private PolygonCollider2D _collider;
@@ -23,17 +23,17 @@ namespace Radio
                 
                 if (Input.GetMouseButtonDown(0))
                 {
-                    radioUI.SetActive(true);
+                    calculatorUI.SetActive(true);
                 }
             }
             else
             {
                 _spriteRenderer.color = Color.white;
             }
-            
+        
             if (Input.GetKeyUp(KeyCode.Escape))
             {
-                radioUI.SetActive(false);
+                calculatorUI.SetActive(false);
             }
         }
         

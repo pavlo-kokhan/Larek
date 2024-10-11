@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Radio
 {
-    public class RadioPanel : MonoBehaviour
+    public class RadioSubscriber : MonoBehaviour
     {
         [SerializeField] private VolumeInputController volumeInput;
         [SerializeField] private ChannelInputController channelInput;

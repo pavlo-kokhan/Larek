@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Core
@@ -8,27 +8,34 @@ namespace Core
         [SerializeField] private Camera mainCamera;
         [SerializeField] private Collider2D backgroundCollider;
         [SerializeField] private float smoothSpeed = 0.7f;
+        [SerializeField] private List<PanelController> panelControllers;
 
         private Vector3 _velocity = Vector3.zero;
 
-        private void Awake()
+        private void Start()
         {
             Cursor.visible = true;
+
+            foreach (var controller in panelControllers)
+            {
+                controller.PanelActivationChanged += status => gameObject.SetActive(!status);
+            }
         }
 
         private void Update()
         {
-            // Отримуємо світову позицію курсора
             Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-            mousePosition.z = mainCamera.transform.position.z; // Зберігаємо поточну позицію по осі Z
+            mousePosition.z = mainCamera.transform.position.z;
 
-            // Обмежуємо рух камери межами колайдера
             Vector3 clampedPosition = ClampCamera(mousePosition);
 
-            // Плавно рухаємо камеру до нової позиції з використанням SmoothDamp для більшого згладження
-            mainCamera.transform.position = Vector3.SmoothDamp(mainCamera.transform.position, clampedPosition, ref _velocity, smoothSpeed);
+            mainCamera.transform.position = Vector3.SmoothDamp(
+                mainCamera.transform.position, 
+                clampedPosition, 
+                ref _velocity, 
+                smoothSpeed);
         }
-
+        
         private Vector3 ClampCamera(Vector3 targetPosition)
         {
             float cameraHalfHeight = mainCamera.orthographicSize;
