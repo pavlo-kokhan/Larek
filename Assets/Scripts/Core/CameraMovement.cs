@@ -18,7 +18,7 @@ namespace Core
 
             foreach (var controller in panelControllers)
             {
-                controller.PanelActivationChanged += status => gameObject.SetActive(!status);
+                controller.PanelActivationChanged += status => enabled = !status;
             }
         }
 
