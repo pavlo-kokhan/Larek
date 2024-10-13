@@ -3,16 +3,17 @@ using UnityEngine;
 
 namespace Radio
 {
-    public class VolumeInputController : MonoBehaviour
+    public class RadioVolumeInput : MonoBehaviour
     {
         public event Action<float, float, float> VolumeChangedUI;
-        public event Action<float> VolumeChangedSong;
+        public event Action<float> VolumeChanged;
         
-        [SerializeField] private float volume;
         [SerializeField] private float volumeStep;
         
         private readonly float _minSliderValue = 0f;
         private readonly float _maxSliderValue = 100f;
+        
+        private float _volume = 100f;
 
         private void Update()
         {
@@ -33,11 +34,11 @@ namespace Radio
         
         private void ChangeVolume(float changeValue)
         {
-            volume = Mathf.Clamp(volume + changeValue, _minSliderValue, _maxSliderValue);
-            VolumeChangedUI?.Invoke(volume, _minSliderValue, _maxSliderValue);
-            VolumeChangedSong?.Invoke(volume);
+            _volume = Mathf.Clamp(_volume + changeValue, _minSliderValue, _maxSliderValue);
+            VolumeChangedUI?.Invoke(_volume, _minSliderValue, _maxSliderValue);
+            VolumeChanged?.Invoke(_volume);
             
-            Debug.Log($"Volume: {volume}");
+            Debug.Log($"Volume: {_volume}");
         }
     }
 }

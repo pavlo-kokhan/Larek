@@ -16,10 +16,10 @@ namespace Core
         {
             Cursor.visible = true;
 
-            foreach (var controller in panelControllers)
-            {
-                controller.PanelActivationChanged += status => enabled = !status;
-            }
+            // foreach (var controller in panelControllers)
+            // {
+            //     controller.PanelActivationChanged += status => enabled = !status;
+            // }
         }
 
         private void Update()

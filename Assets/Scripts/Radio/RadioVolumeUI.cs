@@ -4,13 +4,16 @@ namespace Radio
 {
     public class RadioVolumeUI : MonoBehaviour
     {
+        [SerializeField] private RadioVolumeInput volumeInput;
+        
         private RectTransform _rectTransform;
         private float _minRotationZ = 330f;
         private float _maxRotationZ = 30f;
 
-        private void Awake()
+        private void Start()
         {
             _rectTransform = GetComponent<RectTransform>();
+            volumeInput.VolumeChangedUI += OnVolumeChanged;
         }
 
         public void OnVolumeChanged(float newVolume, float minVolume, float maxVolume)

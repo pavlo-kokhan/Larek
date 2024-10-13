@@ -26,13 +26,6 @@ namespace Core
 
         public void PlayMusic(AudioClip clip)
         {
-            // if (_currentMusicClip != clip)
-            // {
-            //     _currentMusicClip = clip;
-            //     musicSource.clip = _currentMusicClip;
-            //     musicSource.Play();
-            // }
-            
             _currentMusicClip = clip;
             musicSource.clip = _currentMusicClip;
             musicSource.Play();

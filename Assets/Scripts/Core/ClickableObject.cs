@@ -2,7 +2,7 @@
 
 namespace Core
 {
-    public class ClickableObjectController : MonoBehaviour
+    public class ClickableObject : MonoBehaviour
     {
         [SerializeField] protected GameObject interactionUI;
         [SerializeField] protected LayerMask clickableLayerMask;
@@ -10,7 +10,7 @@ namespace Core
         [SerializeField] protected Color defalutColor = Color.white;
         
         protected SpriteRenderer _spriteRenderer;
-        protected bool _isActive;
+        protected bool _isActiveUI;
 
         protected virtual void Awake()
         {
@@ -19,36 +19,31 @@ namespace Core
 
         protected virtual void Update()
         {
-            if (_isActive)
+            if (_isActiveUI && Input.GetKeyUp(KeyCode.Escape))
             {
-                if (Input.GetKeyUp(KeyCode.Escape))
+                ToggleUI(false);
+            }
+            
+            if (IsMouseOver())
+            {
+                HighlightObject(true);
+
+                if (Input.GetMouseButtonDown(0))
                 {
-                    ToggleUI(false);
+                    ToggleUI(true);
                 }
             }
             else
             {
-                if (IsMouseOver())
-                {
-                    HighlightObject(true);
-                    
-                    if (Input.GetMouseButtonDown(0))
-                    {
-                        ToggleUI(true);
-                    }
-                }
-                else
-                {
-                    HighlightObject(false);
-                }
+                HighlightObject(false);
             }
         }
         
         protected virtual void ToggleUI(bool isActive)
         {
             interactionUI.SetActive(isActive);
-            _isActive = isActive;
-            SetLayersColliderState(!isActive);
+            _isActiveUI = isActive;
+            // SetLayersColliderState(!isActive);
         }
         
         protected virtual void SetLayersColliderState(bool state)
@@ -89,6 +84,11 @@ namespace Core
         protected virtual void HighlightObject(bool isHighlighted)
         {
             _spriteRenderer.color = isHighlighted ? highlightColor : defalutColor;
+        }
+
+        public void ClosePanel()
+        {
+            ToggleUI(false);
         }
     }
 }

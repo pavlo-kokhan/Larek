@@ -4,6 +4,7 @@ namespace Radio
 {
     public class RadioChannelUI : MonoBehaviour
     {
+        [SerializeField] private RadioChannelInput channelInput;
         [SerializeField] private RectTransform cursorRectTransform;
         
         private RectTransform _selectorRectTransform;
@@ -12,10 +13,11 @@ namespace Radio
         private float _minCursorX;
         private float _maxCursorX = 410f;
 
-        private void Awake()
+        private void Start()
         {
             _selectorRectTransform = GetComponent<RectTransform>();
             _minCursorX = cursorRectTransform.anchoredPosition.x;
+            channelInput.ChannelChangedUI += OnChannelChanged;
         }
 
         public void OnChannelChanged(float newChannel, float minChannel, float maxChannel)
