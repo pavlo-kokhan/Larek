@@ -5,15 +5,19 @@ namespace Radio
 {
     public class RadioVolumeInput : MonoBehaviour
     {
-        public event Action<float, float, float> VolumeChangedUI;
-        public event Action<float> VolumeChanged;
+        public event Action<float, float, float> VolumeChanged;
         
         [SerializeField] private float volumeStep;
         
         private readonly float _minSliderValue = 0f;
         private readonly float _maxSliderValue = 100f;
         
-        private float _volume = 100f;
+        private float _volume;
+
+        private void Start()
+        {
+            ChangeVolume(0f);
+        }
 
         private void Update()
         {
@@ -35,8 +39,7 @@ namespace Radio
         private void ChangeVolume(float changeValue)
         {
             _volume = Mathf.Clamp(_volume + changeValue, _minSliderValue, _maxSliderValue);
-            VolumeChangedUI?.Invoke(_volume, _minSliderValue, _maxSliderValue);
-            VolumeChanged?.Invoke(_volume);
+            VolumeChanged?.Invoke(_volume, _minSliderValue, _maxSliderValue);
             
             Debug.Log($"Volume: {_volume}");
         }

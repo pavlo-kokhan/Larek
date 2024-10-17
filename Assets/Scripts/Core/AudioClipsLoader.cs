@@ -8,15 +8,15 @@ namespace Core
     {
         [SerializeField] List<AudioClip> audioClips;
 
-        private void Start()
-        {
-            if (audioClips.Count > 0)
-            {
-                foreach (var song in audioClips)
-                {
-                    song.LoadAudioData();
-                }
-            }
-        }
+        // private void Start()
+        // {
+        //     if (audioClips.Count > 0)
+        //     {
+        //         foreach (var song in audioClips)
+        //         {
+        //             song.LoadAudioData();
+        //         }
+        //     }
+        // }
     }
 }
