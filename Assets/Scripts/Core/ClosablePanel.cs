@@ -5,7 +5,7 @@ namespace Core
 {
     public class ClosablePanel : MonoBehaviour, IPointerClickHandler
     {
-        [SerializeField] private ClickableObject clickableObject;
+        [SerializeField] private ClickableObjectWithUI clickableObjectWithUI;
         
         private RectTransform _rectTransform;
         private Vector3 _startPosition;
@@ -20,7 +20,7 @@ namespace Core
         {
             if (eventData.button == PointerEventData.InputButton.Right)
             {
-                clickableObject.ClosePanel();
+                clickableObjectWithUI.ClosePanel();
                 _rectTransform.anchoredPosition = _startPosition;
             }
         }
