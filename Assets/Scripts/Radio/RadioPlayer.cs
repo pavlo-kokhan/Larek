@@ -1,28 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Core;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Radio
 {
-    // todo
     public class RadioPlayer : MonoBehaviour
     {
         [SerializeField] private RadioVolumeInput volumeInput;
         [SerializeField] private RadioChannelInput channelInput;
-        [SerializeField] private List<AudioClip> songs;
+        [SerializeField] private List<RadioChannel> channels;
 
         private AudioSource _audioSource;
-        private int _currentSongIndex;
+        private float _currentVolume;
 
         private void Start()
         {
-            _audioSource = GetComponent<AudioSource>();
-            
-            ShuffleSongs();
-            PlayCurrentSong();
+            _audioSource = channels.First().AudioSource;
         }
 
         private void OnEnable()
@@ -37,32 +30,39 @@ namespace Radio
             channelInput.ChannelChanged -= OnChannelChanged;
         }
 
-        public void OnVolumeChanged(float volume, float minVolume, float maxVolume)
+        private void OnVolumeChanged(float volume, float minVolume, float maxVolume)
         {
-            var actualVolume = volume / maxVolume;
-            _audioSource.volume = actualVolume;
+            _currentVolume = volume / maxVolume;
+            _audioSource.volume = _currentVolume;
         }
         
-        public void OnChannelChanged(float channel, float minChannel, float maxChannel)
+        private void OnChannelChanged(float channel, float minChannel, float maxChannel)
         {
-            var newSongIndex = Mathf.RoundToInt(channel / maxChannel * (songs.Count - 1));
-
-            if (newSongIndex != _currentSongIndex)
+            var count = channels.Count;
+            
+            if (channel <= 10f)
             {
-                _currentSongIndex = newSongIndex;
-                PlayCurrentSong();
+                SwitchAudioSource(0);
+            }
+            else if (channel > 10 && channel <= 20f && count > 1)
+            {
+                SwitchAudioSource(1);
+            }
+            else if (channel > 20 && channel <= 30f && count > 2)
+            {
+                SwitchAudioSource(2);
+            }
+            else if (channel > 30 && channel <= 40f && count > 3)
+            {
+                SwitchAudioSource(3);
             }
         }
 
-        private void ShuffleSongs()
+        private void SwitchAudioSource(int index)
         {
-            songs = songs.OrderBy(i => Guid.NewGuid()).ToList();
-        }
-
-        private void PlayCurrentSong()
-        {
-            _audioSource.clip = songs[_currentSongIndex];
-            _audioSource.Play();
+            _audioSource.volume = 0f;
+            _audioSource = channels[index].AudioSource;
+            _audioSource.volume = _currentVolume;
         }
     }
 }

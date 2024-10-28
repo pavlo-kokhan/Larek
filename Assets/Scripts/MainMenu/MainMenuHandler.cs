@@ -34,7 +34,7 @@ namespace MainMenu
                 if (confirmed)
                 {
                     Debug.Log("Quit");
-                    // Application.Quit();
+                    Application.Quit();
                 }
             });
         }

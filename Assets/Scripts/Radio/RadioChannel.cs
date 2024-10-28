@@ -1,0 +1,64 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using Random = UnityEngine.Random;
+
+namespace Radio
+{
+    public class RadioChannel : MonoBehaviour
+    {
+        public AudioSource AudioSource => _audioSource;
+        
+        [SerializeField] private List<AudioClip> audioClips;
+        
+        private AudioSource _audioSource;
+        private int _currentSongIndex;
+
+        private void Start()
+        {
+            ShuffleAudioClips();
+            
+            _currentSongIndex = 0;
+            _audioSource = GetComponent<AudioSource>();
+            _audioSource.volume = 0f;
+            _audioSource.clip = audioClips[_currentSongIndex];
+            _audioSource.time = Random.Range(0f, _audioSource.clip.length);
+            _audioSource.Play();
+        }
+
+        private void Update()
+        {
+            if (!_audioSource.isPlaying && _audioSource.time >= _audioSource.clip.length - 0.1f)
+            {
+                PlayNextSong();
+            }
+        }
+
+        private void PlayNextSong()
+        {
+            if (_currentSongIndex < audioClips.Count - 2)
+            {
+                _currentSongIndex += 1;
+                PlayCurrentSong();
+            }
+            else
+            {
+                ShuffleAudioClips();
+                _currentSongIndex = 0;
+                PlayCurrentSong();
+            }
+        }
+
+        private void PlayCurrentSong()
+        {
+            _audioSource.clip = audioClips[_currentSongIndex];
+            _audioSource.Play();
+        }
+        
+        private void ShuffleAudioClips()
+        {
+            audioClips = audioClips.OrderBy(x => Guid.NewGuid()).ToList();
+        }
+    }
+}

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Radio
@@ -12,6 +13,11 @@ namespace Radio
         private float _maxRotationZ = 30f;
         private float _minCursorX;
         private float _maxCursorX = 445f;
+
+        private void OnDisable()
+        {
+            channelInput.ChannelChanged -= OnChannelChanged;
+        }
 
         private void Start()
         {
