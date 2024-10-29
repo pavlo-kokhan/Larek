@@ -10,15 +10,19 @@ namespace Radio
         private float _minRotationZ = 330f;
         private float _maxRotationZ = 30f;
 
+        private void OnEnable()
+        {
+            volumeInput.VolumeChanged += OnVolumeChanged;
+        }
+
         private void OnDisable()
         {
             volumeInput.VolumeChanged -= OnVolumeChanged;
         }
 
-        private void Start()
+        private void Awake()
         {
             _rectTransform = GetComponent<RectTransform>();
-            volumeInput.VolumeChanged += OnVolumeChanged;
         }
 
         private void OnVolumeChanged(float newVolume, float minVolume, float maxVolume)

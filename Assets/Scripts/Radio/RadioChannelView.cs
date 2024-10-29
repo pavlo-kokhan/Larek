@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Radio
@@ -14,16 +13,24 @@ namespace Radio
         private float _minCursorX;
         private float _maxCursorX = 445f;
 
+        private void OnEnable()
+        {
+            channelInput.ChannelChanged += OnChannelChanged;
+        }
+
         private void OnDisable()
         {
             channelInput.ChannelChanged -= OnChannelChanged;
         }
 
-        private void Start()
+        private void Awake()
         {
             _selectorRectTransform = GetComponent<RectTransform>();
+        }
+
+        private void Start()
+        {
             _minCursorX = cursorRectTransform.anchoredPosition.x;
-            channelInput.ChannelChanged += OnChannelChanged;
         }
 
         public void OnChannelChanged(float newChannel, float minChannel, float maxChannel)
