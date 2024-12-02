@@ -1,4 +1,5 @@
-﻿using Core;
+﻿using System;
+using Core;
 using UnityEngine;
 
 namespace Shelves
@@ -6,29 +7,30 @@ namespace Shelves
     public class ShelfSoundsPlayer : MonoBehaviour
     {
         [SerializeField] private ShelfOpener shelfOpener;
+        [SerializeField] private ShelfCloser shelfCloser;
         [SerializeField] private AudioClip openSound;
         [SerializeField] private AudioClip closeSound;
 
         private void OnEnable()
         {
-            shelfOpener.ShelfSwitched += PlayOpenSound;
+            shelfOpener.ShelfOpened += PlayOpenSound;
+            shelfCloser.ShelfClosed += PlayCloseSound;
         }
 
         private void OnDisable() 
         {
-            shelfOpener.ShelfSwitched -= PlayOpenSound;
+            shelfOpener.ShelfOpened -= PlayOpenSound;
+            shelfCloser.ShelfClosed -= PlayCloseSound;
         }
 
-        private void PlayOpenSound(bool isOpened)
+        private void PlayOpenSound()
         {
-            if (isOpened)
-            {
-                AudioManager.Instance.PlaySfx(openSound);
-            }
-            else
-            {
-                AudioManager.Instance.PlaySfx(closeSound);
-            }
+            AudioManager.Instance.PlaySfx(openSound);
+        }
+
+        private void PlayCloseSound()
+        {
+            AudioManager.Instance.PlaySfx(closeSound);
         }
     }
 }

@@ -4,41 +4,20 @@ using UnityEngine.EventSystems;
 
 namespace Shelves
 {
+    [RequireComponent(typeof(Collider2D))]
     public class ShelfOpener : MonoBehaviour, IPointerClickHandler
     {
-        public event Action<bool> ShelfSwitched;
+        public event Action ShelfOpened;
         
         [SerializeField] private ShelfAnimator animator;
-        [SerializeField] private float cooldown;
-
-        private float _timer;
-        private bool _isOpened;
-
-        private void Start()
-        {
-            _timer = cooldown;
-        }
-
-        private void Update()
-        {
-            _timer += Time.deltaTime;
-        }
-
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (_timer > cooldown)
+            if (eventData.button == PointerEventData.InputButton.Left && !animator.IsOpened)
             {
-                ToggleShelf();
-                _timer = 0;
+                animator.Open();
+                ShelfOpened?.Invoke();
             }
-        }
-
-        private void ToggleShelf()
-        {
-            _isOpened = !_isOpened;
-            animator.SetOpened(_isOpened);
-            ShelfSwitched?.Invoke(_isOpened);
         }
     }
 }

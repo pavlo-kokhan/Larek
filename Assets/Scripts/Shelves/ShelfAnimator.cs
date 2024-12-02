@@ -7,10 +7,17 @@ namespace Shelves
         private readonly int Opened = Animator.StringToHash(nameof(Opened));
         
         [SerializeField] private Animator animator;
+        
+        public bool IsOpened => animator.GetBool(Opened);
 
-        public void SetOpened(bool status)
+        public void Open()
         {
-            animator.SetBool(Opened, status);
+            animator.SetBool(Opened, true);
+        }
+        
+        public void Close()
+        {
+            animator.SetBool(Opened, false);
         }
     }
 }

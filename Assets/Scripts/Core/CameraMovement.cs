@@ -1,3 +1,5 @@
+using System;
+using Player;
 using UnityEngine;
 
 namespace Core
@@ -9,34 +11,24 @@ namespace Core
         [SerializeField] private float edgeThreshold = 200f;
         [SerializeField] private float smoothSpeed = 0.7f;
         
+        [SerializeField] private RoomSidesSwitcher roomSidesSwitcher;
+        
         private Vector3 _centerPosition;
         private Vector3 _velocity = Vector3.zero;
         private Vector3 _targetPosition;
-        private CameraPuller[] _cameraPullers;
 
         private void OnEnable()
         {
-            _cameraPullers = FindObjectsOfType<CameraPuller>();
-            Debug.Log(_cameraPullers.Length);
-            foreach (var cameraPuller in _cameraPullers)
-            {
-                // cameraPuller.PointerEntered += OnPullCameraToObject;
-                // cameraPuller.PointerExited += OnStopPullingToObject;
-            }
+            roomSidesSwitcher.RoomSideSwitched += ChangeCameraRoomSide;
         }
 
         private void OnDisable()
         {
-            foreach (var cameraPuller in _cameraPullers)
-            {
-                // cameraPuller.PointerEntered -= OnPullCameraToObject;
-                // cameraPuller.PointerExited -= OnStopPullingToObject;
-            }
+            roomSidesSwitcher.RoomSideSwitched -= ChangeCameraRoomSide;
         }
 
         private void Start()
         {
-            Cursor.visible = true;
             _centerPosition = mainCamera.transform.position;
             _targetPosition = _centerPosition;
         }
@@ -64,17 +56,6 @@ namespace Core
                 smoothSpeed);
         }
 
-        private void OnPullCameraToObject(Vector3 objectPosition)
-        {
-            _targetPosition = ClampCamera(objectPosition);
-            _targetPosition.z = _centerPosition.z;
-        }
-
-        private void OnStopPullingToObject()
-        {
-            _targetPosition = _centerPosition;
-        }
-        
         private bool IsMouseNearEdge(Vector3 mousePosition)
         {
             float screenWidth = Screen.width;
@@ -103,6 +84,19 @@ namespace Core
                 Mathf.Clamp(targetPosition.y, minY, maxY),
                 targetPosition.z
             );
+        }
+
+        private void ChangeCameraRoomSide(Collider2D newCollider, Vector3 newCenterPosition)
+        {
+            var oldCameraPosition = mainCamera.transform.position;
+            
+            backgroundCollider = newCollider;
+            _centerPosition = new Vector3(newCenterPosition.x, newCenterPosition.y, oldCameraPosition.z);
+            _targetPosition = _centerPosition;
+
+            _velocity = Vector3.zero;
+
+            mainCamera.transform.position = _centerPosition;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Core
         
         private RectTransform _rectTransform;
 
-        private void Start()
+        private void Awake()
         {
             _rectTransform = GetComponent<RectTransform>();
         }

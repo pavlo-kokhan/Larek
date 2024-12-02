@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Core
@@ -10,9 +11,13 @@ namespace Core
         private RectTransform _rectTransform;
         private Vector3 _startPosition;
 
-        private void Start()
+        private void Awake()
         {
             _rectTransform = GetComponent<RectTransform>();
+        }
+
+        private void Start()
+        {
             _startPosition = _rectTransform.anchoredPosition;
         }
 
