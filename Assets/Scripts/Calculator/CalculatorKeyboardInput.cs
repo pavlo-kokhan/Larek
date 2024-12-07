@@ -1,64 +1,54 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Calculator
 {
     public class CalculatorKeyboardInput : MonoBehaviour
     {
         [SerializeField] private CalculatorInput calculatorInput;
+        
+        private readonly Dictionary<KeyCode, Action> _keyActions = new();
 
-        private void Update()
-        {
-            HandleInput();
-        }
-
-        private void HandleInput()
+        private void Awake()
         {
             for (int i = 0; i <= 9; i++)
             {
-                if (Input.GetKeyDown(i.ToString()))
+                int digit = i;
+                _keyActions[KeyCode.Alpha0 + i] = () => calculatorInput.OnInputButtonPressed(digit.ToString());
+                _keyActions[KeyCode.Keypad0 + i] = () => calculatorInput.OnInputButtonPressed(digit.ToString());
+            }
+            
+            _keyActions[KeyCode.Period] = calculatorInput.OnDecimalPointPressed;
+            _keyActions[KeyCode.Comma] = calculatorInput.OnDecimalPointPressed;
+            
+            _keyActions[KeyCode.Plus] = () => calculatorInput.OnArithmeticalOperatorButtonPressed("+");
+            _keyActions[KeyCode.KeypadPlus] = () => calculatorInput.OnArithmeticalOperatorButtonPressed("+");
+            
+            _keyActions[KeyCode.Minus] = () => calculatorInput.OnArithmeticalOperatorButtonPressed("-");
+            _keyActions[KeyCode.KeypadMinus] = () => calculatorInput.OnArithmeticalOperatorButtonPressed("-");
+            
+            _keyActions[KeyCode.Asterisk] = () => calculatorInput.OnArithmeticalOperatorButtonPressed("*");
+            _keyActions[KeyCode.KeypadMultiply] = () => calculatorInput.OnArithmeticalOperatorButtonPressed("*");
+            
+            _keyActions[KeyCode.Slash] = () => calculatorInput.OnArithmeticalOperatorButtonPressed("/");
+            _keyActions[KeyCode.KeypadDivide] = () => calculatorInput.OnArithmeticalOperatorButtonPressed("/");
+            
+            _keyActions[KeyCode.Equals] = calculatorInput.OnEqualButtonPressed;
+            _keyActions[KeyCode.KeypadEnter] = calculatorInput.OnEqualButtonPressed;
+            
+            _keyActions[KeyCode.Backspace] = calculatorInput.OnBackButtonPressed;
+            _keyActions[KeyCode.C] = calculatorInput.OnClearButtonPressed;
+        }
+
+        private void Update()
+        {
+            foreach (var action in _keyActions)
+            {
+                if (Input.GetKeyDown(action.Key))
                 {
-                    calculatorInput.OnInputButtonPressed(i.ToString());
+                    action.Value.Invoke();
                 }
-            }
-            
-            if (Input.GetKeyDown(KeyCode.Period) || Input.GetKeyDown(KeyCode.Comma))
-            {
-                calculatorInput.OnDecimalPointPressed();
-            }
-            
-            if (Input.GetKeyDown(KeyCode.Plus) || Input.GetKeyDown(KeyCode.KeypadPlus))
-            {
-                calculatorInput.OnArithmeticalOperatorButtonPressed("+");
-            }
-            
-            if (Input.GetKeyDown(KeyCode.Minus) || Input.GetKeyDown(KeyCode.KeypadMinus))
-            {
-                calculatorInput.OnArithmeticalOperatorButtonPressed("-");
-            }
-            
-            if (Input.GetKeyDown(KeyCode.Asterisk) || Input.GetKeyDown(KeyCode.KeypadMultiply))
-            {
-                calculatorInput.OnArithmeticalOperatorButtonPressed("*");
-            }
-            
-            if (Input.GetKeyDown(KeyCode.Slash) || Input.GetKeyDown(KeyCode.KeypadDivide))
-            {
-                calculatorInput.OnArithmeticalOperatorButtonPressed("/");
-            }
-            
-            if (Input.GetKeyDown(KeyCode.Equals) || Input.GetKeyDown(KeyCode.KeypadEnter))
-            {
-                calculatorInput.OnEqualButtonPressed();
-            }
-            
-            if (Input.GetKeyDown(KeyCode.Backspace))
-            {
-                calculatorInput.OnBackButtonPressed();
-            }
-            
-            if (Input.GetKeyDown(KeyCode.C))
-            {
-                calculatorInput.OnClearButtonPressed();
             }
         }
     }

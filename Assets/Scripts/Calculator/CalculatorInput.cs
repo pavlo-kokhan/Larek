@@ -61,7 +61,7 @@ namespace Calculator
 
         public void OnDecimalPointPressed()
         {
-            string[] parts = _expression.Split(new char[] { '+', '-', '*', '/' });
+            string[] parts = _expression.Split('+', '-', '*', '/');
             if (!parts[^1].Contains("."))
             {
                 _expression += ".";

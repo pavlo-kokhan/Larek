@@ -1,4 +1,5 @@
 ﻿using System;
+using Gates.Animations;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
