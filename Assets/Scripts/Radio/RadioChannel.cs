@@ -10,7 +10,7 @@ namespace Radio
     {
         public AudioSource AudioSource => _audioSource;
         
-        [SerializeField] private List<AudioClip> audioClips;
+        [SerializeField] private List<AudioClip> _audioClips;
         
         private AudioSource _audioSource;
         private int _currentSongIndex;
@@ -22,7 +22,7 @@ namespace Radio
             _currentSongIndex = 0;
             _audioSource = GetComponent<AudioSource>();
             _audioSource.volume = 0f;
-            _audioSource.clip = audioClips[_currentSongIndex];
+            _audioSource.clip = _audioClips[_currentSongIndex];
             _audioSource.time = Random.Range(0f, _audioSource.clip.length);
             _audioSource.Play();
         }
@@ -37,7 +37,7 @@ namespace Radio
 
         private void PlayNextSong()
         {
-            if (_currentSongIndex < audioClips.Count - 2)
+            if (_currentSongIndex < _audioClips.Count - 2)
             {
                 _currentSongIndex += 1;
                 PlayCurrentSong();
@@ -52,13 +52,13 @@ namespace Radio
 
         private void PlayCurrentSong()
         {
-            _audioSource.clip = audioClips[_currentSongIndex];
+            _audioSource.clip = _audioClips[_currentSongIndex];
             _audioSource.Play();
         }
         
         private void ShuffleAudioClips()
         {
-            audioClips = audioClips.OrderBy(x => Guid.NewGuid()).ToList();
+            _audioClips = _audioClips.OrderBy(x => Guid.NewGuid()).ToList();
         }
     }
 }

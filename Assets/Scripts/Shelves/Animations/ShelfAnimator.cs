@@ -4,20 +4,20 @@ namespace Shelves.Animations
 {
     public class ShelfAnimator : MonoBehaviour
     {
-        private readonly int Opened = Animator.StringToHash(nameof(Opened));
+        private static readonly int Opened = Animator.StringToHash(nameof(Opened));
         
-        [SerializeField] private Animator animator;
+        [SerializeField] private Animator _animator;
         
-        public bool IsOpened => animator.GetBool(Opened);
+        public bool IsOpened => _animator.GetBool(Opened);
 
         public void Open()
         {
-            animator.SetBool(Opened, true);
+            _animator.SetBool(Opened, true);
         }
         
         public void Close()
         {
-            animator.SetBool(Opened, false);
+            _animator.SetBool(Opened, false);
         }
     }
 }

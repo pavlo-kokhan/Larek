@@ -10,15 +10,15 @@ namespace Gates
     {
         public event Action<bool> GatesSwitched;
         
-        [SerializeField] private GatesAnimator animator;
-        [SerializeField] private float cooldown = 3f;
+        [SerializeField] private GatesAnimator _animator;
+        [SerializeField] private float _cooldown = 3f;
         
         private float _timer;
         private bool _isOpened;
 
         private void Start()
         {
-            _timer = cooldown;
+            _timer = _cooldown;
         }
 
         private void Update()
@@ -28,7 +28,7 @@ namespace Gates
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (_timer > cooldown)
+            if (_timer > _cooldown)
             {
                 ToggleGates();
                 _timer = 0f;
@@ -38,7 +38,7 @@ namespace Gates
         private void ToggleGates()
         {
             _isOpened = !_isOpened;
-            animator.SetOpened(_isOpened);
+            _animator.SetOpened(_isOpened);
             GatesSwitched?.Invoke(_isOpened);
         }
     }

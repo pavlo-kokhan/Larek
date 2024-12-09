@@ -6,9 +6,9 @@ namespace Cursor
     {
         public static CursorView Instance { get; private set; }
         
-        [SerializeField] private Texture2D idleTexture;
-        [SerializeField] private Texture2D questionTexture;
-        [SerializeField] private Texture2D exclamationTexture;
+        [SerializeField] private Texture2D _idleTexture;
+        [SerializeField] private Texture2D _questionTexture;
+        [SerializeField] private Texture2D _exclamationTexture;
         
         private void Awake()
         {
@@ -37,17 +37,17 @@ namespace Cursor
                     SetDefaultCursorTexture();
                     break;
                 case CursorTextureMode.Question:
-                    UnityEngine.Cursor.SetCursor(questionTexture, Vector2.zero, CursorMode.Auto);
+                    UnityEngine.Cursor.SetCursor(_questionTexture, Vector2.zero, CursorMode.Auto);
                     break;
                 case CursorTextureMode.Exclamation:
-                    UnityEngine.Cursor.SetCursor(exclamationTexture, Vector2.zero, CursorMode.Auto);
+                    UnityEngine.Cursor.SetCursor(_exclamationTexture, Vector2.zero, CursorMode.Auto);
                     break;
             }
         }
 
         public void SetDefaultCursorTexture()
         {
-            UnityEngine.Cursor.SetCursor(idleTexture, Vector2.zero, CursorMode.Auto);
+            UnityEngine.Cursor.SetCursor(_idleTexture, Vector2.zero, CursorMode.Auto);
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Calculator
 {
     public class CalculatorKeyboardInput : MonoBehaviour
     {
-        [SerializeField] private CalculatorInput calculatorInput;
+        [SerializeField] private CalculatorInput _calculatorInput;
         
         private readonly Dictionary<KeyCode, Action> _keyActions = new();
 
@@ -15,30 +15,30 @@ namespace Calculator
             for (int i = 0; i <= 9; i++)
             {
                 int digit = i;
-                _keyActions[KeyCode.Alpha0 + i] = () => calculatorInput.OnInputButtonPressed(digit.ToString());
-                _keyActions[KeyCode.Keypad0 + i] = () => calculatorInput.OnInputButtonPressed(digit.ToString());
+                _keyActions[KeyCode.Alpha0 + i] = () => _calculatorInput.OnInputButtonPressed(digit.ToString());
+                _keyActions[KeyCode.Keypad0 + i] = () => _calculatorInput.OnInputButtonPressed(digit.ToString());
             }
             
-            _keyActions[KeyCode.Period] = calculatorInput.OnDecimalPointPressed;
-            _keyActions[KeyCode.Comma] = calculatorInput.OnDecimalPointPressed;
+            _keyActions[KeyCode.Period] = _calculatorInput.OnDecimalPointPressed;
+            _keyActions[KeyCode.Comma] = _calculatorInput.OnDecimalPointPressed;
             
-            _keyActions[KeyCode.Plus] = () => calculatorInput.OnArithmeticalOperatorButtonPressed("+");
-            _keyActions[KeyCode.KeypadPlus] = () => calculatorInput.OnArithmeticalOperatorButtonPressed("+");
+            _keyActions[KeyCode.Plus] = () => _calculatorInput.OnArithmeticalOperatorButtonPressed("+");
+            _keyActions[KeyCode.KeypadPlus] = () => _calculatorInput.OnArithmeticalOperatorButtonPressed("+");
             
-            _keyActions[KeyCode.Minus] = () => calculatorInput.OnArithmeticalOperatorButtonPressed("-");
-            _keyActions[KeyCode.KeypadMinus] = () => calculatorInput.OnArithmeticalOperatorButtonPressed("-");
+            _keyActions[KeyCode.Minus] = () => _calculatorInput.OnArithmeticalOperatorButtonPressed("-");
+            _keyActions[KeyCode.KeypadMinus] = () => _calculatorInput.OnArithmeticalOperatorButtonPressed("-");
             
-            _keyActions[KeyCode.Asterisk] = () => calculatorInput.OnArithmeticalOperatorButtonPressed("*");
-            _keyActions[KeyCode.KeypadMultiply] = () => calculatorInput.OnArithmeticalOperatorButtonPressed("*");
+            _keyActions[KeyCode.Asterisk] = () => _calculatorInput.OnArithmeticalOperatorButtonPressed("*");
+            _keyActions[KeyCode.KeypadMultiply] = () => _calculatorInput.OnArithmeticalOperatorButtonPressed("*");
             
-            _keyActions[KeyCode.Slash] = () => calculatorInput.OnArithmeticalOperatorButtonPressed("/");
-            _keyActions[KeyCode.KeypadDivide] = () => calculatorInput.OnArithmeticalOperatorButtonPressed("/");
+            _keyActions[KeyCode.Slash] = () => _calculatorInput.OnArithmeticalOperatorButtonPressed("/");
+            _keyActions[KeyCode.KeypadDivide] = () => _calculatorInput.OnArithmeticalOperatorButtonPressed("/");
             
-            _keyActions[KeyCode.Equals] = calculatorInput.OnEqualButtonPressed;
-            _keyActions[KeyCode.KeypadEnter] = calculatorInput.OnEqualButtonPressed;
+            _keyActions[KeyCode.Equals] = _calculatorInput.OnEqualButtonPressed;
+            _keyActions[KeyCode.KeypadEnter] = _calculatorInput.OnEqualButtonPressed;
             
-            _keyActions[KeyCode.Backspace] = calculatorInput.OnBackButtonPressed;
-            _keyActions[KeyCode.C] = calculatorInput.OnClearButtonPressed;
+            _keyActions[KeyCode.Backspace] = _calculatorInput.OnBackButtonPressed;
+            _keyActions[KeyCode.C] = _calculatorInput.OnClearButtonPressed;
         }
 
         private void Update()

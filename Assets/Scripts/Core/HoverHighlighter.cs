@@ -6,8 +6,8 @@ namespace Core
     [RequireComponent(typeof(SpriteRenderer), typeof(Collider2D))]
     public class HoverHighlighter : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        [SerializeField] private Color highlightColor = new Color(1f, 0.9f, 0.9f);
-        [SerializeField] private Color defaultColor = Color.white;
+        [SerializeField] private Color _highlightColor = new (1f, 0.9f, 0.9f);
+        [SerializeField] private Color _defaultColor = Color.white;
         
         private SpriteRenderer _spriteRenderer;
 
@@ -28,7 +28,7 @@ namespace Core
         
         private void HighlightObject(bool isHighlighted)
         {
-            _spriteRenderer.color = isHighlighted ? highlightColor : defaultColor;
+            _spriteRenderer.color = isHighlighted ? _highlightColor : _defaultColor;
         }
     }
 }

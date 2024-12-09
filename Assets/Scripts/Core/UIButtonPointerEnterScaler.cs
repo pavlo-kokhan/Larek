@@ -5,8 +5,8 @@ namespace Core
 {
     public class UIButtonPointerEnterScaler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        [SerializeField] private Vector3 hoveredScale;
-        [SerializeField] private float scaleSpeed;
+        [SerializeField] private Vector3 _hoveredScale = new (1.1f, 1.1f, 1.1f);
+        [SerializeField] private float _scaleSpeed = 0.1f;
 
         private RectTransform _rectTransform;
         private Vector3 _idleScale;
@@ -24,15 +24,15 @@ namespace Core
             {
                 _rectTransform.localScale = Vector3.Lerp(
                     _rectTransform.localScale, 
-                    hoveredScale, 
-                    scaleSpeed);
+                    _hoveredScale, 
+                    _scaleSpeed);
             }
             else
             {
                 _rectTransform.localScale = Vector3.Lerp(
                     _rectTransform.localScale, 
                     _idleScale, 
-                    scaleSpeed);
+                    _scaleSpeed);
             }
         }
 

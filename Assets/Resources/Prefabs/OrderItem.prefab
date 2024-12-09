@@ -226,10 +226,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f9c9d6902364652a273664038c90302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemToggle: {fileID: 2535564607681441361}
-  itemNameText: {fileID: 1718835090069728386}
-  quantityInput: {fileID: 1763405214565806867}
-  priceText: {fileID: 1697241714341526474}
+  _itemToggle: {fileID: 2535564607681441361}
+  _itemNameText: {fileID: 1718835090069728386}
+  _quantityInput: {fileID: 1763405214565806867}
+  _priceText: {fileID: 1697241714341526474}
 --- !u!1 &6111783449794102146
 GameObject:
   m_ObjectHideFlags: 0

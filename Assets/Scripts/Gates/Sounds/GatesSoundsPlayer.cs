@@ -5,30 +5,24 @@ namespace Gates.Sounds
 {
     public class GatesSoundsPlayer : MonoBehaviour
     {
-        [SerializeField] private GatesSwitcher gatesSwitcher;
-        [SerializeField] private AudioClip openSound;
-        [SerializeField] private AudioClip closeSound;
+        [SerializeField] private GatesSwitcher _gatesSwitcher;
+        [SerializeField] private AudioClip _openSound;
+        [SerializeField] private AudioClip _closeSound;
 
         private void OnEnable()
         {
-            gatesSwitcher.GatesSwitched += PlaySound;
+            _gatesSwitcher.GatesSwitched += PlaySound;
         }
 
         private void OnDisable()
         {
-            gatesSwitcher.GatesSwitched -= PlaySound;
+            _gatesSwitcher.GatesSwitched -= PlaySound;
         }
 
         private void PlaySound(bool isOpen)
         {
-            if (isOpen)
-            {
-                AudioManager.Instance.PlaySfx(openSound);
-            }
-            else
-            {
-                AudioManager.Instance.PlaySfx(closeSound);
-            }
+            var clip = isOpen ? _openSound : _closeSound;
+            AudioManager.Instance.PlaySfx(clip);
         }
     }
 }

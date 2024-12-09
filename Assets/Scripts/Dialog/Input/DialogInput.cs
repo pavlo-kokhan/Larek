@@ -5,7 +5,7 @@ namespace Dialog.Input
 {
     public class DialogInput : MonoBehaviour
     {
-        [SerializeField] private TMP_Text displayMessage;
+        [SerializeField] private TMP_Text _displayMessage;
 
         private string _currentMessage;
         private string _previousMessage;

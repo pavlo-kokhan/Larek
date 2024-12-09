@@ -4,7 +4,7 @@ namespace Core.Camera
 {
     public class CameraFollow : MonoBehaviour
     {
-        [SerializeField] private Transform target;
+        [SerializeField] private Transform _target;
 
         private Vector3 _initialPosition;
 
@@ -15,7 +15,7 @@ namespace Core.Camera
 
         private void Update()
         {
-            transform.position = new Vector3(target.position.x, target.position.y, _initialPosition.z);
+            transform.position = new Vector3(_target.position.x, _target.position.y, _initialPosition.z);
         }
     }
 }

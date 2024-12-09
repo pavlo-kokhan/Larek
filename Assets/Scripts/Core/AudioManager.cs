@@ -6,7 +6,7 @@ namespace Core
     {
         public static AudioManager Instance { get; private set; }
 
-        [SerializeField] private AudioSource sfxSource;
+        [SerializeField] private AudioSource _soundEffectsSource;
 
         private void Awake()
         {
@@ -23,12 +23,12 @@ namespace Core
 
         public void PlaySfx(AudioClip clip)
         {
-            sfxSource.PlayOneShot(clip);
+            _soundEffectsSource.PlayOneShot(clip);
         }
 
         public void SetSfxVolume(float volume)
         {
-            sfxSource.volume = volume;
+            _soundEffectsSource.volume = volume;
         }
     }
 }

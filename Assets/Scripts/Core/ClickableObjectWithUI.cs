@@ -1,16 +1,19 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Core
 {
     [RequireComponent(typeof(Collider2D))]
-    public class ClickableObjectWithUI : MonoBehaviour, IPointerClickHandler
+    public sealed class ClickableObjectWithUI : MonoBehaviour, IPointerClickHandler
     {
-        [SerializeField] private GameObject interactionUI;
+        public event Action PanelOpened;
+        
+        [SerializeField] private GameObject _interactionUI;
         
         private bool _isActiveUI;
 
-        protected virtual void Update()
+        private void Update()
         {
             if (_isActiveUI && Input.GetKeyUp(KeyCode.Escape))
             {
@@ -23,12 +26,13 @@ namespace Core
             if (eventData.button == PointerEventData.InputButton.Left)
             {
                 ToggleUI(true);
+                PanelOpened?.Invoke();
             }
         }
         
         private void ToggleUI(bool isActive)
         {
-            interactionUI.SetActive(isActive);
+            _interactionUI.SetActive(isActive);
             _isActiveUI = isActive;
         }
         

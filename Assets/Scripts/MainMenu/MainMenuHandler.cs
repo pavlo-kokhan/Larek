@@ -3,6 +3,8 @@ using UnityEngine.SceneManagement;
 
 namespace MainMenu
 {
+    // todo
+    // -------- refactor ---------- //
     public class MainMenuHandler : MonoBehaviour
     {
         [SerializeField] private DialogPanelManager dialogPanelManager;

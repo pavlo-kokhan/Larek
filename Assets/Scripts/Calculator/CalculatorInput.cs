@@ -9,8 +9,8 @@ namespace Calculator
 {
     public class CalculatorInput : MonoBehaviour
     {
-        [SerializeField] private TMP_Text expressionDisplay;
-        [SerializeField] private TMP_Text resultDisplay;
+        [SerializeField] private TMP_Text _expressionDisplay;
+        [SerializeField] private TMP_Text _resultDisplay;
         
         private string _expression = "";
         private float _memory;
@@ -23,7 +23,7 @@ namespace Calculator
             }
             
             _expression += input;
-            expressionDisplay.text = _expression;
+            _expressionDisplay.text = _expression;
         }
         
         public void OnArithmeticalOperatorButtonPressed(string operatorSymbol)
@@ -31,7 +31,7 @@ namespace Calculator
             if (!string.IsNullOrEmpty(_expression) && !IsOperator(_expression[^1].ToString()))
             {
                 _expression += operatorSymbol;
-                expressionDisplay.text = _expression;
+                _expressionDisplay.text = _expression;
             }
         }
 
@@ -40,14 +40,14 @@ namespace Calculator
             if (!string.IsNullOrEmpty(_expression))
             {
                 _expression = $"sqrt({_expression})";
-                expressionDisplay.text = _expression;
+                _expressionDisplay.text = _expression;
             }
         }
         
         public void OnEqualButtonPressed()
         {
             string result = CalculateResult(_expression);
-            resultDisplay.text = "= " + result;
+            _resultDisplay.text = "= " + result;
         }
 
         public void OnBackButtonPressed()
@@ -55,7 +55,7 @@ namespace Calculator
             if (_expression.Length > 0)
             {
                 _expression = _expression.Remove(_expression.Length - 1);
-                expressionDisplay.text = string.IsNullOrEmpty(_expression) ? "0" : _expression;
+                _expressionDisplay.text = string.IsNullOrEmpty(_expression) ? "0" : _expression;
             }
         }
 
@@ -65,20 +65,20 @@ namespace Calculator
             if (!parts[^1].Contains("."))
             {
                 _expression += ".";
-                expressionDisplay.text = _expression;
+                _expressionDisplay.text = _expression;
             }
         }
         
         public void OnClearButtonPressed()
         {
             ClearExpression();
-            resultDisplay.text = "=";
+            _resultDisplay.text = "=";
         }
         
         private void ClearExpression()
         {
             _expression = "";
-            expressionDisplay.text = "0";
+            _expressionDisplay.text = "0";
         }
 
         public void OnMemoryClearButtonPressed()
@@ -89,7 +89,7 @@ namespace Calculator
         public void OnMemoryRecallButtonPressed()
         {
             _expression = _memory.ToString(CultureInfo.InvariantCulture);
-            expressionDisplay.text = _expression;
+            _expressionDisplay.text = _expression;
         }
 
         public void OnMemoryAddButtonPressed()

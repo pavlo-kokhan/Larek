@@ -5,31 +5,31 @@ namespace Radio
 {
     public class RadioChannelView : MonoBehaviour
     {
-        [SerializeField] private RadioSliderInput sliderInput;
-        [SerializeField] RectTransform cursorRectTransform;
-        [SerializeField] private float maxCursorX = 445f;
+        [SerializeField] private RadioSliderInput _sliderInput;
+        [SerializeField] RectTransform _cursorRectTransform;
+        [SerializeField] private float _maxCursorX = 445f;
         
         private float _minCursorX;
 
         private void OnEnable()
         {
-            sliderInput.SliderValueChanged += OnChannelChanged;
+            _sliderInput.SliderValueChanged += OnChannelChanged;
         }
 
         private void OnDisable()
         {
-            sliderInput.SliderValueChanged -= OnChannelChanged;
+            _sliderInput.SliderValueChanged -= OnChannelChanged;
         }
 
         private void Start()
         {
-            _minCursorX = cursorRectTransform.anchoredPosition.x;
+            _minCursorX = _cursorRectTransform.anchoredPosition.x;
         }
 
         private void OnChannelChanged(float newValue, float minValue, float maxValue)
         {
-            float newCursorX = Mathf.Lerp(_minCursorX, maxCursorX, newValue / maxValue);
-            cursorRectTransform.anchoredPosition = new Vector2(newCursorX, cursorRectTransform.anchoredPosition.y);
+            float newCursorX = Mathf.Lerp(_minCursorX, _maxCursorX, newValue / maxValue);
+            _cursorRectTransform.anchoredPosition = new Vector2(newCursorX, _cursorRectTransform.anchoredPosition.y);
         }
     }
 }

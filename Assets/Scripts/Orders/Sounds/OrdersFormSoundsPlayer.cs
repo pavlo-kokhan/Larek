@@ -5,19 +5,19 @@ namespace Orders.Sounds
 {
     public class OrdersFormSoundsPlayer : MonoBehaviour
     {
-        [SerializeField] private OrderFormInput orderFormInput;
-        [SerializeField] private AudioClip pageTurningSound;
+        [SerializeField] private OrderFormInput _orderFormInput;
+        [SerializeField] private AudioClip _pageTurningSound;
 
         private AudioSource _audioSource;
 
         private void OnEnable()
         {
-            orderFormInput.PageTurned += OnPageTurned;
+            _orderFormInput.PageTurned += OnPageTurned;
         }
 
         private void OnDisable()
         {
-            orderFormInput.PageTurned -= OnPageTurned;
+            _orderFormInput.PageTurned -= OnPageTurned;
         }
 
         private void Start()
@@ -27,7 +27,7 @@ namespace Orders.Sounds
 
         private void OnPageTurned(bool isHumanPage)
         {
-            _audioSource.PlayOneShot(pageTurningSound);
+            _audioSource.PlayOneShot(_pageTurningSound);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 
 namespace Notebook.Input
@@ -8,20 +9,23 @@ namespace Notebook.Input
     {
         public event Action PageTurned;
         
-        [SerializeField] private TMP_InputField leftPageInputField;
-        [SerializeField] private TMP_InputField rightPageInputField;
-        [SerializeField] private TMP_Text leftPageNumber;
-        [SerializeField] private TMP_Text rightPageNumber;
-        [SerializeField] private float pageTurnCooldown;
+        [SerializeField] private TMP_InputField _leftPageInputField;
+        [SerializeField] private TMP_InputField _rightPageInputField;
+        
+        [SerializeField] private TMP_Text _leftPageNumber;
+        [SerializeField] private TMP_Text _rightPageNumber;
+        
+        [SerializeField] private float _pageTurnCooldown = 0.5f;
 
         private const int TotalPages = 36;
         private readonly string[] _pages = new string[TotalPages];
+        
         private int _currentPageIndex;
         private float _pageTurnTimer;
         
         private void Start()
         {
-            _pageTurnTimer = pageTurnCooldown;
+            _pageTurnTimer = _pageTurnCooldown;
             
             for (int i = 0; i < TotalPages; i++)
             {
@@ -30,10 +34,10 @@ namespace Notebook.Input
 
             UpdatePageText();
 
-            leftPageInputField.text = "Hello! You can type here whatever you want";
+            _leftPageInputField.text = "Художник лох";
 
-            leftPageInputField.textComponent.enableWordWrapping = true;
-            rightPageInputField.textComponent.enableWordWrapping = true;
+            _leftPageInputField.textComponent.enableWordWrapping = true;
+            _rightPageInputField.textComponent.enableWordWrapping = true;
         }
 
         private void Update()
@@ -45,7 +49,7 @@ namespace Notebook.Input
         {
             if (_currentPageIndex < TotalPages - 2)
             {
-                if (_pageTurnTimer >= pageTurnCooldown)
+                if (_pageTurnTimer >= _pageTurnCooldown)
                 {
                     TurnPage(2); 
                 } 
@@ -58,9 +62,9 @@ namespace Notebook.Input
 
         public void OnPreviousButtonPressed()
         {
-            if (_currentPageIndex > 0 && _pageTurnTimer >= pageTurnCooldown)
+            if (_currentPageIndex > 0 && _pageTurnTimer >= _pageTurnCooldown)
             {
-                if (_pageTurnTimer >= pageTurnCooldown)
+                if (_pageTurnTimer >= _pageTurnCooldown)
                 {
                     TurnPage(-2); 
                 }   
@@ -82,17 +86,17 @@ namespace Notebook.Input
         
         private void SaveCurrentPages()
         {
-            _pages[_currentPageIndex] = leftPageInputField.text;
-            _pages[_currentPageIndex + 1] = rightPageInputField.text;
+            _pages[_currentPageIndex] = _leftPageInputField.text;
+            _pages[_currentPageIndex + 1] = _rightPageInputField.text;
         }
         
         private void UpdatePageText()
         {
-            leftPageInputField.text = _pages[_currentPageIndex];
-            rightPageInputField.text = _pages[_currentPageIndex + 1];
+            _leftPageInputField.text = _pages[_currentPageIndex];
+            _rightPageInputField.text = _pages[_currentPageIndex + 1];
 
-            leftPageNumber.text = (_currentPageIndex + 1).ToString();
-            rightPageNumber.text = (_currentPageIndex + 2).ToString();
+            _leftPageNumber.text = (_currentPageIndex + 1).ToString();
+            _rightPageNumber.text = (_currentPageIndex + 2).ToString();
         }
     }
 }

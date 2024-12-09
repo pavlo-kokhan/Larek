@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 namespace MainMenu
 {
+    // todo
+    // -------- refactor ---------- //
     public class DialogPanelManager : MonoBehaviour
     {
         [SerializeField] private GameObject dialogPanel;

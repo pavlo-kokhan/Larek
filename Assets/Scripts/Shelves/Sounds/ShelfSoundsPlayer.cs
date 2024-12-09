@@ -5,31 +5,31 @@ namespace Shelves.Sounds
 {
     public class ShelfSoundsPlayer : MonoBehaviour
     {
-        [SerializeField] private ShelfOpener shelfOpener;
-        [SerializeField] private ShelfCloser shelfCloser;
-        [SerializeField] private AudioClip openSound;
-        [SerializeField] private AudioClip closeSound;
+        [SerializeField] private ShelfOpener _shelfOpener;
+        [SerializeField] private ShelfCloser _shelfCloser;
+        [SerializeField] private AudioClip _openSound;
+        [SerializeField] private AudioClip _closeSound;
 
         private void OnEnable()
         {
-            shelfOpener.ShelfOpened += PlayOpenSound;
-            shelfCloser.ShelfClosed += PlayCloseSound;
+            _shelfOpener.ShelfOpened += PlayOpenSound;
+            _shelfCloser.ShelfClosed += PlayCloseSound;
         }
 
         private void OnDisable() 
         {
-            shelfOpener.ShelfOpened -= PlayOpenSound;
-            shelfCloser.ShelfClosed -= PlayCloseSound;
+            _shelfOpener.ShelfOpened -= PlayOpenSound;
+            _shelfCloser.ShelfClosed -= PlayCloseSound;
         }
 
         private void PlayOpenSound()
         {
-            AudioManager.Instance.PlaySfx(openSound);
+            AudioManager.Instance.PlaySfx(_openSound);
         }
 
         private void PlayCloseSound()
         {
-            AudioManager.Instance.PlaySfx(closeSound);
+            AudioManager.Instance.PlaySfx(_closeSound);
         }
     }
 }

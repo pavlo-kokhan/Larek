@@ -6,27 +6,27 @@ namespace Orders
 {
     public class OrdersFormView : MonoBehaviour
     {
-        [SerializeField] private OrderFormInput orderFormInput;
+        [SerializeField] private OrderFormInput _orderFormInput;
         
-        [SerializeField] private Sprite humanPanelSprite;
-        [SerializeField] private Sprite monsterPanelSprite;
-        [SerializeField] private Sprite humanCornerSprite;
-        [SerializeField] private Sprite monsterCornerSprite;
+        [SerializeField] private Sprite _humanPanelSprite;
+        [SerializeField] private Sprite _monsterPanelSprite;
+        [SerializeField] private Sprite _humanCornerSprite;
+        [SerializeField] private Sprite _monsterCornerSprite;
         
-        [SerializeField] private Image panelImage;
-        [SerializeField] private Image cornerImage;
-        [SerializeField] private Image signatureImage;
+        [SerializeField] private Image _panelImage;
+        [SerializeField] private Image _cornerImage;
+        [SerializeField] private Image _signatureImage;
         
         private void OnEnable()
         {
-            orderFormInput.PageTurned += OnPageTurned;
-            orderFormInput.OrderConfirmed += OnOrderConfirmed;
+            _orderFormInput.PageTurned += OnPageTurned;
+            _orderFormInput.OrderConfirmed += OnOrderConfirmed;
         }
         
         private void OnDisable()
         {
-            orderFormInput.PageTurned -= OnPageTurned;
-            orderFormInput.OrderConfirmed -= OnOrderConfirmed;
+            _orderFormInput.PageTurned -= OnPageTurned;
+            _orderFormInput.OrderConfirmed -= OnOrderConfirmed;
             
             SetSignatureImage(false);
         }
@@ -37,13 +37,13 @@ namespace Orders
             
             if (isHumanPage)
             {
-                panelImage.sprite = humanPanelSprite;
-                cornerImage.sprite = humanCornerSprite;
+                _panelImage.sprite = _humanPanelSprite;
+                _cornerImage.sprite = _humanCornerSprite;
             }
             else
             {
-                panelImage.sprite = monsterPanelSprite;
-                cornerImage.sprite = monsterCornerSprite;
+                _panelImage.sprite = _monsterPanelSprite;
+                _cornerImage.sprite = _monsterCornerSprite;
             }
         }
         
@@ -54,14 +54,9 @@ namespace Orders
 
         private void SetSignatureImage(bool status)
         {
-            if (status)
-            {
-                signatureImage.color = new Color(1f, 1f, 1f, 1f);
-            }
-            else
-            {
-                signatureImage.color = new Color(1f, 1f, 1f, 0f);
-            }
+            _signatureImage.color = status 
+                ? new Color(1f, 1f, 1f, 1f) 
+                : new Color(1f, 1f, 1f, 0f);
         }
     }
 }

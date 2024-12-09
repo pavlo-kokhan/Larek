@@ -7,22 +7,22 @@ namespace Orders
 {
     public class OrdersForm : MonoBehaviour
     {
-        [SerializeField] private OrderFormInput orderFormInput;
-        [SerializeField] private Transform itemsContainer;
+        [SerializeField] private OrderFormInput _orderFormInput;
+        [SerializeField] private Transform _itemsContainer;
         
         private List<OrderItem> _orderItems;
         private GameObject _orderItemPrefab;
 
         private void OnEnable()
         {
-            orderFormInput.PageTurned += OnPageTurned;
-            orderFormInput.OrderConfirmed += OnOrderConfirmed;
+            _orderFormInput.PageTurned += OnPageTurned;
+            _orderFormInput.OrderConfirmed += OnOrderConfirmed;
         }
 
         private void OnDisable()
         {
-            orderFormInput.PageTurned -= OnPageTurned;
-            orderFormInput.OrderConfirmed -= OnOrderConfirmed;
+            _orderFormInput.PageTurned -= OnPageTurned;
+            _orderFormInput.OrderConfirmed -= OnOrderConfirmed;
         }
 
         private void Start()
@@ -31,13 +31,13 @@ namespace Orders
             
             _orderItems = new List<OrderItem>()
             {
-                new OrderItem(false, "Milk", 1, 15, true),
-                new OrderItem(false, "Bread", 1, 25, true),
-                new OrderItem(false, "Dildo BIG", 1, 45, true),
-                new OrderItem(false, "Some other stuff", 1, 120, true),
-                new OrderItem(false, "Monster item 1", 1, 15, false),
-                new OrderItem(false, "Monster item 2", 1, 25, false),
-                new OrderItem(false, "Monster item 3", 1, 45, false),
+                new (false, "Milk", 1, 15, true),
+                new (false, "Bread", 1, 25, true),
+                new (false, "Dildo BIG", 1, 45, true),
+                new (false, "Some other stuff", 1, 120, true),
+                new (false, "Monster item 1", 1, 15, false),
+                new (false, "Monster item 2", 1, 25, false),
+                new (false, "Monster item 3", 1, 45, false),
             };
             
             OnPageTurned(true);
@@ -61,7 +61,7 @@ namespace Orders
         
         private void DestroyOrderItems()
         {
-            foreach (var item in itemsContainer.GetComponentsInChildren<OrderItemView>())
+            foreach (var item in _itemsContainer.GetComponentsInChildren<OrderItemView>())
             {
                 Destroy(item.gameObject);
             }
@@ -71,7 +71,7 @@ namespace Orders
         {
             foreach (var item in items)
             {
-                var instance = Instantiate(_orderItemPrefab, itemsContainer);
+                var instance = Instantiate(_orderItemPrefab, _itemsContainer);
                 var itemUI = instance.GetComponent<OrderItemView>();
                 itemUI.Initialize(item);
             }
@@ -88,6 +88,5 @@ namespace Orders
                 Debug.Log(item);
             }
         }
-
     }
 }

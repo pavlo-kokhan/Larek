@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Notebook
+namespace Core
 {
     public class UIButtonPagesPointerOffset  : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        [SerializeField] private Vector3 hoveredPosition;
-        [SerializeField] private float offsetSpeed;
+        [SerializeField] private Vector3 _hoveredPosition;
+        [SerializeField] private float _offsetSpeed = 0.1f;
 
         private RectTransform _rectTransform;
         private Vector3 _idlePosition;
@@ -24,15 +24,15 @@ namespace Notebook
             {
                 _rectTransform.localPosition = Vector3.Lerp(
                     _rectTransform.localPosition, 
-                    hoveredPosition, 
-                    offsetSpeed);
+                    _hoveredPosition, 
+                    _offsetSpeed);
             }
             else
             {
                 _rectTransform.localPosition = Vector3.Lerp(
                     _rectTransform.localPosition, 
                     _idlePosition, 
-                    offsetSpeed);
+                    _offsetSpeed);
             }
         }
 

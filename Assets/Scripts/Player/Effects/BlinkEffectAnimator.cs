@@ -4,7 +4,7 @@ namespace Player.Effects
 {
     public class BlinkEffectAnimator : MonoBehaviour
     {
-        private readonly int Blink = Animator.StringToHash(nameof(Blink));
+        private static readonly int Blink = Animator.StringToHash(nameof(Blink));
 
         [SerializeField] private Animator animator;
 

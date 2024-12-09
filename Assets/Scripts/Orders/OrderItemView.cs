@@ -6,10 +6,10 @@ namespace Orders
 {
     public class OrderItemView : MonoBehaviour
     {
-        [SerializeField] private Toggle itemToggle;
-        [SerializeField] private TMP_Text itemNameText;
-        [SerializeField] private TMP_InputField quantityInput;
-        [SerializeField] private TMP_Text priceText;
+        [SerializeField] private Toggle _itemToggle;
+        [SerializeField] private TMP_Text _itemNameText;
+        [SerializeField] private TMP_InputField _quantityInput;
+        [SerializeField] private TMP_Text _priceText;
         
         private OrderItem _orderItem;
 
@@ -18,22 +18,22 @@ namespace Orders
             _orderItem = orderItem;
 
             UpdateView();
-            itemToggle.onValueChanged.AddListener(OnItemToggleChanged);
-            quantityInput.onEndEdit.AddListener(OnQuantityChanged);
+            _itemToggle.onValueChanged.AddListener(OnItemToggleChanged);
+            _quantityInput.onEndEdit.AddListener(OnQuantityChanged);
         }
 
         private void UpdateView()
         {
-            itemToggle.isOn = _orderItem.IsSelected;
-            itemNameText.text = _orderItem.Name;
-            priceText.text = $"{_orderItem.Price}";
-            quantityInput.text = $"{_orderItem.Count}";
+            _itemToggle.isOn = _orderItem.IsSelected;
+            _itemNameText.text = _orderItem.Name;
+            _priceText.text = $"{_orderItem.Price}";
+            _quantityInput.text = $"{_orderItem.Count}";
         }
         
         private void OnItemToggleChanged(bool isSelected)
         {
             _orderItem.IsSelected = isSelected;
-            itemToggle.isOn = isSelected;
+            _itemToggle.isOn = isSelected;
         }
 
         private void OnQuantityChanged(string value)
@@ -47,7 +47,7 @@ namespace Orders
                 _orderItem.Count = 1;
             }
             
-            quantityInput.text = $"{_orderItem.Count}";
+            _quantityInput.text = $"{_orderItem.Count}";
         }
     }
 }

@@ -2,34 +2,33 @@
 using System.Linq;
 using Radio.Input;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Radio
 {
     public class RadioPlayer : MonoBehaviour
     {
-        [SerializeField] RadioSliderInput volumeInput;
-        [SerializeField] private RadioSliderInput channelInput;
-        [SerializeField] private List<RadioChannel> channels;
+        [SerializeField] RadioSliderInput _volumeInput;
+        [SerializeField] private RadioSliderInput _channelInput;
+        [SerializeField] private List<RadioChannel> _channels;
 
         private AudioSource _audioSource;
         private float _currentVolume;
 
         private void Start()
         {
-            _audioSource = channels.Last().AudioSource;
+            _audioSource = _channels.Last().AudioSource;
         }
 
         private void OnEnable()
         {
-            volumeInput.SliderValueChanged += OnVolumeChanged;
-            channelInput.SliderValueChanged += OnChannelChanged;
+            _volumeInput.SliderValueChanged += OnVolumeChanged;
+            _channelInput.SliderValueChanged += OnChannelChanged;
         }
 
         private void OnDisable()
         {
-            volumeInput.SliderValueChanged -= OnVolumeChanged;
-            channelInput.SliderValueChanged -= OnChannelChanged;
+            _volumeInput.SliderValueChanged -= OnVolumeChanged;
+            _channelInput.SliderValueChanged -= OnChannelChanged;
         }
 
         private void OnVolumeChanged(float newValue, float minValue, float maxValue)
@@ -40,7 +39,7 @@ namespace Radio
         
         private void OnChannelChanged(float newValue, float minValue, float maxValue)
         {
-            var count = channels.Count;
+            var count = _channels.Count;
             var channel = newValue / maxValue;
             
             if (channel >= 0.1f && channel <= 0.15f)
@@ -57,14 +56,14 @@ namespace Radio
             }
             else
             {
-                SwitchAudioSource(channels.Count - 1);
+                SwitchAudioSource(_channels.Count - 1);
             }
         }
 
         private void SwitchAudioSource(int index)
         {
             _audioSource.volume = 0f;
-            _audioSource = channels[index].AudioSource;
+            _audioSource = _channels[index].AudioSource;
             _audioSource.volume = _currentVolume;
         }
     }

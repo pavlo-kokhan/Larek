@@ -22,7 +22,11 @@ namespace Orders
 
         public override string ToString()
         {
-            return $"IsSelected: {IsSelected} Name: {Name}, Count: {Count}, Price: {Price}, IsForHuman: {IsForHuman}";
+            return $"{nameof(IsSelected)}: {IsSelected}, " +
+                   $"{nameof(Name)}: {Name}, " +
+                   $"{nameof(Count)}: {Count}, " +
+                   $"{nameof(Price)}: {Price}, " +
+                   $"{nameof(IsForHuman)}: {IsForHuman}";
         }
     }
 }

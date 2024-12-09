@@ -5,11 +5,11 @@ namespace Cursor
 {
     public class CursorChanger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        [SerializeField] private CursorTextureMode cursorTextureMode;
+        [SerializeField] private CursorTextureMode _cursorTextureMode;
         
         public void OnPointerEnter(PointerEventData eventData)
         {
-            CursorView.Instance.SetCursorTexture(cursorTextureMode);
+            CursorView.Instance.SetCursorTexture(_cursorTextureMode);
         }
 
         public void OnPointerExit(PointerEventData eventData)

@@ -10,13 +10,13 @@ namespace Shelves
     {
         public event Action ShelfClosed;
         
-        [SerializeField] private ShelfAnimator animator;
+        [SerializeField] private ShelfAnimator _animator;
         
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (eventData.button == PointerEventData.InputButton.Right && animator.IsOpened)
+            if (eventData.button == PointerEventData.InputButton.Right && _animator.IsOpened)
             {
-                animator.Close();
+                _animator.Close();
                 ShelfClosed?.Invoke();
             }
         }
