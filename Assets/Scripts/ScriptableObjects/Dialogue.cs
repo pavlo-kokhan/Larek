@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace ScriptableObjects
 {
@@ -6,7 +7,6 @@ namespace ScriptableObjects
     public class Dialogue : ScriptableObject
     {
         public string characterPhrase;
-        public string[] playerResponses;
-        public Dialogue[] nextDialogues;
+        public List<DialogueOption> options = new ();
     }
 }

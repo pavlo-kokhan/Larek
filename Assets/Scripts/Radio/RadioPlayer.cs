@@ -7,7 +7,7 @@ namespace Radio
 {
     public class RadioPlayer : MonoBehaviour
     {
-        [SerializeField] RadioSliderInput _volumeInput;
+        [SerializeField] private RadioSliderInput _volumeInput;
         [SerializeField] private RadioSliderInput _channelInput;
         [SerializeField] private List<RadioChannel> _channels;
 
