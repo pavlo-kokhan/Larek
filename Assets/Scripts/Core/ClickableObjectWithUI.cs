@@ -1,44 +1,35 @@
-﻿using System;
+﻿using Panels;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Zenject;
 
 namespace Core
 {
     [RequireComponent(typeof(Collider2D))]
     public sealed class ClickableObjectWithUI : MonoBehaviour, IPointerClickHandler
     {
-        public event Action PanelOpened;
+        [SerializeField] private GameObject _interactivePanelPrefab;
+        [Inject] private InteractivePanelsRegistrator _panelsRegistrator;
+        [Inject] private InteractivePanelsFactory _panelsFactory;
         
-        [SerializeField] private GameObject _interactionUI;
-        
-        private bool _isActiveUI;
-
-        private void Update()
-        {
-            if (_isActiveUI && Input.GetKeyUp(KeyCode.Escape))
-            {
-                ToggleUI(false);
-            }
-        }
+        private GameObject _interactivePanelInstance;
         
         public void OnPointerClick(PointerEventData eventData)
         {
             if (eventData.button == PointerEventData.InputButton.Left)
             {
-                ToggleUI(true);
-                PanelOpened?.Invoke();
+                OnLeftButtonClicked();
             }
         }
-        
-        private void ToggleUI(bool isActive)
+
+        private void OnLeftButtonClicked()
         {
-            _interactionUI.SetActive(isActive);
-            _isActiveUI = isActive;
-        }
-        
-        public void ClosePanel()
-        {
-            ToggleUI(false);
+            if (_interactivePanelInstance == null)
+            {
+                _interactivePanelInstance = _panelsFactory.Create(_interactivePanelPrefab);
+            }
+                
+            _panelsRegistrator.RegisterPanel(_interactivePanelInstance);
         }
     }
 }

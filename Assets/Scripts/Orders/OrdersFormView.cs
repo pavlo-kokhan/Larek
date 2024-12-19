@@ -1,5 +1,4 @@
-﻿using Orders.Input;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Orders

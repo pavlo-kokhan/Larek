@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Orders.Input;
 using UnityEngine;
 
 namespace Orders
@@ -9,9 +8,9 @@ namespace Orders
     {
         [SerializeField] private OrderFormInput _orderFormInput;
         [SerializeField] private Transform _itemsContainer;
+        [SerializeField] private GameObject _orderItemPrefab;
         
         private List<OrderItem> _orderItems;
-        private GameObject _orderItemPrefab;
 
         private void OnEnable()
         {
@@ -27,8 +26,6 @@ namespace Orders
 
         private void Start()
         {
-            _orderItemPrefab = Resources.Load<GameObject>("Prefabs/OrderItem");
-            
             _orderItems = new List<OrderItem>()
             {
                 new (false, "Milk", 1, 15, true),

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Core;
-using Core.Camera;
 using JetBrains.Annotations;
-using Player.Effects;
 using UnityEngine;
 
 namespace Player
@@ -14,13 +12,26 @@ namespace Player
         
         [SerializeField] private BlinkEffectAnimator _animator;
         [SerializeField] private float _roomSwitchDelay = 0.2f;
+        [SerializeField] private float _roomSwitchCooldown = 1f;
 
         [SerializeField] [CanBeNull] private RoomSide _leftRoomSide;
         [SerializeField] [CanBeNull] private RoomSide _rightRoomSide;
-        
+
+        private float _roomSwitchTimer;
+
+        private void Start()
+        {
+            _roomSwitchTimer = _roomSwitchCooldown;
+        }
+
+        private void Update()
+        {
+            _roomSwitchTimer += Time.deltaTime;
+        }
+
         public void OnLeftSideSwitch()
         {
-            if (_leftRoomSide != null)
+            if (_leftRoomSide != null && _roomSwitchTimer >= _roomSwitchCooldown)
             {
                 SwitchRoomSide(_leftRoomSide);
             }
@@ -28,7 +39,7 @@ namespace Player
         
         public void OnRightSideSwitch()
         {
-            if (_rightRoomSide != null)
+            if (_rightRoomSide != null && _roomSwitchTimer >= _roomSwitchCooldown)
             {
                 SwitchRoomSide(_rightRoomSide);
             }
@@ -38,6 +49,7 @@ namespace Player
         {
             _animator.SetBlink();
             StartCoroutine(SwitchRoomSideCoroutine(roomSide));
+            _roomSwitchTimer = 0f;
         }
 
         private IEnumerator SwitchRoomSideCoroutine(RoomSide roomSide)
