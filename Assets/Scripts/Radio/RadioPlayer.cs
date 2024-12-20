@@ -1,30 +1,36 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Core;
 using UnityEngine;
 
 namespace Radio
 {
     public class RadioPlayer : MonoBehaviour
     {
-        [SerializeField] private RadioSliderInput _volumeInput;
-        [SerializeField] private RadioSliderInput _channelInput;
         [SerializeField] private List<RadioChannel> _channels;
 
-        private AudioSource _audioSource;
+        private RadioSliderInput _volumeInput;
+        private RadioSliderInput _channelInput;
+        private AudioSource _currentAudioSource;
         private float _currentVolume;
+        private bool _isInitialized;
 
-        private void Start()
+        public void Initialize(RadioSliderInput volumeInput, RadioSliderInput channelInput)
         {
-            _audioSource = _channels.Last().AudioSource;
-        }
-
-        private void OnEnable()
-        {
+            if (_isInitialized) return;
+            
+            _volumeInput = volumeInput;
+            _channelInput = channelInput;
+            
             _volumeInput.SliderValueChanged += OnVolumeChanged;
             _channelInput.SliderValueChanged += OnChannelChanged;
+            
+            _currentAudioSource = _channels.Last().AudioSource;
+            
+            _isInitialized = true;
         }
-
-        private void OnDisable()
+        
+        private void OnDestroy()
         {
             _volumeInput.SliderValueChanged -= OnVolumeChanged;
             _channelInput.SliderValueChanged -= OnChannelChanged;
@@ -32,15 +38,21 @@ namespace Radio
 
         private void OnVolumeChanged(float newValue, float minValue, float maxValue)
         {
+            if (!_isInitialized) return;
+            
             _currentVolume = newValue / maxValue;
-            _audioSource.volume = _currentVolume;
+            _currentAudioSource.volume = _currentVolume;
+            Debug.Log($"Volume changed to {newValue}");
         }
         
         private void OnChannelChanged(float newValue, float minValue, float maxValue)
         {
+            if (!_isInitialized) return;
+            
             var count = _channels.Count;
             var channel = newValue / maxValue;
             
+            // todo
             if (channel >= 0.1f && channel <= 0.15f)
             {
                 SwitchAudioSource(0);
@@ -57,13 +69,14 @@ namespace Radio
             {
                 SwitchAudioSource(_channels.Count - 1);
             }
+            Debug.Log($"Channel changed to {newValue}");
         }
 
         private void SwitchAudioSource(int index)
         {
-            _audioSource.volume = 0f;
-            _audioSource = _channels[index].AudioSource;
-            _audioSource.volume = _currentVolume;
+            _currentAudioSource.volume = 0f;
+            _currentAudioSource = _channels[index].AudioSource;
+            _currentAudioSource.volume = _currentVolume;
         }
     }
 }

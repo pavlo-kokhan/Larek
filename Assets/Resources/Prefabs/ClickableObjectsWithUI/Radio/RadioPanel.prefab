@@ -52,6 +52,7 @@ MonoBehaviour:
   _sliderRectTransform: {fileID: 9116662838805570919}
   _minAngle: 20
   _maxAngle: 340
+  _type: 0
 --- !u!1 &2052287419988218174
 GameObject:
   m_ObjectHideFlags: 0
@@ -418,6 +419,7 @@ MonoBehaviour:
   _sliderRectTransform: {fileID: 8072296626917368834}
   _minAngle: 20
   _maxAngle: 340
+  _type: 1
 --- !u!114 &9039087514203993492
 MonoBehaviour:
   m_ObjectHideFlags: 0

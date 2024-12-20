@@ -18,22 +18,5 @@ namespace Panels
         {
             return _container.InstantiatePrefab(prefab, _panelsContainer);
         }
-
-        // private GameObject GetPrefabForType(InteractivePanelType type)
-        // {
-        //     switch (type)
-        //     {
-        //         case InteractivePanelType.Radio:
-        //             return Resources.Load<GameObject>("Prefabs/InteractiveObjects/Radio/RadioPanel");
-        //         case InteractivePanelType.Calculator:
-        //             return null;
-        //         case InteractivePanelType.Notebook:
-        //             return null;
-        //         case InteractivePanelType.OrdersPanel:
-        //             return null;
-        //         default:
-        //             return null;
-        //     }
-        // }
     }
 }

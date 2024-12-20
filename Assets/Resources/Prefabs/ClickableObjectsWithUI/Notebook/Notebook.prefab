@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 948976314226474491}
   - component: {fileID: 215677247742521492}
   - component: {fileID: 4587216663658821355}
-  - component: {fileID: 1352578670306658046}
+  - component: {fileID: 7260975500977700799}
   - component: {fileID: 1275143646233039120}
   m_Layer: 8
   m_Name: Notebook
@@ -180,7 +180,7 @@ PolygonCollider2D:
       - {x: -0.14999999, y: -0.78499997}
       - {x: 0.04, y: -0.775}
   m_UseDelaunayMesh: 0
---- !u!114 &1352578670306658046
+--- !u!114 &7260975500977700799
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -189,7 +189,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5952555938452622160}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 832ff16fe6764e569845f6ab5afa62ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 0382e7840c7940b08f0025f5b02d6b44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _interactivePanelPrefab: {fileID: 703667721005803433, guid: f60fafa1e2cab96409cd84b7c6c0987a, type: 3}

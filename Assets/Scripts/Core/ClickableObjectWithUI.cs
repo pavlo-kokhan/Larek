@@ -6,14 +6,25 @@ using Zenject;
 namespace Core
 {
     [RequireComponent(typeof(Collider2D))]
-    public sealed class ClickableObjectWithUI : MonoBehaviour, IPointerClickHandler
+    public abstract class ClickableObjectWithUI : MonoBehaviour, IPointerClickHandler
     {
-        [SerializeField] private GameObject _interactivePanelPrefab;
-        [Inject] private InteractivePanelsRegistrator _panelsRegistrator;
+        [SerializeField] protected GameObject _interactivePanelPrefab;
+
         [Inject] private InteractivePanelsFactory _panelsFactory;
+        [Inject] private InteractivePanelsRegistrator _panelsRegistrator;
         
-        private GameObject _interactivePanelInstance;
+        protected GameObject _interactivePanelInstance;
         
+        protected void Start()
+        {
+            _interactivePanelInstance = _panelsFactory.Create(_interactivePanelPrefab);
+            _interactivePanelInstance.SetActive(false);
+            
+            OnPanelLoaded();
+        }
+
+        protected abstract void OnPanelLoaded();
+
         public void OnPointerClick(PointerEventData eventData)
         {
             if (eventData.button == PointerEventData.InputButton.Left)
@@ -24,11 +35,8 @@ namespace Core
 
         private void OnLeftButtonClicked()
         {
-            if (_interactivePanelInstance == null)
-            {
-                _interactivePanelInstance = _panelsFactory.Create(_interactivePanelPrefab);
-            }
-                
+            if (_interactivePanelInstance == null) return;
+            
             _panelsRegistrator.RegisterPanel(_interactivePanelInstance);
         }
     }

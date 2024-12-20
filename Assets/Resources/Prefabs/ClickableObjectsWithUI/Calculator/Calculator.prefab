@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3156675396676959598}
   - component: {fileID: 5095058983913682261}
   - component: {fileID: 8131550119386717432}
+  - component: {fileID: 3493940423086506177}
   - component: {fileID: 6900675495468643773}
-  - component: {fileID: 8739792909117492181}
   m_Layer: 8
   m_Name: Calculator
   m_TagString: Untagged
@@ -149,6 +149,19 @@ PolygonCollider2D:
       - {x: 0.755, y: -0.575}
       - {x: 0.965, y: -0.265}
   m_UseDelaunayMesh: 0
+--- !u!114 &3493940423086506177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2041834088379999369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0f737b364f841fdbc358f74c6d1dd52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactivePanelPrefab: {fileID: 6013074812069949878, guid: 5617253e69505744180b15daa6c4d062, type: 3}
 --- !u!114 &6900675495468643773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,16 +176,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _highlightColor: {r: 1, g: 0.9, b: 0.9, a: 1}
   _defaultColor: {r: 1, g: 1, b: 1, a: 1}
---- !u!114 &8739792909117492181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2041834088379999369}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 832ff16fe6764e569845f6ab5afa62ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _interactivePanelPrefab: {fileID: 6013074812069949878, guid: 5617253e69505744180b15daa6c4d062, type: 3}

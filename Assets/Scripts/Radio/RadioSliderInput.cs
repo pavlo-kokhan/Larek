@@ -13,6 +13,8 @@ namespace Radio
         [SerializeField] private RectTransform _sliderRectTransform;
         [SerializeField] private float _minAngle = 20f;
         [SerializeField] private float _maxAngle = 340f;
+        [SerializeField] private RadioSliderType _type;
+        public RadioSliderType Type => _type;
         
         private float _currentAngle;
         private float _lastAngle;
@@ -43,7 +45,6 @@ namespace Radio
             _lastAngle = newAngle;
             
             _sliderFraction = Mathf.InverseLerp(_maxAngle, _minAngle, _currentAngle);
-            Debug.Log(_sliderFraction);
             
             SliderValueChanged?.Invoke(_sliderFraction, SliderMinValue, SliderMaxValue);
         }

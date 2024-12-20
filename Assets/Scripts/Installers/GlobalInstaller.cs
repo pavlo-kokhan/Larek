@@ -6,8 +6,6 @@ namespace Installers
 {
     public class GlobalInstaller : MonoInstaller
     {
-        [SerializeField] private Vector2 _targetScreenAspectRatio;
-        
         public override void InstallBindings()
         {
             Container.Bind<LocalizationLoader>()
@@ -18,11 +16,6 @@ namespace Installers
             Container.Bind<Localizer>()
                 .ToSelf()
                 .AsSingle();
-            
-            // Container.Bind<ScreenAspectRatioApplier>()
-            //     .ToSelf()
-            //     .AsSingle()
-            //     .WithArguments(_targetScreenAspectRatio, Camera.main);
         }
     }
 }

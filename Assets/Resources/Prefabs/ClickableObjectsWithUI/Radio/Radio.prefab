@@ -300,7 +300,8 @@ GameObject:
   - component: {fileID: 7444702944224767921}
   - component: {fileID: 7465100673305331522}
   - component: {fileID: 6087560242702784784}
-  - component: {fileID: 4201633315117280737}
+  - component: {fileID: 3515868860515598025}
+  - component: {fileID: 1599763800827659863}
   - component: {fileID: 2749621551062633591}
   m_Layer: 8
   m_Name: Radio
@@ -318,7 +319,7 @@ Transform:
   m_GameObject: {fileID: 7681923723328909467}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.5, y: -6.07, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -483,7 +484,7 @@ PolygonCollider2D:
       - {x: 2.565, y: -1.045}
       - {x: 2.465, y: -0.97499996}
   m_UseDelaunayMesh: 0
---- !u!114 &4201633315117280737
+--- !u!114 &3515868860515598025
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -492,10 +493,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 7681923723328909467}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 832ff16fe6764e569845f6ab5afa62ba, type: 3}
+  m_Script: {fileID: 11500000, guid: e5aa9603cd1346b4a35e2f7b096695f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _radioPlayer: {fileID: 1599763800827659863}
   _interactivePanelPrefab: {fileID: 2052287419988218174, guid: f2aafa25319c4544abc0105a4c313807, type: 3}
+--- !u!114 &1599763800827659863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7681923723328909467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5ef3152458944d8977bd8ff6c08809a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _channels:
+  - {fileID: 1487375774694317431}
+  - {fileID: 4387998741170501471}
+  - {fileID: 2863382771665321379}
+  - {fileID: 4846527605241228911}
 --- !u!114 &2749621551062633591
 MonoBehaviour:
   m_ObjectHideFlags: 0

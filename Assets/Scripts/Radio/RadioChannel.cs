@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 
 namespace Radio
 {
+    [RequireComponent(typeof(AudioSource))]
     public class RadioChannel : MonoBehaviour
     {
         public AudioSource AudioSource => _audioSource;
@@ -19,8 +20,9 @@ namespace Radio
         {
             ShuffleAudioClips();
             
-            _currentSongIndex = 0;
             _audioSource = GetComponent<AudioSource>();
+            
+            _currentSongIndex = 0;
             _audioSource.volume = 0f;
             _audioSource.clip = _audioClips[_currentSongIndex];
             _audioSource.time = Random.Range(0f, _audioSource.clip.length);
