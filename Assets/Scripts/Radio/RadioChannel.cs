@@ -6,61 +6,57 @@ using Random = UnityEngine.Random;
 
 namespace Radio
 {
-    [RequireComponent(typeof(AudioSource))]
     public class RadioChannel : MonoBehaviour
     {
-        public AudioSource AudioSource => _audioSource;
+        public event Action<RadioChannel> AudioClipSwitched;
         
         [SerializeField] private List<AudioClip> _audioClips;
         
-        private AudioSource _audioSource;
-        private int _currentSongIndex;
+        private int _currentAudioClipIndex;
+        
+        public AudioClip CurrentAudioClip => _audioClips[_currentAudioClipIndex];
+        public float CurrentAudioClipTime { get; private set; }
 
         private void Start()
         {
             ShuffleAudioClips();
             
-            _audioSource = GetComponent<AudioSource>();
-            
-            _currentSongIndex = 0;
-            _audioSource.volume = 0f;
-            _audioSource.clip = _audioClips[_currentSongIndex];
-            _audioSource.time = Random.Range(0f, _audioSource.clip.length);
-            _audioSource.Play();
+            _currentAudioClipIndex = 0;
+            CurrentAudioClipTime = Random.Range(0f, CurrentAudioClip.length);
         }
 
         private void Update()
         {
-            if (!_audioSource.isPlaying && _audioSource.time >= _audioSource.clip.length - 0.1f)
+            if (CurrentAudioClipTime >= CurrentAudioClip.length - 0.1f)
             {
-                PlayNextSong();
+                SwitchNextSong();
             }
+            
+            CurrentAudioClipTime += Time.deltaTime;
         }
 
-        private void PlayNextSong()
+        private void SwitchNextSong()
         {
-            if (_currentSongIndex < _audioClips.Count - 2)
+            if (_currentAudioClipIndex < _audioClips.Count - 2)
             {
-                _currentSongIndex += 1;
-                PlayCurrentSong();
+                _currentAudioClipIndex++;
             }
             else
             {
                 ShuffleAudioClips();
-                _currentSongIndex = 0;
-                PlayCurrentSong();
+                _currentAudioClipIndex = 0;
             }
+
+            CurrentAudioClipTime = 0f;
+            AudioClipSwitched?.Invoke(this);
         }
 
-        private void PlayCurrentSong()
-        {
-            _audioSource.clip = _audioClips[_currentSongIndex];
-            _audioSource.Play();
-        }
-        
         private void ShuffleAudioClips()
         {
-            _audioClips = _audioClips.OrderBy(x => Guid.NewGuid()).ToList();
+            if (_audioClips.Count < 2) return;
+            
+            var random = new System.Random();
+            _audioClips = _audioClips.OrderBy(x => random.Next()).ToList();
         }
     }
 }

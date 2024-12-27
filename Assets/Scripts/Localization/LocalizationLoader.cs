@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -14,18 +13,32 @@ namespace Localization
             _path = path;
         }
         
-        public Dictionary<string, string> LoadLocalization(string language)
+        public Dictionary<string, string> LoadLocalization(LanguageType language)
         {
-            string fullPath = Path.Combine(_path, $"{language}.json");
-
-            if (!File.Exists(fullPath))
+            var languageFileName = GetLanguageKey(language);
+            var fullPath = $"{_path}/{languageFileName}";
+            var file = Resources.Load<TextAsset>(fullPath);
+            
+            if (file == null)
             {
                 Debug.LogError($"Localization file not found: {fullPath}");
                 return new Dictionary<string, string>();
             }
 
-            string json = File.ReadAllText(fullPath);
-            return JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+            return JsonConvert.DeserializeObject<Dictionary<string, string>>(file.text);
+        }
+
+        public static string GetLanguageKey(LanguageType language)
+        {
+            switch (language)
+            {
+                case LanguageType.Ukrainian:
+                    return "ua";
+                case LanguageType.Russian:
+                    return "ru";
+                default:
+                    return "en";
+            }
         }
     }
 }

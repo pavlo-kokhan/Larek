@@ -38,5 +38,3 @@ Thank you for your purchase!
 === end_dialogue ===
 If you need anything, feel free to return.
 -> END
-
-

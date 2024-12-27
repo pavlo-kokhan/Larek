@@ -8,16 +8,11 @@ namespace Localization
     public class LocalizedText : MonoBehaviour
     {
         [SerializeField] private string _localizedTextKey;
-
+        
+        [Inject] private Localizer _localizer;
+        
         private TextMeshProUGUI _textMeshPro;
-        private Localizer _localizer;
-
-        [Inject]
-        public void Construct(Localizer localizer)
-        {
-            _localizer = localizer;
-        }
-
+        
         private void Awake()
         {
             _textMeshPro = GetComponent<TextMeshProUGUI>();

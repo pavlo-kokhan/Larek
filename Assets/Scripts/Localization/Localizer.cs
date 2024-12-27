@@ -1,15 +1,13 @@
 ﻿using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Localization
 {
     public class Localizer
     {
-        private const string LanguagePrefKey = "SelectedLanguage";
-
-        private LocalizationLoader _localizationLoader;
+        private const string LanguagePreferenceKey = "SelectedLanguage";
         
+        private LocalizationLoader _localizationLoader;
         private readonly Dictionary<string, string> _enTexts;
         private readonly Dictionary<string, string> _uaTexts;
         private readonly Dictionary<string, string> _ruTexts;
@@ -18,29 +16,36 @@ namespace Localization
         
         private readonly HashSet<LocalizedText> _localizedTextComponents = new();
      
-        public string CurrentLanguage => PlayerPrefs.GetString(LanguagePrefKey);
+        public string CurrentLanguageKey => PlayerPrefs.GetString(LanguagePreferenceKey);
         
         public Localizer(LocalizationLoader localizationLoader)
         {
-            _enTexts = localizationLoader.LoadLocalization("en");
-            _uaTexts = localizationLoader.LoadLocalization("ua");
-            _ruTexts = localizationLoader.LoadLocalization("ru");
-            SetLanguage(CurrentLanguage);
+            _enTexts = localizationLoader.LoadLocalization(LanguageType.English);
+            _uaTexts = localizationLoader.LoadLocalization(LanguageType.Ukrainian);
+            _ruTexts = localizationLoader.LoadLocalization(LanguageType.Russian);
+            SetLanguageByKey(CurrentLanguageKey);
         }
         
-        public void SetLanguage(string language)
+        public void SetLanguage(LanguageType language)
         {
-            PlayerPrefs.SetString(LanguagePrefKey, language);
+            var languageKey = LocalizationLoader.GetLanguageKey(language);
+            
+            SetLanguageByKey(languageKey);
+        }
+
+        private void SetLanguageByKey(string languageKey)
+        {
+            PlayerPrefs.SetString(LanguagePreferenceKey, languageKey);
             PlayerPrefs.Save();
             
-            _currentLanguageDictionary = SwitchLanguage(language);
+            _currentLanguageDictionary = GetCurrentLocalization(languageKey);
 
             UpdateAllLocalizedTextComponents();
         }
 
-        private Dictionary<string, string> SwitchLanguage(string language)
+        private Dictionary<string, string> GetCurrentLocalization(string languageKey)
         {
-            switch (language)
+            switch (languageKey)
             {
                 case "ua":
                     return _uaTexts;
@@ -51,11 +56,11 @@ namespace Localization
             }
         }
 
-        public string GetLocalizedText(string key)
+        public string GetLocalizedText(string textKey)
         {
-            return _currentLanguageDictionary.TryGetValue(key, out var value) 
-                ? value 
-                : $"[Missing: {key}]";
+            return _currentLanguageDictionary.TryGetValue(textKey, out var text) 
+                ? text 
+                : $"[Missing: {textKey}]";
         }
 
         public void RegisterText(LocalizedText localizedText)

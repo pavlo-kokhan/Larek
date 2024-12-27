@@ -13,11 +13,6 @@ namespace Panels
             _parentRectTransform.SetAsLastSibling();
         }
 
-        private void OnDisable()
-        {
-            _parentRectTransform.SetAsFirstSibling();
-        }
-
         private void Awake()
         {
             _parentRectTransform = GetComponentInParent<RectTransform>();
