@@ -16,7 +16,96 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 875256a4c11afb34790e70a3652023bf
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 1453337c5631a3f4ebcf10dec964ed32
+    m_Address: Assets/Audio/Radio/Songs/Metallica - The Unforgiven.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1dc4fc4fd99f7d54bbc51e7c6e99d4a4
+    m_Address: "Assets/Audio/Radio/Songs/\u0421\u0435\u043A\u0442\u043E\u0440 \u0413\u0430\u0437\u0430
+      - \u041F\u043E\u0440\u0430 \u0434\u043E\u043C\u043E\u0439.mp3"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1f2f8ccff7fcfd149b026aad828b9882
+    m_Address: "Assets/Audio/Radio/Songs/\u0421\u0435\u043A\u0442\u043E\u0440 \u0413\u0430\u0437\u0430
+      - 30 \u043B\u0435\u0442.mp3"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3ee0baf113101434a8645d414b5c03b8
+    m_Address: "Assets/Audio/Radio/Songs/\u0421\u0435\u043A\u0442\u043E\u0440 \u0413\u0430\u0437\u0430
+      - \u0414\u0435\u043C\u043E\u0431\u0438\u043B\u0438\u0437\u0430\u0446\u0438\u044F.mp3"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3f6e70950a08c6f4facc6da75394a60b
+    m_Address: Assets/Audio/Radio/Songs/Metallica - The Call of Ktulu.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 46fe4f8d402c6a143b1a63841e081835
+    m_Address: "Assets/Audio/Radio/Songs/\u0421\u0435\u043A\u0442\u043E\u0440 \u0413\u0430\u0437\u0430
+      - \u0413\u0443\u043B\u044F\u0439, \u043C\u0443\u0436\u0438\u043A!.mp3"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 694be1bd36bc8544ba6d35638d9f8881
+    m_Address: Assets/Audio/Radio/Songs/Iron Maiden - Fear of the Dark.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 69aab6975988cde4289517e12850aeaa
+    m_Address: "Assets/Audio/Radio/Songs/\u0412\u0438\u043A\u0442\u043E\u0440 \u0426\u043E\u0439
+      - \u0421\u043F\u043E\u043A\u043E\u0439\u043D\u0430\u044F \u043D\u043E\u0447\u044C.mp3"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6f3cf35674836e141a9d27469b3ab163
+    m_Address: "Assets/Audio/Radio/Songs/\u0421\u0435\u043A\u0442\u043E\u0440 \u0413\u0430\u0437\u0430
+      - \u0411\u043E\u043C\u0436.mp3"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 80e24a0b68440924d92e3960cca643dd
+    m_Address: Assets/Audio/Radio/NoSignal/no_signal.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9e0c4b0655a75904e86b36b1db7f8493
+    m_Address: Assets/Audio/Radio/Songs/Metallica - Nothing Else Matters.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a6f8980e177cccf498763ce44d732d8b
+    m_Address: "Assets/Audio/Radio/Songs/\u0412\u0438\u043A\u0442\u043E\u0440 \u0426\u043E\u0439
+      - \u041A\u0443\u043A\u0443\u0448\u043A\u0430.mp3"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a9abc576d5cb77344856e04f88fd7711
+    m_Address: "Assets/Audio/Radio/Songs/\u0412\u0438\u043A\u0442\u043E\u0440 \u0426\u043E\u0439
+      - \u0413\u0440\u0443\u043F\u043F\u0430 \u043A\u0440\u043E\u0432\u0438.mp3"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b71987cbe7befda47ab10f39935c0826
+    m_Address: Assets/Audio/Radio/Songs/Metallica - Enter Sandman.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c29d266ac227e1e4ca0b56aaeada2920
+    m_Address: "Assets/Audio/Radio/Songs/\u0412\u0438\u043A\u0442\u043E\u0440 \u0426\u043E\u0439
+      - \u041F\u0430\u0447\u043A\u0430 \u0441\u0438\u0433\u0430\u0440\u0435\u0442.mp3"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fb7aced18f44c04448b73d457af76a33
+    m_Address: Assets/Audio/Radio/Songs/Metallica - Master Of Puppets.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 8e248b06fe1a1c847970c55e0cbac53a, type: 2}
   m_SchemaSet:

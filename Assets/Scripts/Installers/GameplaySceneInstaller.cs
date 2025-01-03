@@ -1,6 +1,6 @@
-﻿using GlobalAudio;
+﻿using Data;
+using GlobalAudio;
 using Panels;
-using Radio;
 using UnityEngine;
 using Zenject;
 
@@ -30,6 +30,18 @@ namespace Installers
             Container.Bind<InteractivePanelsFactory>()
                 .AsSingle()
                 .WithArguments(Container, _interactivePanelsContainer);
+            
+            IPersistentData persistentData = new PersistentData();
+            
+            Container.Bind<IDataProvider>()
+                .To<PlayerDataProvider>()
+                .AsSingle()
+                .WithArguments(persistentData);
+            
+            Container.Bind<IDataProvider>()
+                .To<RefrigeratorDataProvider>()
+                .AsSingle()
+                .WithArguments(persistentData);
         }
     }
 }

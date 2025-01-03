@@ -13,7 +13,8 @@ namespace Radio
         [SerializeField] private RectTransform _sliderRectTransform;
         [SerializeField] private float _minAngle = 20f;
         [SerializeField] private float _maxAngle = 340f;
-        [SerializeField] [Range(0.01f, 0.5f)] private float _debounceInterval = 0.05f;
+        [SerializeField] [Range(0f, 0.5f)] private float _debounceInterval = 0f;
+        [SerializeField] [Range(0f, 10f)] private float _minAngleStep = 5f;
         [SerializeField] private RadioSliderType _type;
         public RadioSliderType Type => _type;
         
@@ -42,24 +43,28 @@ namespace Radio
             var newAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
             var angleDifference = Mathf.DeltaAngle(_lastAngle, newAngle);
-            _currentAngle = Mathf.Clamp(_currentAngle + angleDifference, _minAngle, _maxAngle);
-            _sliderRectTransform.rotation = Quaternion.Euler(0, 0, _currentAngle);
-            _lastAngle = newAngle;
-            
-            var newSliderFraction = Mathf.InverseLerp(_maxAngle, _minAngle, _currentAngle);
 
-            if (Time.time - _lastDebounceTime >= _debounceInterval)
+            if (Mathf.Abs(angleDifference) >= _minAngleStep)
             {
-                _sliderFraction = newSliderFraction;
-                SliderValueChanged?.Invoke(_sliderFraction, SliderMinValue, SliderMaxValue);
-                _lastDebounceTime = Time.time;
+                _currentAngle = Mathf.Clamp(_currentAngle + angleDifference, _minAngle, _maxAngle);
+                _sliderRectTransform.rotation = Quaternion.Euler(0, 0, _currentAngle);
+                _lastAngle = newAngle;
+
+                var newSliderFraction = Mathf.InverseLerp(_maxAngle, _minAngle, _currentAngle);
+
+                if (Time.time - _lastDebounceTime >= _debounceInterval)
+                {
+                    _sliderFraction = newSliderFraction;
+                    SliderValueChanged?.Invoke(_sliderFraction, SliderMinValue, SliderMaxValue);
+                    _lastDebounceTime = Time.time;
+                }
             }
         }
         
         public void OnEndDrag()
         {
-            _sliderFraction = Mathf.InverseLerp(_maxAngle, _minAngle, _currentAngle);
-            SliderValueChanged?.Invoke(_sliderFraction, SliderMinValue, SliderMaxValue);
+            // _sliderFraction = Mathf.InverseLerp(_maxAngle, _minAngle, _currentAngle);
+            // SliderValueChanged?.Invoke(_sliderFraction, SliderMinValue, SliderMaxValue);
         }
     }
 }
