@@ -1,31 +1,29 @@
-﻿using UnityEngine;
-using UnityEngine.EventSystems;
+﻿using Refrigerator;
+using UnityEngine;
 using Zenject;
 
 namespace Cursors
 {
-    public class CursorProductIconChanger : MonoBehaviour, IPointerClickHandler
+    public class CursorProductIconChanger : MonoBehaviour
     {
+        [SerializeField] private RefrigeratorProductComponent _productComponent;
         [SerializeField] private Sprite _sprite;
         
         [Inject] private CursorView _cursorView;
 
-        private bool _isSpriteSet;
-
-        public void OnPointerClick(PointerEventData eventData)
+        private void OnEnable()
         {
-            if (eventData.button == PointerEventData.InputButton.Left)
-            {
-                if (_isSpriteSet)
-                {
-                    _cursorView.ClearCursorProductIcon();
-                    _isSpriteSet = false;
-                    return;
-                }
-                
-                _cursorView.SetCursorProductIcon(_sprite);
-                _isSpriteSet = true;
-            }
+            _productComponent.ProductTaken += OnProductTaken;
+            _productComponent.ProductReturned += OnProductReturned;
         }
+
+        private void OnDisable()
+        {
+            _productComponent.ProductTaken -= OnProductTaken;
+            _productComponent.ProductReturned -= OnProductReturned;
+        }
+
+        private void OnProductTaken(RefrigeratorProduct product) => _cursorView.SetCursorProductIcon(_sprite);
+        private void OnProductReturned(RefrigeratorProduct product) =>  _cursorView.ClearCursorProductIcon();
     }
 }

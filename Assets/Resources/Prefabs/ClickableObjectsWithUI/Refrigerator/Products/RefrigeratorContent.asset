@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d64cd3e25694f9fae58e66ef199643f, type: 3}
   m_Name: RefrigeratorContent
   m_EditorClassIdentifier: 
-  _refrigeratorProducts:
+  _products:
   - {fileID: 11400000, guid: db1b2492c02d193438e0fbfac9fe5457, type: 2}
   - {fileID: 11400000, guid: 7b7db082818f6af419162d6245818904, type: 2}
+  - {fileID: 11400000, guid: 05e557ca16cc4b949b725a8a3a830f82, type: 2}
+  - {fileID: 11400000, guid: 6a38e25cc2e1dbc4e874788b49eddace, type: 2}

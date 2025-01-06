@@ -1,6 +1,9 @@
-﻿using Data;
+﻿using System.Linq;
+using Cursors;
+using Data;
 using GlobalAudio;
 using Panels;
+using Refrigerator;
 using UnityEngine;
 using Zenject;
 
@@ -33,15 +36,24 @@ namespace Installers
             
             IPersistentData persistentData = new PersistentData();
             
-            Container.Bind<IDataProvider>()
-                .To<PlayerDataProvider>()
+            Container.Bind<IPersistentData>()
+                .FromInstance(persistentData)
+                .AsSingle();
+            
+            Container.Bind<PlayerDataProvider>()
                 .AsSingle()
                 .WithArguments(persistentData);
             
-            Container.Bind<IDataProvider>()
-                .To<RefrigeratorDataProvider>()
+            Container.Bind<RefrigeratorDataProvider>()
                 .AsSingle()
                 .WithArguments(persistentData);
+
+            Container.Bind<RefrigeratorProductsFactory>()
+                .AsSingle()
+                .WithArguments(Container);
+
+            Container.Bind<ProductHolder>()
+                .AsSingle();
         }
     }
 }

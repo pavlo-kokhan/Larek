@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -8,22 +7,16 @@ namespace Refrigerator
     [CreateAssetMenu(fileName = "RefrigeratorContent", menuName = "Scriptable Objects/Refrigerator/Content")]
     public class RefrigeratorContent : ScriptableObject
     {
-        [SerializeField] private List<RefrigeratorProduct> _refrigeratorProducts;
+        [SerializeField] private List<RefrigeratorProduct> _products = new();
 
-        public IEnumerable<RefrigeratorProduct> RefrigeratorProducts => _refrigeratorProducts;
+        public IEnumerable<RefrigeratorProduct> Products => _products;
 
         private void OnValidate()
         {
-            var productsDuplicates = _refrigeratorProducts
+            _products = _products
                 .GroupBy(p => p.Type)
-                .Where(g => g.Count() > 1)
+                .Select(g => g.First())
                 .ToList();
-
-            if (productsDuplicates.Count > 0)
-            {
-                throw new InvalidOperationException(
-                    $"{nameof(_refrigeratorProducts)} has duplicate type: {productsDuplicates.First().Key}");
-            }
         }
     }
 }   

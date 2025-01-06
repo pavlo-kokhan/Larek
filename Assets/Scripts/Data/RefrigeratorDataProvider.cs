@@ -32,13 +32,13 @@ namespace Data
 
         public bool TryLoad()
         {
-            if (AlreadyExists() == false) return false;
+            if (FileAlreadyExists() == false) return false;
 
             var json = File.ReadAllText(FullDataPath);
             _persistentData.RefrigeratorData = JsonConvert.DeserializeObject<RefrigeratorData>(json);
             return true;
         }
         
-        private bool AlreadyExists() => File.Exists(FullDataPath);
+        private bool FileAlreadyExists() => File.Exists(FullDataPath);
     }
 }

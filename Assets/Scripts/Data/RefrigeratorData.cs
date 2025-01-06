@@ -1,7 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
 using Refrigerator;
-using UnityEngine;
 
 namespace Data
 {
@@ -9,11 +8,6 @@ namespace Data
     {
         private RefrigeratorContent _refrigeratorContent;
 
-        public RefrigeratorData()
-        {
-            _refrigeratorContent = ScriptableObject.CreateInstance<RefrigeratorContent>();
-        }
-        
         [JsonConstructor]
         public RefrigeratorData(RefrigeratorContent refrigeratorContent)
         {
