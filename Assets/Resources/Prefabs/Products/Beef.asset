@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9605a469c52401dae322eafd2f82e76, type: 3}
+  m_Name: Beef
+  m_EditorClassIdentifier: 
+  <InitialQuantity>k__BackingField: 5
+  <PickupCursorIcon>k__BackingField: {fileID: 21300000, guid: 115d422e1680b0743a67ec9ed1b8cc57, type: 3}
+  <Type>k__BackingField: 10
+  <PrefabForRefrigerator>k__BackingField: {fileID: 1482410172348964202, guid: d8a228288da848d448ac789cdd11401e, type: 3}
+  <PrefabForProductsContainer>k__BackingField: {fileID: 0}

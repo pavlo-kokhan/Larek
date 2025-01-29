@@ -1,31 +1,36 @@
 ﻿using System;
+using Kitchen.Refrigerator.Content;
 using Newtonsoft.Json;
-using Refrigerator;
 
 namespace Data
 {
     public class RefrigeratorData
     {
-        private RefrigeratorContent _refrigeratorContent;
+        private RefrigeratorContentState _contentState;
 
-        [JsonConstructor]
-        public RefrigeratorData(RefrigeratorContent refrigeratorContent)
+        public RefrigeratorData(RefrigeratorContent content)
         {
-            _refrigeratorContent = refrigeratorContent;
+            _contentState = new RefrigeratorContentState(content);
+        }
+        
+        [JsonConstructor]
+        public RefrigeratorData(RefrigeratorContentState contentStateState)
+        {
+            _contentState = contentStateState;
         }
 
-        public RefrigeratorContent RefrigeratorContent
+        public RefrigeratorContentState ContentState
         {
-            get => _refrigeratorContent;
+            get => _contentState;
 
             set
             {
-                if (_refrigeratorContent == null)
+                if (_contentState == null)
                 {
-                    throw new NullReferenceException($"{nameof(_refrigeratorContent)} can not be null");
+                    throw new NullReferenceException($"{nameof(_contentState)} can not be null");
                 }
                 
-                _refrigeratorContent = value;
+                _contentState = value;
             }
         }
     }

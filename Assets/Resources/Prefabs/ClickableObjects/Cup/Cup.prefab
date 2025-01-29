@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4159331223627056522}
   - component: {fileID: 126507196458487165}
-  - component: {fileID: 323105541347976407}
+  - component: {fileID: 1597427549983982260}
   m_Layer: 8
   m_Name: Cup
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &323105541347976407
+--- !u!60 &1597427549983982260
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

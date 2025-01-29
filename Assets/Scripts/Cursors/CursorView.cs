@@ -15,7 +15,9 @@ namespace Cursors
         {
             _availableCursorTextures = availableCursorTextures;
             _defaultCursorTexture = defaultCursorTexture;
+            
             _productIcon = productIcon;
+            _productIcon.gameObject.SetActive(true);
             
             SetDefaultCursorTexture();
             ClearCursorProductIcon();

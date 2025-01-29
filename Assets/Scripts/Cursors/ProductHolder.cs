@@ -1,19 +1,19 @@
-﻿using Refrigerator;
+﻿using Kitchen.Products;
 
 namespace Cursors
 {
     public class ProductHolder
     {
-        private RefrigeratorProduct _product;
-        public RefrigeratorProduct Product => _product;
+        private Product _product;
+        public Product Product => _product;
 
-        public bool TryTakeNewProduct(RefrigeratorProduct product)
+        public bool TryTakeNewProduct(Product product)
         {
             if (_product != null) return false;
             _product = product;
             return true;
         }
         
-        public void ReturnHoldingProduct() => _product = null;
+        public void DeleteHoldingProduct() => _product = null;
     }
 }

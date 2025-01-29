@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9605a469c52401dae322eafd2f82e76, type: 3}
+  m_Name: Tomato
+  m_EditorClassIdentifier: 
+  <InitialQuantity>k__BackingField: 5
+  <PickupCursorIcon>k__BackingField: {fileID: 21300000, guid: 80595bef0bf89eb4e8b3af3975d3e10a, type: 3}
+  <Type>k__BackingField: 1
+  <PrefabForRefrigerator>k__BackingField: {fileID: 5697185396052124429, guid: 73734157d5eaa9745a3c0e99d7db73e4, type: 3}
+  <PrefabForProductsContainer>k__BackingField: {fileID: 0}

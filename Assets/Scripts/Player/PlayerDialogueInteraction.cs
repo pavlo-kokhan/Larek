@@ -17,8 +17,8 @@ namespace Player
 
             if (Input.GetKeyDown(KeyCode.F))
             {
-                bool started = _currentCharacter.TryStartDialogue();
-                Debug.Log(started);
+                // bool started = _currentCharacter.TryStartDialogue();
+                // Debug.Log(started);
             }
         }
 
@@ -29,7 +29,7 @@ namespace Player
             if (other.TryGetComponent(out Character character))
             {
                 _currentCharacter = character;
-                _currentCharacter.TriggerInteraction();
+                // _currentCharacter.TriggerInteraction();
                 Debug.Log("Character entered");
             }
         }

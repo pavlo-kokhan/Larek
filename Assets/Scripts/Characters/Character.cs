@@ -1,44 +1,52 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using TMPro;
+using UnityEngine;
 
 namespace Characters
 {
-    [RequireComponent(typeof(CharacterInteractionIndicator))]
+    [RequireComponent(typeof(Collider2D))]
     public class Character : MonoBehaviour
     {
+        [SerializeField] private string _name;
         [SerializeField] private TextAsset _inkJson;
-        [SerializeField] private CharacterInteractionIndicator _interactionIndicator;
+        [SerializeField] private GameObject _phrasePanel;
+        [SerializeField] private TMP_Text _phrasesText;
 
-        private bool _wantsToTalk;
-        
+        public string Name => _name;
+        public TextAsset InkJson => _inkJson;
+
         private void Start()
         {
-            _wantsToTalk = true;
-            _interactionIndicator.DeactivateIndicator();
+            DeactivatePhrasesPanel();
+        }
+
+        public void ActivatePhrasesPanel()
+        {
+            _phrasePanel.SetActive(true);
+        }
+
+        public void DeactivatePhrasesPanel()
+        {
+            _phrasePanel.SetActive(false);
         }
         
-        public bool TryStartDialogue()
+        public void UpdatePhrase(string phrase)
         {
-            if (_inkJson != null && _wantsToTalk)
+            StartCoroutine(TypeNewPhraseCoroutine(phrase));
+        }
+        
+        private IEnumerator TypeNewPhraseCoroutine(string phrase)
+        {
+            _phrasesText.text = string.Empty;
+            
+            foreach (var character in phrase)
             {
-                // dialogueManager.StartDialogue(_inkJson);
-                Debug.Log("Dialogue started");
-                return true;
+                _phrasesText.text += character;
+                yield return new WaitForSeconds(0.05f);
             }
 
-            return false;
-        }
-
-        public void TriggerInteraction()
-        {
-            if (_wantsToTalk)
-            {
-                _interactionIndicator.ActivateIndicator();
-            }
-        }
-
-        public void EndInteraction()
-        {
-            _interactionIndicator.DeactivateIndicator();
+            yield return null;
         }
     }
 }

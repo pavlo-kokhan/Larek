@@ -1,25 +1,32 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace Characters
 {
-    public class CharactersFactory
+    public class CharactersFactory : IFactory<GameObject, GameObject>
     {
-        private readonly GameObject _characterPrefab;
+        private readonly DiContainer _container;
+        private readonly Transform _charactersContainer;
         private readonly Transform _spawnPoint;
         private readonly Transform _interactionPoint;
         private readonly Transform _leavePoint;
 
-        public CharactersFactory(GameObject characterPrefab, Transform spawnPoint, Transform interactionPoint, Transform leavePoint)
+        public CharactersFactory(DiContainer container, 
+            Transform charactersContainer, 
+            Transform spawnPoint, 
+            Transform interactionPoint, 
+            Transform leavePoint)
         {
-            _characterPrefab = characterPrefab;
+            _container = container;
+            _charactersContainer = charactersContainer;
             _spawnPoint = spawnPoint;
             _interactionPoint = interactionPoint;
             _leavePoint = leavePoint;
         }
 
-        public GameObject SpawnCharacter(Transform parent)
+        public GameObject Create(GameObject prefab)
         {
-            var character = Object.Instantiate(_characterPrefab, parent);
+            var character = _container.InstantiatePrefab(prefab, _charactersContainer);
             var characterMovement = character.GetComponent<CharacterMovement>();
             
             characterMovement.Initialize(_spawnPoint, _interactionPoint, _leavePoint);

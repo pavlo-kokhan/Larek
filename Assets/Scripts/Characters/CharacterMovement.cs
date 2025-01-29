@@ -1,12 +1,9 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Characters
 {
     public class CharacterMovement : MonoBehaviour
     {
-        public event Action ReachedInteractionPoint;
-        
         [SerializeField] private CharacterAnimator _animator;
         [SerializeField] private float _speed = 5f;
         
@@ -66,11 +63,6 @@ namespace Characters
             if (Vector3.Distance(transform.position, _targetPosition) < 0.1f)
             {
                 StopMovement();
-
-                if (_targetPosition == _interactionPoint.position)
-                {
-                    ReachedInteractionPoint?.Invoke();
-                }
             }
         }
     }

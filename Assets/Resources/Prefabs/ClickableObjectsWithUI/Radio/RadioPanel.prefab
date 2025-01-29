@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7346149622393372150}
   - component: {fileID: 591007061061763633}
+  - component: {fileID: 6640331543318614096}
   m_Layer: 5
   m_Name: VolumeSlider
   m_TagString: Untagged
@@ -55,6 +56,19 @@ MonoBehaviour:
   _debounceInterval: 0.05
   _minAngleStep: 5
   _type: 0
+--- !u!114 &6640331543318614096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175605376446019283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9425c676321a4a738c4fde1e03798827, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cursorTexture: {fileID: 2800000, guid: dd8cf0ae06e0c7c408e963cc05a7e767, type: 3}
 --- !u!1 &2052287419988218174
 GameObject:
   m_ObjectHideFlags: 0
@@ -69,7 +83,6 @@ GameObject:
   - component: {fileID: 7176493479660008390}
   - component: {fileID: 2787667168989729393}
   - component: {fileID: -511842383258800376}
-  - component: {fileID: -8188780806870703681}
   m_Layer: 5
   m_Name: RadioPanel
   m_TagString: Untagged
@@ -173,19 +186,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a07b002cca274da19eba00bee69278da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-8188780806870703681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2052287419988218174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9425c676321a4a738c4fde1e03798827, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cursorTexture: {fileID: 2800000, guid: dd8cf0ae06e0c7c408e963cc05a7e767, type: 3}
 --- !u!1 &2158869468515424722
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,6 +409,7 @@ GameObject:
   - component: {fileID: 6962076682349136192}
   - component: {fileID: 1878633010117692575}
   - component: {fileID: 9039087514203993492}
+  - component: {fileID: 7633048375966102092}
   m_Layer: 5
   m_Name: ChannelSlider
   m_TagString: Untagged
@@ -469,6 +470,19 @@ MonoBehaviour:
   _sliderInput: {fileID: 1878633010117692575}
   _cursorRectTransform: {fileID: 3009665115398905916}
   _maxCursorX: 445
+--- !u!114 &7633048375966102092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6821627265683522940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9425c676321a4a738c4fde1e03798827, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cursorTexture: {fileID: 2800000, guid: dd8cf0ae06e0c7c408e963cc05a7e767, type: 3}
 --- !u!1 &8224646554159512856
 GameObject:
   m_ObjectHideFlags: 0

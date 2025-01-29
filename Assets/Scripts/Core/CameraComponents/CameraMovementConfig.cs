@@ -1,0 +1,16 @@
+﻿using UnityEngine;
+
+namespace Core.CameraComponents
+{
+    [CreateAssetMenu(fileName = "CameraMovementConfig", menuName = "Scriptable Objects/Configs/CameraMovementConfig")]
+    public class CameraMovementConfig : ScriptableObject
+    {
+        [field: SerializeField] 
+        [field: Range(0f, 200f)] 
+        public float EdgeThreshold { get; private set; } = 100f;
+
+        [field: SerializeField]
+        [field: Range(0f, 2f)]
+        public float SmoothSpeed { get; private set; } = 0.5f;
+    }
+}

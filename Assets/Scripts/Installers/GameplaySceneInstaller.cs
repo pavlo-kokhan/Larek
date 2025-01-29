@@ -1,9 +1,9 @@
-﻿using System.Linq;
+﻿using Core;
 using Cursors;
 using Data;
+using Dialogs;
 using GlobalAudio;
 using Panels;
-using Refrigerator;
 using UnityEngine;
 using Zenject;
 
@@ -13,7 +13,7 @@ namespace Installers
     {
         [SerializeField] private Canvas _uiCanvas;
         [SerializeField] private AudioSource _globalAudioSource;
-        [SerializeField] private Transform _interactivePanelsContainer;
+        [SerializeField] private GameObject _dialoguePanel;
         
         public override void InstallBindings()
         {
@@ -30,10 +30,6 @@ namespace Installers
                 .ToSelf()
                 .AsSingle();
 
-            Container.Bind<InteractivePanelsFactory>()
-                .AsSingle()
-                .WithArguments(Container, _interactivePanelsContainer);
-            
             IPersistentData persistentData = new PersistentData();
             
             Container.Bind<IPersistentData>()
@@ -48,12 +44,12 @@ namespace Installers
                 .AsSingle()
                 .WithArguments(persistentData);
 
-            Container.Bind<RefrigeratorProductsFactory>()
-                .AsSingle()
-                .WithArguments(Container);
-
             Container.Bind<ProductHolder>()
                 .AsSingle();
+            
+            Container.Bind<DialogueService>()
+                .AsSingle()
+                .WithArguments(_dialoguePanel);
         }
     }
 }
