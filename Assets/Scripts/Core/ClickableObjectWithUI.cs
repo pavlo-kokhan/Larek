@@ -19,6 +19,7 @@ namespace Core
         {
             _interactivePanelInstance = _panelsFactory.Create(_interactivePanelPrefab);
             _interactivePanelInstance.SetActive(false);
+            _panelsRegistrator.RegisterPanel(_interactivePanelInstance);
             
             OnPanelLoaded();
         }
@@ -37,7 +38,7 @@ namespace Core
         {
             if (_interactivePanelInstance == null) return;
             
-            _panelsRegistrator.RegisterPanel(_interactivePanelInstance);
+            _panelsRegistrator.ManuallyOpenPanel(_interactivePanelInstance);
         }
     }
 }

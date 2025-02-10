@@ -4,6 +4,8 @@
     {
         FrontSide,
         Kitchen,
-        Storage
+        BarTapSide,
+        BackSide,
+        UndergroundSide
     }
 }

@@ -340,7 +340,7 @@ MonoBehaviour:
   - {fileID: 1487375774694317431}
   - {fileID: 4387998741170501471}
   - {fileID: 2863382771665321379}
-  _noSignalAudioClip: {fileID: 8300000, guid: 09934e9d3ca9285448ff8c1c1ea26cc4, type: 3}
+  _noSignalAudioClip: {fileID: 8300000, guid: 80e24a0b68440924d92e3960cca643dd, type: 3}
   _noSignalAudioSource: {fileID: 5537443772052115461}
   _channelPositionLength: 0.1
   _channelEdgePositionsOffset: 0.05

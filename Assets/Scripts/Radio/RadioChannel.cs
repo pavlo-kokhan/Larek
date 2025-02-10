@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -11,64 +10,111 @@ namespace Radio
     [RequireComponent(typeof(AudioSource))]
     public class RadioChannel : MonoBehaviour
     {
-        [SerializeField] private AudioSource _audioSource;
         [SerializeField] private List<AssetReference> _audioClips;
         
-        private readonly Dictionary<AssetReference, AudioClip> _audioClipsCache = new();
-        private readonly Dictionary<AudioClip, AsyncOperationHandle> _loadOperationsCache = new();
-        
+        private AudioSource _audioSource;
+        private AsyncOperationHandle<AudioClip> _currentAudioClipHandle;
         private int _currentAudioClipIndex;
+        private bool _isLoadingClip;
         
         public AudioSource AudioSource => _audioSource;
-        
+
+        private void Awake()
+        {
+            _audioSource = GetComponent<AudioSource>();
+        }
+
         private async void Start()
         {
+            _isLoadingClip = true;
+            
             ShuffleAudioClips();
             _currentAudioClipIndex = 0;
             _audioSource.volume = 0f;
-            await PlayCurrentAudioClip();
+            
+            var audioClip = await LoadAudioClipAsync(_audioClips[_currentAudioClipIndex]);
+
+            if (audioClip is null)
+            {
+                Debug.LogWarning($"{nameof(RadioChannel)}: Failed to load first audio clip. May be invalid AssetReference.");
+                return;
+            }
+            
+            PlayNewAudioClip(audioClip, Random.Range(0f, audioClip.length));
+            
+            // для тесту
+            // PlayNewAudioClip(audioClip, audioClip.length - 10f);
+
+            _isLoadingClip = false;
         }
 
         private async void Update()
         {
-            if (_audioSource.clip != null && _audioSource.time >= _audioSource.clip.length - 0.1f)
+            if (_audioSource.clip is null || _isLoadingClip) return;
+            
+            if (_audioSource.isPlaying == false && _audioSource.clip is not null)
             {
-                var currentClipAsset = _audioClips[_currentAudioClipIndex];
-                var clip = _audioClipsCache[currentClipAsset];
+                _isLoadingClip = true;
+
+                if (_currentAudioClipIndex >= _audioClips.Count - 1)
+                {
+                    ShuffleAudioClips();
+                }
                 
-                // todo release handle and clear ram
-                // _loadOperationsCache[clip].Release();
-                // _audioClips.Remove(currentClipAsset);
-                // _loadOperationsCache.Remove(clip);
-                
+                UnloadCurrentAudioClip();
                 SetNextAudioClipIndex();
-                await PlayCurrentAudioClip();
+                
+                var newAudioClip = await LoadAudioClipAsync(_audioClips[_currentAudioClipIndex]);
+                
+                if (newAudioClip is null)
+                {
+                    Debug.LogWarning($"{nameof(RadioChannel)}: Failed to load audio clip at index {_currentAudioClipIndex}. " +
+                                     "May be invalid AssetReference.");
+                    return;
+                }
+                
+                PlayNewAudioClip(newAudioClip);
+                
+                // для тесту
+                // PlayNewAudioClip(newAudioClip, newAudioClip.length - 10f);
+                
+                _isLoadingClip = false;
             }
         }
 
-        private async Task PlayCurrentAudioClip()
+        private async Task<AudioClip> LoadAudioClipAsync(AssetReference audioClipReference)
         {
-            if (_audioClips.Count == 0) return;
-
-            var clipReference = _audioClips[_currentAudioClipIndex];
-
-            var handle = clipReference.LoadAssetAsync<AudioClip>();
-            await handle.Task;
-
-            if (handle.Status != AsyncOperationStatus.Succeeded)
+            if (_audioClips.Count == 0) return null;
+            
+            if (_currentAudioClipHandle.IsValid() && _currentAudioClipHandle.Status == AsyncOperationStatus.Succeeded)
             {
-                Debug.LogError($"Failed to load audio clip {clipReference}");
-                return;
+                return _currentAudioClipHandle.Result;
             }
             
-            var clip = handle.Result;
-            _audioClipsCache[clipReference] = clip;
-            _loadOperationsCache[clip] = handle;
-
-            var clipStartTime = _currentAudioClipIndex == 0 ? Random.Range(0f, clip.length) : 0f;
-            PlayNewAudioClip(clip, clipStartTime);
+            var handle = audioClipReference.LoadAssetAsync<AudioClip>();
+            
+            await handle.Task;
+            
+            if (handle.Status != AsyncOperationStatus.Succeeded)
+            {
+                Debug.LogWarning($"{nameof(RadioChannel)}: Failed to load audio clip {audioClipReference}");
+                return null;
+            }
+            
+            _currentAudioClipHandle = handle;
+            
+            return handle.Result;
         }
-
+        
+        private void UnloadCurrentAudioClip()
+        {
+            if (_currentAudioClipHandle.IsValid())
+            {
+                Addressables.Release(_currentAudioClipHandle);
+                _currentAudioClipHandle = default;
+            }
+        }
+        
         private void PlayNewAudioClip(AudioClip clip, float time = 0f)
         {
             _audioSource.clip = clip;
@@ -78,22 +124,26 @@ namespace Radio
         
         private void SetNextAudioClipIndex()
         {
-            if (_currentAudioClipIndex < _audioClips.Count - 2)
-            {
-                _currentAudioClipIndex++;
-                return;
-            }
-            
-            ShuffleAudioClips();
-            _currentAudioClipIndex = 0;
+            _currentAudioClipIndex = (_currentAudioClipIndex + 1) % _audioClips.Count;
         }
 
         private void ShuffleAudioClips()
         {
             if (_audioClips.Count < 2) return;
-            
-            var random = new System.Random();
-            _audioClips = _audioClips.OrderBy(x => random.Next()).ToList();
+
+            var lastClip = _audioClips[^1];
+
+            for (var i = _audioClips.Count - 1; i > 0; i--)
+            {
+                var randomIndex = Random.Range(0, i + 1);
+                (_audioClips[i], _audioClips[randomIndex]) = (_audioClips[randomIndex], _audioClips[i]);
+            }
+
+            if (_audioClips[0] == lastClip)
+            {
+                var randomIndex = Random.Range(1, _audioClips.Count);
+                (_audioClips[0], _audioClips[randomIndex]) = (_audioClips[randomIndex], _audioClips[0]);
+            }
         }
     }
 }

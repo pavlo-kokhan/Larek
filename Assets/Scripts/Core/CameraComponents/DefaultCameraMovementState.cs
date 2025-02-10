@@ -5,7 +5,7 @@ namespace Core.CameraComponents
     public class DefaultCameraMovementState : ICameraMovementState
     {
         private readonly CameraMovement _cameraMovement;
-        private readonly CameraMovementConfig _cameraMovementConfig;
+        private readonly DefaultCameraMovementConfig _defaultCameraMovementConfig;
 
         private Vector3 _velocity;
         private Vector3 _targetPosition;
@@ -13,7 +13,7 @@ namespace Core.CameraComponents
         public DefaultCameraMovementState(CameraMovement cameraMovement)
         {
             _cameraMovement = cameraMovement;
-            _cameraMovementConfig = _cameraMovement.CameraMovementConfig;
+            _defaultCameraMovementConfig = _cameraMovement.DefaultCameraMovementConfig;
         }
         
         public void EnterState()
@@ -43,21 +43,22 @@ namespace Core.CameraComponents
                 mainCamera.transform.position, 
                 _targetPosition, 
                 ref _velocity, 
-                _cameraMovementConfig.SmoothSpeed);
+                _defaultCameraMovementConfig.SmoothSpeed);
         }
         
         private bool IsMouseNearEdge(Vector3 mousePosition)
         {
-            var edgeThreshold = _cameraMovementConfig.EdgeThreshold;
+            var horizontalEdgeThreshold = _defaultCameraMovementConfig.HorizontalEdgeThreshold;
+            var verticalEdgeThreshold = _defaultCameraMovementConfig.VerticalEdgeThreshold;
             
             float screenWidth = Screen.width;
             float screenHeight = Screen.height;
 
-            var isNearHorizontalEdge = mousePosition.x < edgeThreshold 
-                                        || mousePosition.x > screenWidth - edgeThreshold;
+            var isNearHorizontalEdge = mousePosition.x < horizontalEdgeThreshold 
+                                        || mousePosition.x > screenWidth - horizontalEdgeThreshold;
             
-            var isNearVerticalEdge = mousePosition.y < edgeThreshold 
-                                      || mousePosition.y > screenHeight - edgeThreshold;
+            var isNearVerticalEdge = mousePosition.y < verticalEdgeThreshold 
+                                      || mousePosition.y > screenHeight - verticalEdgeThreshold;
 
             return isNearHorizontalEdge || isNearVerticalEdge;
         }

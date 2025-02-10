@@ -193,6 +193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f85e215faac748aaa357d8e7cf6c71fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <StartupRoom>k__BackingField: 0
+  _allowedRooms: 0000000001000000
 --- !u!114 &4655696549030973667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,7 +267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _orderFormInput: {fileID: 6953873080940155847}
-  _pageTurningSound: {fileID: 8300000, guid: ec860d163bf2c8740902109243f3c560, type: 3}
+  _pageTurningSound: {fileID: 8300000, guid: 8a6303272a56dc447a862a9d4d83a59a, type: 3}
 --- !u!114 &6953873080940155847
 MonoBehaviour:
   m_ObjectHideFlags: 0

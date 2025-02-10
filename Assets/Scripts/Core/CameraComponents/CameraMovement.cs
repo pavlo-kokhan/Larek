@@ -7,12 +7,14 @@ namespace Core.CameraComponents
     {
         [SerializeField] private Camera _mainCamera;
         [SerializeField] private Collider2D _backgroundCollider;
-        [SerializeField] private CameraMovementConfig _cameraMovementConfig;
+        [SerializeField] private DefaultCameraMovementConfig _defaultCameraMovementConfig;
+        [SerializeField] private HorizontalCameraMovementConfig _horizontalCameraMovementConfig;
         [SerializeField] private RoomSidesSwitcher _roomSidesSwitcher;
         
         public Camera MainCamera => _mainCamera;
         public Collider2D BackgroundCollider => _backgroundCollider;
-        public CameraMovementConfig CameraMovementConfig => _cameraMovementConfig;
+        public DefaultCameraMovementConfig DefaultCameraMovementConfig => _defaultCameraMovementConfig;
+        public HorizontalCameraMovementConfig HorizontalCameraMovementConfig => _horizontalCameraMovementConfig;
         public Vector3 CenterPosition { get; private set; }
 
         private ICameraMovementState _currentState;
@@ -56,6 +58,8 @@ namespace Core.CameraComponents
             {
                 case RoomType.FrontSide:
                     return new DefaultCameraMovementState(this);
+                case RoomType.Kitchen:
+                    return new HorizontalCameraMovementState(this);
                 default:
                     return new BlockedCameraMovementState(this);
             }

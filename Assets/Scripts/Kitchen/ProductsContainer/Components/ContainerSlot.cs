@@ -19,7 +19,7 @@ namespace Kitchen.ProductsContainer.Components
 
         private void Start()
         {
-            throw new NotImplementedException();
+            // find out if there are products saved
         }
 
         public void OnPointerClick(PointerEventData eventData)

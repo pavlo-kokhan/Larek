@@ -14,10 +14,16 @@ namespace Installers
         
         public override void InstallBindings()
         {
+            var productHolder = new ProductHolder();
+            var cursorView = new CursorView(_availableCursorTextures, _defaultCursorTexture, _productIcon, productHolder);
+            
+            Container.Bind<ProductHolder>()
+                .FromInstance(productHolder)
+                .AsSingle();
+            
             Container.Bind<CursorView>()
-                .ToSelf()
-                .AsSingle()
-                .WithArguments(_availableCursorTextures, _defaultCursorTexture, _productIcon);
+                .FromInstance(cursorView)
+                .AsSingle();
         }
     }
 }

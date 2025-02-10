@@ -134,5 +134,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gatesSwitcher: {fileID: 0}
-  _openSound: {fileID: 8300000, guid: b9cedf5c701abc34f80c2964c3336abc, type: 3}
-  _closeSound: {fileID: 8300000, guid: f1e2ff322367f8940bc115a3947cd2e7, type: 3}
+  _openSound: {fileID: 8300000, guid: b46435fc79b278a49b240cf551555765, type: 3}
+  _closeSound: {fileID: 8300000, guid: bbfd0aee65940ab4e9bf3ad66be969f3, type: 3}

@@ -325,6 +325,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f85e215faac748aaa357d8e7cf6c71fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <StartupRoom>k__BackingField: 0
+  _allowedRooms: 0000000001000000020000000300000004000000
 --- !u!114 &2496384499424877981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -379,7 +381,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _notebookInput: {fileID: 8779090865445721807}
-  _pageTurningSound: {fileID: 8300000, guid: e7ec940d2973a4248b5b2ce50171a135, type: 3}
+  _pageTurningSound: {fileID: 8300000, guid: f36d470cf22123243b5c211a7d5d3882, type: 3}
 --- !u!1 &2271386627330125005
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,6 +530,7 @@ GameObject:
   - component: {fileID: 4371735557082119378}
   - component: {fileID: 5597872712450372795}
   - component: {fileID: 6597039637184456535}
+  - component: {fileID: 3657140161249786439}
   m_Layer: 5
   m_Name: Button_Next
   m_TagString: Untagged
@@ -676,6 +679,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hoveredPosition: {x: 910, y: -664, z: 0}
   _offsetSpeed: 0.1
+--- !u!114 &3657140161249786439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3265376552397638578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8654c66b1a0490099b30fd778cb436b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _closablePanel: {fileID: -7289723177630644582}
 --- !u!1 &3987188725395887234
 GameObject:
   m_ObjectHideFlags: 0
@@ -952,6 +968,7 @@ GameObject:
   - component: {fileID: 1459511222504637011}
   - component: {fileID: 5539967014303859294}
   - component: {fileID: 6874717653342462381}
+  - component: {fileID: 4111475473016019337}
   m_Layer: 5
   m_Name: InputLeft
   m_TagString: Untagged
@@ -1115,6 +1132,19 @@ MonoBehaviour:
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 14
   m_InputValidator: {fileID: 0}
+--- !u!114 &4111475473016019337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6770576473306686080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8654c66b1a0490099b30fd778cb436b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _closablePanel: {fileID: -7289723177630644582}
 --- !u!1 &6885645420652088417
 GameObject:
   m_ObjectHideFlags: 0
@@ -1129,6 +1159,7 @@ GameObject:
   - component: {fileID: 3115719143420600336}
   - component: {fileID: 2101444001616930989}
   - component: {fileID: 4516160939519541015}
+  - component: {fileID: 1286940810829773820}
   m_Layer: 5
   m_Name: Button_Previous
   m_TagString: Untagged
@@ -1277,6 +1308,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hoveredPosition: {x: -907, y: 563, z: 0}
   _offsetSpeed: 0.1
+--- !u!114 &1286940810829773820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6885645420652088417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8654c66b1a0490099b30fd778cb436b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _closablePanel: {fileID: -7289723177630644582}
 --- !u!1 &7593863472512780696
 GameObject:
   m_ObjectHideFlags: 0
@@ -1340,6 +1384,7 @@ GameObject:
   - component: {fileID: 7356219473885623574}
   - component: {fileID: 7457051808784924564}
   - component: {fileID: 3809740055813575213}
+  - component: {fileID: 4430150881169634893}
   m_Layer: 5
   m_Name: InputRight
   m_TagString: Untagged
@@ -1503,6 +1548,19 @@ MonoBehaviour:
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 14
   m_InputValidator: {fileID: 0}
+--- !u!114 &4430150881169634893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8310629647749723840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8654c66b1a0490099b30fd778cb436b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _closablePanel: {fileID: -7289723177630644582}
 --- !u!1 &8736125401543748579
 GameObject:
   m_ObjectHideFlags: 0

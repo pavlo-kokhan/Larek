@@ -7,15 +7,19 @@ namespace Kitchen.TrashContainer
 {
     public class TrashContainer : MonoBehaviour, IPointerClickHandler
     {
-        [Inject] private CursorView _cursorView;
-        [Inject] private ProductHolder _productHolder;
+        private ProductHolder _productHolder;
+        
+        [Inject]
+        public void Construct(ProductHolder productHolder)
+        {
+            _productHolder = productHolder;
+        }
         
         public void OnPointerClick(PointerEventData eventData)
         {
             if (eventData.button == PointerEventData.InputButton.Left)
             {
-                _cursorView.ClearCursorProductIcon();
-                _productHolder.DeleteHoldingProduct();
+                _productHolder.TryReturnProduct(_ => true, out _);
             }
         }
     }

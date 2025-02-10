@@ -1,5 +1,4 @@
-﻿using Data;
-using Kitchen.Refrigerator.Components;
+﻿using Kitchen.Refrigerator.Components;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Zenject;

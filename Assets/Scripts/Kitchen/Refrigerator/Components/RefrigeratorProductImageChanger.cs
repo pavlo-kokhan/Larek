@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Kitchen.Refrigerator.Products;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -37,32 +35,32 @@ namespace Kitchen.Refrigerator.Components
             _quantitySprites.Add(5, _spriteFiveAndMoreQuantity);
         }
 
-        private void OnEnable()
-        {
-            _productComponent.ProductTaken += ChangeRefrigeratorProductImage;
-            _productComponent.ProductReturned += ChangeRefrigeratorProductImage;
-        }
+        // private void OnEnable()
+        // {
+        //     _productComponent.ProductTaken += ChangeRefrigeratorProductImage;
+        //     _productComponent.ProductReturned += ChangeRefrigeratorProductImage;
+        // }
+        //
+        // private void OnDisable()
+        // {
+        //     _productComponent.ProductTaken -= ChangeRefrigeratorProductImage;
+        //     _productComponent.ProductReturned -= ChangeRefrigeratorProductImage;
+        // }
 
-        private void OnDisable()
-        {
-            _productComponent.ProductTaken -= ChangeRefrigeratorProductImage;
-            _productComponent.ProductReturned -= ChangeRefrigeratorProductImage;
-        }
-
-        private void ChangeRefrigeratorProductImage(ProductState productState)
-        {
-            _image.sprite = GetQuantitySprite(productState);
-        }
-        
-        private Sprite GetQuantitySprite(ProductState productState)
-        {
-            var quantity = productState.Quantity;
-
-            if (quantity < 0) return null;
-            
-            var key = quantity > 5 ? 5 : quantity;
-            
-            return _quantitySprites[key];
-        }
+        // private void ChangeRefrigeratorProductImage(ProductState productState)
+        // {
+        //     _image.sprite = GetQuantitySprite(productState);
+        // }
+        //
+        // private Sprite GetQuantitySprite(ProductState productState)
+        // {
+        //     var quantity = productState.Quantity;
+        //
+        //     if (quantity < 0) return null;
+        //     
+        //     var key = quantity > 5 ? 5 : quantity;
+        //     
+        //     return _quantitySprites[key];
+        // }
     }
 }

@@ -1,9 +1,8 @@
-﻿using Core;
-using Cursors;
-using Data;
+﻿using Cursors;
 using Dialogs;
 using GlobalAudio;
 using Panels;
+using Player;
 using UnityEngine;
 using Zenject;
 
@@ -12,6 +11,7 @@ namespace Installers
     public class GameplaySceneInstaller : MonoInstaller
     {
         [SerializeField] private Canvas _uiCanvas;
+        [SerializeField] private RoomSidesSwitcher _roomSidesSwitcher;
         [SerializeField] private AudioSource _globalAudioSource;
         [SerializeField] private GameObject _dialoguePanel;
         
@@ -25,26 +25,11 @@ namespace Installers
                 .ToSelf()
                 .AsSingle()
                 .WithArguments(_globalAudioSource);
+
+            var interactivePanelsRegistrator = new InteractivePanelsRegistrator(_roomSidesSwitcher);
             
             Container.Bind<InteractivePanelsRegistrator>()
-                .ToSelf()
-                .AsSingle();
-
-            IPersistentData persistentData = new PersistentData();
-            
-            Container.Bind<IPersistentData>()
-                .FromInstance(persistentData)
-                .AsSingle();
-            
-            Container.Bind<PlayerDataProvider>()
-                .AsSingle()
-                .WithArguments(persistentData);
-            
-            Container.Bind<RefrigeratorDataProvider>()
-                .AsSingle()
-                .WithArguments(persistentData);
-
-            Container.Bind<ProductHolder>()
+                .FromInstance(interactivePanelsRegistrator)
                 .AsSingle();
             
             Container.Bind<DialogueService>()

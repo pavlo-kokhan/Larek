@@ -1,18 +1,19 @@
 ﻿using System;
-using System.Linq;
 using Core;
-using Data;
-using Kitchen.Refrigerator.Content;
-using UnityEngine;
+using Kitchen.Products;
 using Zenject;
 
 namespace Kitchen.Refrigerator
 {
     public class Refrigerator : ClickableObjectWithUI
     {
-        [SerializeField] private RefrigeratorContent _defaultRefrigeratorContent;
-        [Inject] private RefrigeratorDataProvider _dataProvider;
-        [Inject] private IPersistentData _persistentData;
+        private ProductsStorage _productsStorage;
+        
+        [Inject]
+        public void Construct(ProductsStorage productsStorage)
+        {
+            _productsStorage = productsStorage;
+        }
         
         protected override void OnPanelLoaded()
         {
@@ -23,15 +24,6 @@ namespace Kitchen.Refrigerator
                 throw new InvalidOperationException(
                     $"Component {typeof(RefrigeratorPanel)} does not exist in {nameof(_interactivePanelInstance)}");
             }
-
-            if (_dataProvider.TryLoad() == false)
-            {
-                _persistentData.RefrigeratorData = new RefrigeratorData(_defaultRefrigeratorContent);
-            }
-
-            var content = _persistentData.RefrigeratorData.ContentState;
-            var products = content.ProductStates.ToList();
-            panel.InstantiateProductPrefabs(products);
         }
     }
 }
