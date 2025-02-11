@@ -1,5 +1,5 @@
 ﻿using System;
-using Cursors;
+using Core.Cursors;
 using Kitchen.Products;
 using UnityEngine;
 using UnityEngine.EventSystems;

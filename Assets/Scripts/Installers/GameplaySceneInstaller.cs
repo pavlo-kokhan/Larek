@@ -1,8 +1,7 @@
-﻿using Cursors;
+﻿using Core.Panels;
+using Core.RoomSidesSwitcherComponents;
 using Dialogs;
 using GlobalAudio;
-using Panels;
-using Player;
 using UnityEngine;
 using Zenject;
 

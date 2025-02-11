@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Panels;
+using Core.Panels;
 using UnityEngine;
 
 namespace Kitchen.Refrigerator

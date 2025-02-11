@@ -1,6 +1,6 @@
 ﻿using Characters;
 using Core;
-using Panels;
+using Core.Panels;
 using UnityEngine;
 using Zenject;
 

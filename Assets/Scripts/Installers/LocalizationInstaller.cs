@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using Localization;
+using Core.Localization;
 using Zenject;
 
 namespace Installers

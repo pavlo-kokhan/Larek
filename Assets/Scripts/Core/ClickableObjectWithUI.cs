@@ -1,4 +1,4 @@
-﻿using Panels;
+﻿using Core.Panels;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;

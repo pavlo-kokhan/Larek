@@ -1,4 +1,4 @@
-﻿using Cursors;
+﻿using Core.Cursors;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
