@@ -1,90 +1,36 @@
-
 тест.png
-size: 1545,1536
-format: RGBA8888
-filter: Linear,Linear
-repeat: none
+size:1559,1559
+filter:Linear,Linear
+pma:true
 глаза закрытые
-  rotate: true
-  xy: 565, 214
-  size: 203, 128
-  orig: 203, 128
-  offset: 0, 0
-  index: -1
+bounds:565,237,203,128
+rotate:90
 глаза открытые
-  rotate: false
-  xy: 198, 27
-  size: 182, 36
-  orig: 182, 36
-  offset: 0, 0
-  index: -1
+bounds:2,2,182,36
 глаза полуприкртые
-  rotate: false
-  xy: 2, 17
-  size: 194, 46
-  orig: 194, 46
-  offset: 0, 0
-  index: -1
+bounds:2,40,194,46
 голова
-  rotate: true
-  xy: 2, 65
-  size: 352, 561
-  orig: 352, 561
-  offset: 0, 0
-  index: -1
+bounds:2,88,352,561
+rotate:90
 закрыт
-  rotate: true
-  xy: 565, 60
-  size: 152, 125
-  orig: 152, 125
-  offset: 0, 0
-  index: -1
+bounds:565,83,152,125
+rotate:90
 л
-  rotate: true
-  xy: 692, 47
-  size: 165, 114
-  orig: 165, 114
-  offset: 0, 0
-  index: -1
+bounds:692,70,165,114
+rotate:90
 левая рука
-  rotate: true
-  xy: 897, 820
-  size: 714, 646
-  orig: 714, 646
-  offset: 0, 0
-  index: -1
+bounds:897,843,714,646
+rotate:90
 открыт
-  rotate: true
-  xy: 695, 252
-  size: 165, 114
-  orig: 165, 114
-  offset: 0, 0
-  index: -1
+bounds:695,275,165,114
+rotate:90
 правая рука
-  rotate: true
-  xy: 936, 44
-  size: 774, 595
-  orig: 774, 595
-  offset: 0, 0
-  index: -1
+bounds:936,67,774,595
+rotate:90
 приоткрытэ
-  rotate: true
-  xy: 808, 110
-  size: 140, 126
-  orig: 140, 126
-  offset: 0, 0
-  index: -1
+bounds:808,133,140,126
+rotate:90
 тело
-  rotate: false
-  xy: 2, 419
-  size: 893, 1115
-  orig: 893, 1115
-  offset: 0, 0
-  index: -1
+bounds:2,442,893,1115
 усы
-  rotate: false
-  xy: 198, 2
-  size: 92, 23
-  orig: 92, 23
-  offset: 0, 0
-  index: -1
+bounds:186,15,92,23

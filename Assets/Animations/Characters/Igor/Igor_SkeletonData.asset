@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1b3b4b945939a54ea0b23d3396115fb, type: 3}
   m_Name: Igor_SkeletonData
   m_EditorClassIdentifier: 
-  atlasAssets: []
+  atlasAssets:
+  - {fileID: 11400000, guid: eb521be8ad954414899bf402293decc6, type: 2}
   scale: 0.01
-  skeletonJSON: {fileID: 4900000, guid: 6e613f26b31fcec4f9fd03aeed6b9cc7, type: 3}
+  skeletonJSON: {fileID: 4900000, guid: 24cb3cede22504046acbf11904aad948, type: 3}
   isUpgradingBlendModeMaterials: 0
   blendModeMaterials:
     requiresBlendModeMaterials: 0
@@ -23,14 +24,8 @@ MonoBehaviour:
     multiplyMaterials: []
     screenMaterials: []
   skeletonDataModifiers: []
-  fromAnimation:
-  - base
-  - speak
-  toAnimation:
-  - speak
-  - base
-  duration:
-  - 0
-  - 0
-  defaultMix: 0
+  fromAnimation: []
+  toAnimation: []
+  duration: []
+  defaultMix: 0.2
   controller: {fileID: 0}
