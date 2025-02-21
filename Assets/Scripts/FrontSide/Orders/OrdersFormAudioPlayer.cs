@@ -1,4 +1,4 @@
-﻿using GlobalAudio;
+﻿using Core.GlobalAudio;
 using UnityEngine;
 using Zenject;
 

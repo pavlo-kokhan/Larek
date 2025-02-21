@@ -15,7 +15,7 @@ namespace Kitchen.Refrigerator
         {
             foreach (var productSlot in _productSlots)
             {
-                productSlot.RightButtonClicked += ClosePanel;
+                productSlot.ClosePanelRequested += ClosePanel;
             }
         }
 
@@ -23,7 +23,7 @@ namespace Kitchen.Refrigerator
         {
             foreach (var productSlot in _productSlots)
             {
-                productSlot.RightButtonClicked -= ClosePanel;
+                productSlot.ClosePanelRequested -= ClosePanel;
             }
         }
 

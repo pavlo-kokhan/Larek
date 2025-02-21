@@ -17,6 +17,7 @@ namespace Core.Localization
         private readonly HashSet<LocalizedText> _localizedTextComponents = new();
      
         public string CurrentLanguageKey => PlayerPrefs.GetString(LanguagePreferenceKey);
+        public LanguageType CurrentLanguageType => LocalizationLoader.GetLanguageType(CurrentLanguageKey);
         
         public Localizer(LocalizationLoader localizationLoader)
         {

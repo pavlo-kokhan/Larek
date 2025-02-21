@@ -1,7 +1,7 @@
-﻿using Core.Panels;
+﻿using Core.Dialogs;
+using Core.GlobalAudio;
+using Core.Panels;
 using Core.RoomSidesSwitcherComponents;
-using Dialogs;
-using GlobalAudio;
 using UnityEngine;
 using Zenject;
 
@@ -12,7 +12,7 @@ namespace Installers
         [SerializeField] private Canvas _uiCanvas;
         [SerializeField] private RoomSidesSwitcher _roomSidesSwitcher;
         [SerializeField] private AudioSource _globalAudioSource;
-        [SerializeField] private GameObject _dialoguePanel;
+        [SerializeField] private DialogueChoicesPanel _dialogueChoicesPanel;
         
         public override void InstallBindings()
         {
@@ -33,7 +33,7 @@ namespace Installers
             
             Container.Bind<DialogueService>()
                 .AsSingle()
-                .WithArguments(_dialoguePanel);
+                .WithArguments(_dialogueChoicesPanel);
         }
     }
 }

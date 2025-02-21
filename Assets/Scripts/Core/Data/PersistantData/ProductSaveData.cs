@@ -8,21 +8,21 @@ namespace Core.Data.PersistantData
     public class ProductSaveData
     {
         public ProductType Type { get; private set; }
-        public ProductFryingStage FryingStage { get; private set; }
+        public ProductCookingStage CookingStage { get; private set; }
         public ProductLocation Location { get; private set; }
 
         public ProductSaveData(Product product)
         {
-            Type = product.Type;
-            FryingStage = product.FryingStage;
+            Type = product.Config.Type;
+            CookingStage = product.Config.CookingStage;
             Location = product.Location;
         }
         
         [JsonConstructor]
-        public ProductSaveData(ProductType type, ProductFryingStage fryingStage, ProductLocation location)
+        public ProductSaveData(ProductType type, ProductCookingStage cookingStage, ProductLocation location)
         {
             Type = type;
-            FryingStage = fryingStage;
+            CookingStage = cookingStage;
             Location = location;
         }
     }

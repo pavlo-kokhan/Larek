@@ -12,16 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 222bd15f1ae8416886e19f1d886238ce, type: 3}
   m_Name: BeefConfig
   m_EditorClassIdentifier: 
-  <Type>k__BackingField: 8
-  <FryingStage>k__BackingField: 0
+  <Type>k__BackingField: 2
+  <CookingStage>k__BackingField: 0
+  <ChoppingStage>k__BackingField: 0
+  <Prefab>k__BackingField: {fileID: 2305771425628409035, guid: 4c3862a4eacbeb747a4be484a3cb9e60, type: 3}
+  <CanBeSpawned>k__BackingField: 1
   <CanBeFried>k__BackingField: 0
   <CanBeInFridge>k__BackingField: 1
-  <CanBeChopped>k__BackingField: 1
-  <CanBeMixed>k__BackingField: 0
   <CanBeInContainer>k__BackingField: 1
+  <CanBeStackedInContainer>k__BackingField: 1
+  <CanBeChopped>k__BackingField: 1
+  <SlicesCount>k__BackingField: 1
+  <CanBeBaked>k__BackingField: 1
+  <CanBeAssembled>k__BackingField: 1
+  <CanBeMixed>k__BackingField: 0
   <PickupCursorSprite>k__BackingField: {fileID: 21300000, guid: 6f39fcb3e1260f24387626f084a807f6, type: 3}
   <InContainerSprite>k__BackingField: {fileID: 21300000, guid: 115d422e1680b0743a67ec9ed1b8cc57, type: 3}
-  <OnChoppingBoardSprite>k__BackingField: {fileID: 0}
+  <OnChoppingBoardSprite>k__BackingField: {fileID: 21300000, guid: c8b9116484ff04c459d6771d4c842b0c, type: 3}
+  <OnChoppingBoardPanelSprite>k__BackingField: {fileID: 21300000, guid: 11d28eae487951248909a1dd0f48a1c1, type: 3}
+  <OnAssemblyBoardSprite>k__BackingField: {fileID: 0}
+  <OnOvenPanelSprite>k__BackingField: {fileID: 0}
   <OnHotplateSprite>k__BackingField: {fileID: 0}
   <InRefrigeratorSprites>k__BackingField:
   - {fileID: 0}

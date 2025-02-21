@@ -1,6 +1,8 @@
 ﻿using Characters;
 using Core;
 using Core.Panels;
+using Kitchen.Products;
+using Kitchen.Products.OnTable;
 using UnityEngine;
 using Zenject;
 
@@ -14,8 +16,9 @@ namespace Installers
         [Header("Characters")]
         [SerializeField] private Transform _charactersContainer;
         [SerializeField] private Transform _spawnPoint;
-        [SerializeField] private Transform _interactionPoint;
-        [SerializeField] private Transform _leavePoint;
+
+        [Header("Products")] 
+        [SerializeField] private Transform _onTableProductsContainer;
         
         public override void InstallBindings()
         {
@@ -29,7 +32,11 @@ namespace Installers
             
             Container.Bind<CharactersFactory>()
                 .AsSingle()
-                .WithArguments(Container, _charactersContainer, _spawnPoint, _interactionPoint, _leavePoint);
+                .WithArguments(Container, _charactersContainer, _spawnPoint);
+            
+            Container.Bind<ProductObjectsFactory>()
+                .AsSingle()
+                .WithArguments(Container, _onTableProductsContainer);
         }
     }
 }

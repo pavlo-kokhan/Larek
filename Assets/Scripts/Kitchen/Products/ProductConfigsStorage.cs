@@ -9,7 +9,7 @@ namespace Kitchen.Products
     {
         [field: SerializeField] public List<ProductConfig> AllConfigs { get; private set; } = new();
 
-        private readonly Dictionary<(ProductType, ProductFryingStage), ProductConfig> _configLookup = new();
+        private readonly Dictionary<(ProductType, ProductCookingStage, ProductChoppingStage), ProductConfig> _configLookup = new();
 
         private void OnEnable()
         {
@@ -17,18 +17,13 @@ namespace Kitchen.Products
     
             foreach (var config in AllConfigs)
             {
-                _configLookup[(config.Type, config.FryingStage)] = config;
+                _configLookup[(config.Type, config.CookingStage, config.ChoppingStage)] = config;
             }
         }
 
-        public ProductConfig GetConfigOfProductType(ProductType type, ProductFryingStage fryingStage)
+        public ProductConfig GetConfig(ProductType type, ProductCookingStage cookingStage, ProductChoppingStage choppingStage)
         {
-            return _configLookup.GetValueOrDefault((type, fryingStage));
-        }
-
-        public ProductConfig GetConfigOfNextFryingStageType(ProductType type, ProductFryingStage fryingStage)
-        {
-            return null;
+            return _configLookup.GetValueOrDefault((type, cookingStage, choppingStage));
         }
     }
 }

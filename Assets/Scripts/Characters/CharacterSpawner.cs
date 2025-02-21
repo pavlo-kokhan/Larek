@@ -6,11 +6,19 @@ namespace Characters
     public class CharacterSpawner : MonoBehaviour
     {
         [SerializeField] private GameObject _prefab;
-        [Inject] private CharactersFactory _factory;
+        
+        private CharactersFactory _factory;
 
+        [Inject]
+        public void Construct(CharactersFactory factory)
+        {
+            _factory = factory;
+        }
+        
         public void SpawnTestCharacter()
         {
             _factory.Create(_prefab);
+            gameObject.SetActive(false);
         }
     }
 }

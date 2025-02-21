@@ -1,52 +1,61 @@
-﻿using System;
-using System.Collections;
-using TMPro;
+﻿using Core.Dialogs;
+using Spine.Unity;
 using UnityEngine;
+using Zenject;
 
 namespace Characters
 {
     [RequireComponent(typeof(Collider2D))]
     public class Character : MonoBehaviour
     {
+        [SerializeField] private CharacterPhrasePanel _phrasePanel;
+        [SerializeField] private SkeletonAnimation _skeletonAnimation;
         [SerializeField] private string _name;
         [SerializeField] private TextAsset _inkJson;
-        [SerializeField] private GameObject _phrasePanel;
-        [SerializeField] private TMP_Text _phrasesText;
 
-        public string Name => _name;
-        public TextAsset InkJson => _inkJson;
+        private DialogueService _dialogueService;
+        
+        [Inject]
+        public void Construct(DialogueService dialogueService)
+        {
+            _dialogueService = dialogueService;
+        }
 
         private void Start()
         {
-            DeactivatePhrasesPanel();
+            Stand();
         }
 
-        public void ActivatePhrasesPanel()
+        private void OnEnable()
         {
-            _phrasePanel.SetActive(true);
+            _phrasePanel.StartedTypingPhrase += Speak;
+            _phrasePanel.EndedTypingPhrase += Stand;
         }
 
-        public void DeactivatePhrasesPanel()
+        private void OnDisable()
         {
-            _phrasePanel.SetActive(false);
+            _phrasePanel.StartedTypingPhrase -= Speak;
+            _phrasePanel.EndedTypingPhrase -= Stand;
         }
-        
-        public void UpdatePhrase(string phrase)
-        {
-            StartCoroutine(TypeNewPhraseCoroutine(phrase));
-        }
-        
-        private IEnumerator TypeNewPhraseCoroutine(string phrase)
-        {
-            _phrasesText.text = string.Empty;
-            
-            foreach (var character in phrase)
-            {
-                _phrasesText.text += character;
-                yield return new WaitForSeconds(0.05f);
-            }
 
-            yield return null;
+        private void OnMouseDown()
+        {
+            StartDialogue();
+        }
+
+        private void StartDialogue()
+        {
+            _dialogueService.StartDialogue(_phrasePanel, _inkJson);
+        }
+
+        private void Speak()
+        {
+            _skeletonAnimation.AnimationState.SetAnimation(0, "speak", true);
+        }
+
+        private void Stand()
+        {
+            _skeletonAnimation.AnimationState.SetAnimation(0, "base", true);
         }
     }
 }

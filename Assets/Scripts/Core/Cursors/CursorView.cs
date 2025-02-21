@@ -56,7 +56,7 @@ namespace Core.Cursors
         
         private void SetCursorProductIcon(Product product)
         {
-            var sprite = product.PickupCursorSprite;
+            var sprite = product.Config.PickupCursorSprite;
             
             if (sprite == null)
             {
@@ -66,8 +66,8 @@ namespace Core.Cursors
             
             _productIcon.sprite = sprite;
             _productIcon.SetNativeSize();
-            _productIcon.rectTransform.localScale = new Vector3(0.1f, 0.1f, 1);
-            _productIcon.color = new Color(255, 255, 255, 0.85f);
+            _productIcon.rectTransform.localScale = new Vector3(0.4f, 0.4f, 1);
+            _productIcon.color = new Color(255, 255, 255, 1f);
         }
 
         private void ClearCursorProductIcon()

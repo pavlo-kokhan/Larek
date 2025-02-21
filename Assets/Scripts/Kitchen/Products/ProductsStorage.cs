@@ -24,63 +24,76 @@ namespace Kitchen.Products
             _productConfigsStorage = productConfigsStorage;
         }
 
-        public void SaveProducts()
-        {
-            var productsSaveData = new ProductsSaveData(_products);
-            
-            if (_dataService.SaveData(RelativePath, productsSaveData) == false)
-            {
-                Debug.Log("Failed to save products.");
-                return;
-            }
-            
-            Debug.Log("Products are saved successfully.");
-        }
-
-        public void LoadProducts()
-        {
-            try
-            {
-                var result = _dataService.LoadData<ProductsSaveData>(RelativePath);
-
-                if (result == null)
-                {
-                    Debug.Log("Loaded products are null.");
-                    _products.Clear();
-                    return;
-                }
-
-                foreach (var productSaveData in result.Products)
-                {
-                    var type = productSaveData.Type;
-                    var fryingStage = productSaveData.FryingStage;
-                    var config = _productConfigsStorage.GetConfigOfProductType(type, fryingStage);
-
-                    if (config == null)
-                    {
-                        Debug.LogError($"Product config of type {type} " +
-                                       $"and frying stage {fryingStage} is not found.");
-                        continue;
-                    }
-                    
-                    _products.Add(new Product(config, productSaveData.Location));
-                }
-            }
-            catch (Exception)
-            {
-                Debug.Log("Failed to load products");
-            }
-        }
+        // public void SaveProducts()
+        // {
+        //     var productsSaveData = new ProductsSaveData(_products);
+        //     
+        //     if (_dataService.SaveData(RelativePath, productsSaveData) == false)
+        //     {
+        //         Debug.Log("Failed to save products.");
+        //         return;
+        //     }
+        //     
+        //     Debug.Log("Products are saved successfully.");
+        // }
+        //
+        // public void LoadProducts()
+        // {
+        //     try
+        //     {
+        //         var result = _dataService.LoadData<ProductsSaveData>(RelativePath);
+        //
+        //         if (result == null)
+        //         {
+        //             Debug.Log("Loaded products are null.");
+        //             _products.Clear();
+        //             return;
+        //         }
+        //
+        //         foreach (var productSaveData in result.Products)
+        //         {
+        //             var type = productSaveData.Type;
+        //             var fryingStage = productSaveData.CookingStage;
+        //             var config = _productConfigsStorage.GetConfig(type, fryingStage);
+        //
+        //             if (config == null)
+        //             {
+        //                 Debug.LogError($"Product config of type {type} " +
+        //                                $"and frying stage {fryingStage} is not found.");
+        //                 continue;
+        //             }
+        //             
+        //             _products.Add(new Product(config, productSaveData.Location));
+        //         }
+        //     }
+        //     catch (Exception)
+        //     {
+        //         Debug.Log("Failed to load products");
+        //     }
+        // }
 
         public void LoadDefaultProducts()
         {
-            var tomatoConfig = _productConfigsStorage.GetConfigOfProductType(ProductType.Tomato, ProductFryingStage.Raw);
-            var beefConfig = _productConfigsStorage.GetConfigOfProductType(ProductType.Beef, ProductFryingStage.Raw);
-            var saladConfig = _productConfigsStorage.GetConfigOfProductType(ProductType.Salad, ProductFryingStage.Raw);
+            var tomatoConfig = _productConfigsStorage.GetConfig(ProductType.Tomato, ProductCookingStage.Raw, ProductChoppingStage.Unchopped);
+            var beefConfig = _productConfigsStorage.GetConfig(ProductType.Beef, ProductCookingStage.Raw, ProductChoppingStage.Unchopped);
+            var saladConfig = _productConfigsStorage.GetConfig(ProductType.Salad, ProductCookingStage.Raw, ProductChoppingStage.Unchopped);
+            var doughConfig = _productConfigsStorage.GetConfig(ProductType.Dough, ProductCookingStage.Raw, ProductChoppingStage.Unchopped);
             
             _products.Add(new Product(tomatoConfig, ProductLocation.Refrigerator));
+            _products.Add(new Product(tomatoConfig, ProductLocation.Refrigerator));
+            _products.Add(new Product(tomatoConfig, ProductLocation.Refrigerator));
+            
             _products.Add(new Product(beefConfig, ProductLocation.Refrigerator));
+            _products.Add(new Product(beefConfig, ProductLocation.Refrigerator));
+            _products.Add(new Product(beefConfig, ProductLocation.Refrigerator));
+            
             _products.Add(new Product(saladConfig, ProductLocation.Refrigerator));
+            _products.Add(new Product(saladConfig, ProductLocation.Refrigerator));
+            _products.Add(new Product(saladConfig, ProductLocation.Refrigerator));
+            
+            _products.Add(new Product(doughConfig, ProductLocation.Refrigerator));
+            _products.Add(new Product(doughConfig, ProductLocation.Refrigerator));
+            _products.Add(new Product(doughConfig, ProductLocation.Refrigerator));
         }
     }
 }

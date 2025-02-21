@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
+using UnityEditor.AddressableAssets.Build.Layout;
 using UnityEngine;
 
 namespace Core.Localization
@@ -38,6 +40,21 @@ namespace Core.Localization
                     return "ru";
                 default:
                     return "en";
+            }
+        }
+        
+        public static LanguageType GetLanguageType(string languageKey)
+        {
+            switch (languageKey)
+            {
+                case "en":
+                    return LanguageType.English;
+                case "ua":
+                    return LanguageType.Ukrainian;
+                case "ru":
+                    return LanguageType.Russian;
+                default:
+                    throw new ArgumentException($"{nameof(languageKey)} is invalid or not supported)");
             }
         }
     }
