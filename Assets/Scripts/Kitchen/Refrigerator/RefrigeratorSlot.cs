@@ -12,18 +12,22 @@ namespace Kitchen.Refrigerator
 {
     public class RefrigeratorSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        public event Action<int> ProductsCountChanged;
+        public event Action<IReadOnlyCollection<Product>> ProductsChanged;
         public event Action ClosePanelRequested;
         
         [field: SerializeField] public ProductType Type { get; private set; }
         [SerializeField] private Texture2D _textureTake;
 
         private readonly List<Product> _currentProducts = new();
+        public IEnumerable<Product> CurrentProducts => _currentProducts;
+        
         private IAcceptProductCondition _acceptProductCondition;
         
         private ProductsStorage _productsStorage;
         private ProductHolder _productHolder;
         private CursorView _cursorView;
+
+        private bool _isInitialized;
         
         public int CurrentProductsCount => _currentProducts.Count;
 
@@ -35,19 +39,23 @@ namespace Kitchen.Refrigerator
             _productsStorage = productsStorage;
             _productHolder = productHolder;
             _cursorView = cursorView;
-
-            var products = _productsStorage.Products
-                .Where(p => p.Config.Type == Type && p.Location == ProductLocation.Refrigerator);
-
-            foreach (var product in products)
-            {
-                _currentProducts.Add(product);
-            }
         }
 
         private void Start()
         {
-            ProductsCountChanged?.Invoke(_currentProducts.Count);
+            ProductsChanged?.Invoke(_currentProducts.AsReadOnly());
+        }
+
+        public void Initialize(IEnumerable<Product> products)
+        {
+            if (_isInitialized) return;
+
+            foreach (var product in products)
+            {
+                if (product.Type == Type) _currentProducts.Add(product);
+            }
+            
+            _isInitialized = true;
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -83,7 +91,7 @@ namespace Kitchen.Refrigerator
                 if (_productHolder.TryTakeNewProduct(lastProduct))
                 {
                     _currentProducts.Remove(lastProduct);
-                    ProductsCountChanged?.Invoke(_currentProducts.Count);
+                    ProductsChanged?.Invoke(_currentProducts.AsReadOnly());
                     return;
                 }
             }
@@ -91,7 +99,7 @@ namespace Kitchen.Refrigerator
             if (_productHolder.TryReturnProduct(_acceptProductCondition, out var product))
             {
                 _currentProducts.Add(product);
-                ProductsCountChanged?.Invoke(_currentProducts.Count);
+                ProductsChanged?.Invoke(_currentProducts.AsReadOnly());
             }
         }
     }

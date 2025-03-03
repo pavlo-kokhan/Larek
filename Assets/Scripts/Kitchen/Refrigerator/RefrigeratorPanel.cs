@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Core.Panels;
+using Kitchen.Products;
 using UnityEngine;
 
 namespace Kitchen.Refrigerator
@@ -10,6 +11,7 @@ namespace Kitchen.Refrigerator
         [SerializeField] private List<RefrigeratorSlot> _productSlots;
 
         private ClosablePanel _closablePanelComponent;
+        private bool _isInitialized;
 
         private void OnEnable()
         {
@@ -30,6 +32,18 @@ namespace Kitchen.Refrigerator
         private void Awake()
         {
             _closablePanelComponent = GetComponent<ClosablePanel>();
+        }
+        
+        public void Initialize(IEnumerable<Product> products)
+        {
+            if (_isInitialized) return;
+
+            foreach (var slot in _productSlots)
+            {
+                slot.Initialize(products);
+            }
+            
+            _isInitialized = true;
         }
 
         private void ClosePanel()

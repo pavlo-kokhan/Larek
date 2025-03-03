@@ -9,21 +9,20 @@ namespace Core.Data.PersistantData
     {
         public ProductType Type { get; private set; }
         public ProductCookingStage CookingStage { get; private set; }
-        public ProductLocation Location { get; private set; }
+        public ProductChoppingStage ChoppingStage { get; private set; }
 
         public ProductSaveData(Product product)
         {
-            Type = product.Config.Type;
-            CookingStage = product.Config.CookingStage;
-            Location = product.Location;
+            Type = product.Type;
+            CookingStage = product.CookingStage;
         }
         
         [JsonConstructor]
-        public ProductSaveData(ProductType type, ProductCookingStage cookingStage, ProductLocation location)
+        public ProductSaveData(ProductType type, ProductCookingStage cookingStage, ProductChoppingStage choppingStage)
         {
             Type = type;
             CookingStage = cookingStage;
-            Location = location;
+            ChoppingStage = choppingStage;
         }
     }
 }

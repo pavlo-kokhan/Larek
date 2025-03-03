@@ -2,7 +2,7 @@
 using Core;
 using Core.Panels;
 using Kitchen.Products;
-using Kitchen.Products.OnTable;
+using Kitchen.Products.ProductGameObject;
 using UnityEngine;
 using Zenject;
 

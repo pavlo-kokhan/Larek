@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 222bd15f1ae8416886e19f1d886238ce, type: 3}
   m_Name: BeefChoppedConfig
   m_EditorClassIdentifier: 
-  <Type>k__BackingField: 2
-  <CookingStage>k__BackingField: 0
-  <ChoppingStage>k__BackingField: 1
+  <Id>k__BackingField:
+    <Type>k__BackingField: 2
+    <CookingStage>k__BackingField: 0
+    <ChoppingStage>k__BackingField: 1
   <Prefab>k__BackingField: {fileID: 0}
   <CanBeSpawned>k__BackingField: 1
   <CanBeFried>k__BackingField: 1
@@ -29,6 +30,26 @@ MonoBehaviour:
   <ProductPerspectiveSprites>k__BackingField:
     _serializedList:
     - Key: 0
+      Value:
+        <ProductSprite>k__BackingField: {fileID: 0}
+        <ShadowSprite>k__BackingField: {fileID: 0}
+        <JuiceSprite>k__BackingField: {fileID: 0}
+    - Key: 1
+      Value:
+        <ProductSprite>k__BackingField: {fileID: 0}
+        <ShadowSprite>k__BackingField: {fileID: 0}
+        <JuiceSprite>k__BackingField: {fileID: 0}
+    - Key: 2
+      Value:
+        <ProductSprite>k__BackingField: {fileID: 0}
+        <ShadowSprite>k__BackingField: {fileID: 0}
+        <JuiceSprite>k__BackingField: {fileID: 0}
+    - Key: 3
+      Value:
+        <ProductSprite>k__BackingField: {fileID: 0}
+        <ShadowSprite>k__BackingField: {fileID: 0}
+        <JuiceSprite>k__BackingField: {fileID: 0}
+    - Key: 4
       Value:
         <ProductSprite>k__BackingField: {fileID: 0}
         <ShadowSprite>k__BackingField: {fileID: 0}

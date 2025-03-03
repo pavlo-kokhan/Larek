@@ -7,23 +7,30 @@ namespace Kitchen.Products
     [CreateAssetMenu(fileName = "Products Storage", menuName = "Scriptable Objects/Configs/Products Configs Storage")]
     public class ProductConfigsStorage : ScriptableObject
     {
-        [field: SerializeField] public List<ProductConfig> AllConfigs { get; private set; } = new();
+        [SerializeField] private List<ProductConfig> _allConfigs = new();
 
-        private readonly Dictionary<(ProductType, ProductCookingStage, ProductChoppingStage), ProductConfig> _configLookup = new();
+        private readonly Dictionary<ProductId, ProductConfig> _configLookup = new();
 
         private void OnEnable()
         {
             _configLookup.Clear();
     
-            foreach (var config in AllConfigs)
+            foreach (var config in _allConfigs)
             {
-                _configLookup[(config.Type, config.CookingStage, config.ChoppingStage)] = config;
+                _configLookup[config.Id] = config;
             }
         }
 
         public ProductConfig GetConfig(ProductType type, ProductCookingStage cookingStage, ProductChoppingStage choppingStage)
         {
-            return _configLookup.GetValueOrDefault((type, cookingStage, choppingStage));
+            var productId = new ProductId(type, cookingStage, choppingStage);
+            
+            return GetConfig(productId);
+        }
+        
+        public ProductConfig GetConfig(ProductId productId)
+        {
+            return _configLookup[productId];
         }
     }
 }

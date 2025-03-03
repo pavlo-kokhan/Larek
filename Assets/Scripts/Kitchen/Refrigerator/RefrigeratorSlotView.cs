@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Kitchen.Products;
-using Kitchen.Products.Enums;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
 namespace Kitchen.Refrigerator
 {
@@ -14,42 +13,20 @@ namespace Kitchen.Refrigerator
         [SerializeField] private Image _productImage;
         [SerializeField] private TextMeshProUGUI _counterText;
         
-        private readonly Dictionary<int, Sprite> _sprites = new();
-
-        [Inject]
-        public void Construct(ProductConfigsStorage productConfigsStorage)
-        {
-            var productType = _refrigeratorSlot.Type;
-            var productConfig = productConfigsStorage.GetConfig(productType, ProductCookingStage.Raw, ProductChoppingStage.Unchopped);
-
-            var refrigeratorSprites = productConfig.InRefrigeratorSprites;
-            
-            if (refrigeratorSprites == null || refrigeratorSprites.Length == 0)
-            {
-                Debug.LogError($"No refrigerator sprites found in config of product type: {productType}");
-                return;
-            }
-
-            for (int i = 0; i < refrigeratorSprites.Length; i++)
-            {
-                _sprites[i] = refrigeratorSprites[i];
-            }
-            
-            UpdateView(_refrigeratorSlot.CurrentProductsCount);
-        }
-        
         private void OnEnable()
         {
-            _refrigeratorSlot.ProductsCountChanged += UpdateView;
+            _refrigeratorSlot.ProductsChanged += UpdateView;
         }
 
         private void OnDisable()
         {
-            _refrigeratorSlot.ProductsCountChanged -= UpdateView;
+            _refrigeratorSlot.ProductsChanged -= UpdateView;
         }
 
-        private void UpdateView(int count)
+        private void UpdateView(IReadOnlyCollection<Product> products)
         {
+            var count = products.Count;
+            
             _counterText.SetText(count.ToString());
             
             if (count == 0)
@@ -58,10 +35,12 @@ namespace Kitchen.Refrigerator
                 _productImage.color = new Color(0, 0, 0, 0);
                 return;
             }
+
+            var sprites = products.First().InRefrigeratorSprites;
             
-            count = count > _sprites.Count - 1 ? _sprites.Count - 1 : count;
+            count = count > sprites.Length - 1 ? sprites.Length - 1 : count;
             
-            _productImage.sprite = _sprites[count];
+            _productImage.sprite = sprites[count];
             _productImage.color = new Color(1f, 1f, 1f, 1f);
         }
     }

@@ -1,22 +1,26 @@
 ﻿using Kitchen.Products;
+using Kitchen.Products.ProductGameObject;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Kitchen.ChoppingBoard
 {
     public class ChoppingBoardPanel : MonoBehaviour
     {
-        private Product _product;
+        [SerializeField] private Image _productImage;
+        
+        private ChoppingBoard _choppingBoard;
+        public ProductObject ProductObject => _choppingBoard.FirstProductObject;
 
-        public Product Product
+        private bool _isInitialized;
+
+        public void Initialize(ChoppingBoard choppingBoard)
         {
-            get => _product;
-            set
-            {
-                if (value is null || _product is not null) return;
-                _product = value;
-            }
+            if (_isInitialized) return;
+            
+            _choppingBoard = choppingBoard;
+            
+            _isInitialized = true;
         }
-        
-        
     }
 }

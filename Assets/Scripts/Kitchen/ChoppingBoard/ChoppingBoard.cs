@@ -1,6 +1,7 @@
-﻿using Core;
-using Kitchen.Products;
-using Kitchen.Products.OnTable;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Core;
+using Kitchen.Products.ProductGameObject;
 using UnityEngine;
 
 namespace Kitchen.ChoppingBoard
@@ -8,28 +9,27 @@ namespace Kitchen.ChoppingBoard
     [RequireComponent(typeof(Collider2D))]
     public class ChoppingBoard : ClickableObjectWithUI
     {
-        private ChoppingBoardPanel _panel;
-        private Product _product;
+        private readonly List<ProductObject> _registeredProducts = new();
+        public ProductObject FirstProductObject => _registeredProducts.FirstOrDefault();
         
         protected override void OnPanelLoaded()
         {
-            if (_interactivePanelInstance.TryGetComponent<ChoppingBoardPanel>(out var panel) == false)
+            if (!_interactivePanelInstance.TryGetComponent<ChoppingBoardPanel>(out var panel))
             {
                 Debug.LogWarning($"{nameof(_interactivePanelInstance)} requires {nameof(ChoppingBoardPanel)} component.");
                 return;
             }
             
-            _panel = panel;
+            panel.Initialize(this);
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.TryGetComponent<ProductObject>(out var productObject))
             {
-                if (_product is not null) return;
+                if (_registeredProducts.Contains(productObject)) return;
                 
-                _product = productObject.Product;
-                Debug.Log($"{nameof(ChoppingBoard)} product of type {_product.Type} is saved on chopping board.");
+                _registeredProducts.Add(productObject);
             }
         }
 
@@ -37,13 +37,9 @@ namespace Kitchen.ChoppingBoard
         {
             if (other.TryGetComponent<ProductObject>(out var productObject))
             {
-                if (_product is null) return;
-
-                if (_product == productObject.Product)
-                {
-                    _product = null;
-                    Debug.Log($"{nameof(ChoppingBoard)} product of type {productObject.Product.Type} is deleted from chopping board.");
-                }
+                if (!_registeredProducts.Contains(productObject)) return;
+                
+                _registeredProducts.Remove(productObject);
             }
         }
     }

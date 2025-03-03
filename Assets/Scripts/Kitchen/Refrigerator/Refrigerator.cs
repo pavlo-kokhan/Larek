@@ -1,6 +1,6 @@
-﻿using System;
-using Core;
+﻿using Core;
 using Kitchen.Products;
+using UnityEngine;
 using Zenject;
 
 namespace Kitchen.Refrigerator
@@ -19,11 +19,13 @@ namespace Kitchen.Refrigerator
         {
             var panel = _interactivePanelInstance.GetComponent<RefrigeratorPanel>();
 
-            if (panel == null)
+            if (panel is null)
             {
-                throw new InvalidOperationException(
-                    $"Component {typeof(RefrigeratorPanel)} does not exist in {nameof(_interactivePanelInstance)}");
+                Debug.LogWarning($"{nameof(_interactivePanelInstance)} requires component {nameof(RefrigeratorPanel)}");
+                return;
             }
+
+            panel.Initialize(_productsStorage.Products);
         }
     }
 }
