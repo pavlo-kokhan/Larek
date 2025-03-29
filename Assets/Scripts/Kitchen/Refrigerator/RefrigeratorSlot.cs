@@ -15,13 +15,13 @@ namespace Kitchen.Refrigerator
         public event Action<IReadOnlyCollection<Product>> ProductsChanged;
         public event Action ClosePanelRequested;
         
-        [field: SerializeField] public ProductType Type { get; private set; }
+        [field: SerializeField] public ProductId ProductId { get; private set; }
         [SerializeField] private Texture2D _textureTake;
 
         private readonly List<Product> _currentProducts = new();
         public IEnumerable<Product> CurrentProducts => _currentProducts;
         
-        private IAcceptProductCondition _acceptProductCondition;
+        private IAcceptProductCondition _acceptCondition;
         
         private ProductsStorage _productsStorage;
         private ProductHolder _productHolder;
@@ -29,12 +29,12 @@ namespace Kitchen.Refrigerator
 
         private bool _isInitialized;
         
-        public int CurrentProductsCount => _currentProducts.Count;
+        private int CurrentProductsCount => _currentProducts.Count;
 
         [Inject]
-        public void Construct(ProductsStorage productsStorage, ProductHolder productHolder, CursorView cursorView)
+        private void Construct(ProductsStorage productsStorage, ProductHolder productHolder, CursorView cursorView)
         {
-            _acceptProductCondition = new RefrigeratorSlotAcceptCondition(Type);
+            _acceptCondition = new RefrigeratorSlotAcceptCondition(ProductId);
             
             _productsStorage = productsStorage;
             _productHolder = productHolder;
@@ -52,7 +52,7 @@ namespace Kitchen.Refrigerator
 
             foreach (var product in products)
             {
-                if (product.Type == Type) _currentProducts.Add(product);
+                if (_acceptCondition.CanAcceptProduct(product)) _currentProducts.Add(product);
             }
             
             _isInitialized = true;
@@ -96,7 +96,7 @@ namespace Kitchen.Refrigerator
                 }
             }
 
-            if (_productHolder.TryReturnProduct(_acceptProductCondition, out var product))
+            if (_productHolder.TryReturnProduct(_acceptCondition, out var product))
             {
                 _currentProducts.Add(product);
                 ProductsChanged?.Invoke(_currentProducts.AsReadOnly());

@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 222bd15f1ae8416886e19f1d886238ce, type: 3}
+  m_Name: BunBaseMedium
+  m_EditorClassIdentifier: 
+  <Id>k__BackingField:
+    <Type>k__BackingField: 6
+    <CookingStage>k__BackingField: 1
+    <ChoppingStage>k__BackingField: 0
+    <ShapeType>k__BackingField: 0
+    <AssemblyType>k__BackingField: 1
+  <Prefab>k__BackingField: {fileID: 2305771425628409035, guid: 3f9e7e215b6a3b84db0ad64d0ee3359b, type: 3}
+  <OnChoppingBoardPrefab>k__BackingField: {fileID: 0}
+  <NextFryingConfig>k__BackingField: {fileID: 0}
+  <NextBakingConfig>k__BackingField: {fileID: 0}
+  <ChoppingParticles>k__BackingField: []
+  <FryingTime>k__BackingField: 5
+  <BakingTime>k__BackingField: 5
+  <SlicesCount>k__BackingField: 1
+  <CanBeAssembled>k__BackingField: 1
+  <ProductPerspectiveSprites>k__BackingField:
+    _serializedList:
+    - Key: 0
+      Value:
+        <ProductSprite>k__BackingField: {fileID: 21300000, guid: 06862e94ed5ca86458071afff2b7a49a, type: 3}
+        <ShadowSprite>k__BackingField: {fileID: 0}
+        <JuiceSprite>k__BackingField: {fileID: 0}
+    - Key: 1
+      Value:
+        <ProductSprite>k__BackingField: {fileID: 21300000, guid: 4664f1285e3c2a14d955a07ea700510c, type: 3}
+        <ShadowSprite>k__BackingField: {fileID: 21300000, guid: 1f1bc757ba79db5429243b7c79c8b593, type: 3}
+        <JuiceSprite>k__BackingField: {fileID: 0}
+    - Key: 2
+      Value:
+        <ProductSprite>k__BackingField: {fileID: 21300000, guid: 283769c98d771c940ab0d64757dbde2e, type: 3}
+        <ShadowSprite>k__BackingField: {fileID: 21300000, guid: d6f8efc5131e88b48873a13344815cde, type: 3}
+        <JuiceSprite>k__BackingField: {fileID: 0}
+    - Key: 3
+      Value:
+        <ProductSprite>k__BackingField: {fileID: 21300000, guid: da9e9c81d4d8d594c84be4cbcd389fef, type: 3}
+        <ShadowSprite>k__BackingField: {fileID: 21300000, guid: b30e96f412a1b9a408d089b9cce7ad6b, type: 3}
+        <JuiceSprite>k__BackingField: {fileID: 0}
+    - Key: 4
+      Value:
+        <ProductSprite>k__BackingField: {fileID: 21300000, guid: c9380e97775d4e044bc06b50297722e8, type: 3}
+        <ShadowSprite>k__BackingField: {fileID: 21300000, guid: c3c530513258d334ebcf0780064cc69d, type: 3}
+        <JuiceSprite>k__BackingField: {fileID: 0}
+  <PickupCursorSprites>k__BackingField:
+  - {fileID: 21300000, guid: 3235afc51818b7544912d7671b5ad9f6, type: 3}
+  <InContainerSprites>k__BackingField:
+  - {fileID: 21300000, guid: 17d77881cc6f3404b817b696eb6c788c, type: 3}
+  <OnChoppingBoardPanelSprite>k__BackingField: {fileID: 0}
+  <OnOvenPanelSprite>k__BackingField: {fileID: 0}
+  <InRefrigeratorSprites>k__BackingField: []

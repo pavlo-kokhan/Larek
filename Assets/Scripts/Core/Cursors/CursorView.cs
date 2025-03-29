@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Kitchen.Products;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,16 +28,14 @@ namespace Core.Cursors
             _productIcon.gameObject.SetActive(true);
             
             SetDefaultCursorTexture();
-            ClearCursorProductIcon();
+            ClearProductIcon();
 
-            _productHolder.ProductTaken += SetCursorProductIcon;
-            _productHolder.ProductReturned += ClearCursorProductIcon;
+            _productHolder.ProductsUpdated += UpdateProductIcon;
         }
         
         public void Dispose()
         {
-            _productHolder.ProductTaken -= SetCursorProductIcon;
-            _productHolder.ProductReturned -= ClearCursorProductIcon;
+            _productHolder.ProductsUpdated -= UpdateProductIcon;
         }
         
         public void SetCursorTexture(Texture2D texture) 
@@ -54,23 +53,36 @@ namespace Core.Cursors
             Cursor.SetCursor(_defaultCursorTexture, Vector2.zero, CursorMode.Auto);
         }
         
-        private void SetCursorProductIcon(Product product)
+        private void UpdateProductIcon(IReadOnlyList<Product> products)
         {
-            var sprite = product.Config.PickupCursorSprite;
-            
-            if (sprite == null)
+            if (products.Count == 0)
             {
-                ClearCursorProductIcon();
+                ClearProductIcon();
                 return;
             }
             
+            var spriteIndex = products.Count - 1;
+            var sprites = products.First().PickupCursorSprites;
+            var countedSprite = sprites[spriteIndex];
+            
+            if (countedSprite is null)
+            {
+                SetProductIcon(sprites[0]);
+                return;
+            }
+            
+            SetProductIcon(countedSprite);
+        }
+
+        private void SetProductIcon(Sprite sprite)
+        {
             _productIcon.sprite = sprite;
             _productIcon.SetNativeSize();
             _productIcon.rectTransform.localScale = new Vector3(0.4f, 0.4f, 1);
             _productIcon.color = new Color(255, 255, 255, 1f);
         }
 
-        private void ClearCursorProductIcon()
+        private void ClearProductIcon()
         {
             _productIcon.sprite = null;
             _productIcon.color = new Color(255, 255, 255, 0);

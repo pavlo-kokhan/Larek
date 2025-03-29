@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7208275260511198991}
   - component: {fileID: 3213442039700992077}
   - component: {fileID: 5874109536787891032}
+  - component: {fileID: 5034480264797334952}
   m_Layer: 0
   m_Name: ChoppingBoard
   m_TagString: Untagged
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 20
+  m_SortingOrder: 23
   m_Sprite: {fileID: 21300000, guid: b24f860583fb3d4458b3b98d78d655f4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -158,4 +159,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc3899ac07d94ccc865b953c065dcbc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactivePanelPrefab: {fileID: 0}
+  _interactivePanelPrefab: {fileID: 4350858298161487718, guid: 926df0e86be438a4587a8c0b7412ec20, type: 3}
+  _productSpawnArea: {fileID: 0}
+--- !u!114 &5034480264797334952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2994006143426266290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 956e62dda9d64792a400dc48dbdc73aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _highlightColor: {r: 1, g: 0.9, b: 0.9, a: 1}
+  _defaultColor: {r: 1, g: 1, b: 1, a: 1}

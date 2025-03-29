@@ -1,4 +1,5 @@
-﻿using Kitchen.Table;
+﻿using System;
+using Kitchen.Table;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
@@ -12,12 +13,13 @@ namespace Kitchen.Products.ProductGameObject
         
         [Header("Movement config")]
         [SerializeField] private float _movementSmoothTime = 0.05f;
-        [SerializeField] private float _maxClickTime = 0.25f;
+        [SerializeField] private float _maxClickTime = 0.1f;
 
         private float _dragTimer;
         private Vector2 _movementVelocity;
         private Vector3 _targetPosition;
         private bool _isMovable;
+        public bool IsMovable => _isMovable;
         
         private ProductObject _productObject;
         private Rigidbody2D _rigidbody;
@@ -28,7 +30,7 @@ namespace Kitchen.Products.ProductGameObject
         private Product Product => _productObject.Product;
         
         [Inject]
-        public void Construct(ProductHolder productHolder)
+        private void Construct(ProductHolder productHolder)
         {
             _productHolder = productHolder;
         }

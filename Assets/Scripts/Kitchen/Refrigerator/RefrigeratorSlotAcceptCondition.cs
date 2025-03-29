@@ -5,16 +5,16 @@ namespace Kitchen.Refrigerator
 {
     public class RefrigeratorSlotAcceptCondition : IAcceptProductCondition
     {
-        private readonly ProductType _productType;
+        private readonly ProductId _productId;
 
-        public RefrigeratorSlotAcceptCondition(ProductType productType)
+        public RefrigeratorSlotAcceptCondition(ProductId productId)
         {
-            _productType = productType;
+            _productId = productId;
         }
 
         public bool CanAcceptProduct(Product product)
         {
-            return product.CanBeInFridge && _productType == product.Type;
+            return product.Id.Equals(_productId);
         }
     }
 }

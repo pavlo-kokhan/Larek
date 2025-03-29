@@ -344,7 +344,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7331826164be4af49114e37e904bd18b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _localizedTextKey: MENU_NEW_GAME_TEXT
+  _localizedTextKey: MENU_NEW_GAME
+  _defaultText: New Game
 --- !u!1 &16723843
 GameObject:
   m_ObjectHideFlags: 0
@@ -792,7 +793,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7331826164be4af49114e37e904bd18b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _localizedTextKey: MENU_GAME_NAME_TEXT
+  _localizedTextKey: MENU_GAME_NAME
+  _defaultText: Larek
 --- !u!1 &56453665
 GameObject:
   m_ObjectHideFlags: 0
@@ -2101,7 +2103,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7331826164be4af49114e37e904bd18b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _localizedTextKey: MENU_SETTINGS_TEXT
+  _localizedTextKey: MENU_SETTINGS
+  _defaultText: Settings
 --- !u!1 &365770219
 GameObject:
   m_ObjectHideFlags: 0
@@ -2452,7 +2455,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7331826164be4af49114e37e904bd18b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _localizedTextKey: MENU_BACK_TEXT
+  _localizedTextKey: MENU_BACK
+  _defaultText: Back
 --- !u!114 &461482117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3619,50 +3623,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 709797950}
   m_CullTransparentMesh: 1
---- !u!1 &737359397
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 737359398}
-  - component: {fileID: 737359399}
-  m_Layer: 0
-  m_Name: LocalizationInstaller
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &737359398
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 737359397}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1241474756}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &737359399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 737359397}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd8c8888ec6b471a874195f5ba338749, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &751627961
 GameObject:
   m_ObjectHideFlags: 0
@@ -4634,7 +4594,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7331826164be4af49114e37e904bd18b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _localizedTextKey: MENU_CONTINUE_GAME_TEXT
+  _localizedTextKey: MENU_CONTINUE_GAME
+  _defaultText: Continue
 --- !u!1 &894578670
 GameObject:
   m_ObjectHideFlags: 0
@@ -5121,7 +5082,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7331826164be4af49114e37e904bd18b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _localizedTextKey: MENU_SETTINGS_TEXT
+  _localizedTextKey: MENU_SETTINGS
+  _defaultText: Settings
 --- !u!114 &962599042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6387,7 +6349,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7331826164be4af49114e37e904bd18b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _localizedTextKey: MENU_GALLERY_TEXT
+  _localizedTextKey: MENU_GALLERY
+  _defaultText: Gallery
 --- !u!1 &1209456434
 GameObject:
   m_ObjectHideFlags: 0
@@ -6610,52 +6573,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7331826164be4af49114e37e904bd18b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _localizedTextKey: MENU_QUIT_TEXT
---- !u!1 &1241474754
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1241474756}
-  - component: {fileID: 1241474755}
-  m_Layer: 0
-  m_Name: Installers
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1241474755
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1241474754}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8dd759c4a25f453ebb6621a37f7f1740, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1241474756
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1241474754}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.6834486, y: -2.2444937, z: 14.528207}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 737359398}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  _localizedTextKey: MENU_QUIT
+  _defaultText: Quit
 --- !u!1 &1243120722
 GameObject:
   m_ObjectHideFlags: 0
@@ -7151,7 +7070,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7331826164be4af49114e37e904bd18b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _localizedTextKey: MENU_BACK_TEXT
+  _localizedTextKey: MENU_BACK
+  _defaultText: Back
 --- !u!114 &1338087624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8489,8 +8409,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
-  _monoInstallers:
-  - {fileID: 737359399}
+  _monoInstallers: []
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -9916,7 +9835,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7331826164be4af49114e37e904bd18b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _localizedTextKey: MENU_LANGUAGE_TEXT
+  _localizedTextKey: MENU_LANGUAGE
+  _defaultText: Language
 --- !u!114 &1907884557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10604,7 +10524,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7331826164be4af49114e37e904bd18b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _localizedTextKey: MENU_GALLERY_TEXT
+  _localizedTextKey: MENU_GALLERY
+  _defaultText: Gallery
 --- !u!114 &2080836678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10785,4 +10706,3 @@ SceneRoots:
   - {fileID: 708627344}
   - {fileID: 110709544}
   - {fileID: 1560244147}
-  - {fileID: 1241474756}

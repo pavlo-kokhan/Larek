@@ -10,7 +10,7 @@ namespace Kitchen.Refrigerator
         private ProductsStorage _productsStorage;
         
         [Inject]
-        public void Construct(ProductsStorage productsStorage)
+        private void Construct(ProductsStorage productsStorage)
         {
             _productsStorage = productsStorage;
         }

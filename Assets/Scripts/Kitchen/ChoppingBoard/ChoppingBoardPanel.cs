@@ -1,5 +1,4 @@
-﻿using Kitchen.Products;
-using Kitchen.Products.ProductGameObject;
+﻿using Kitchen.Products.ProductGameObject;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,8 +8,8 @@ namespace Kitchen.ChoppingBoard
     {
         [SerializeField] private Image _productImage;
         
-        private ChoppingBoard _choppingBoard;
-        public ProductObject ProductObject => _choppingBoard.FirstProductObject;
+        private ChoppingBoard _board;
+        public ChoppingBoard Board => _board;
 
         private bool _isInitialized;
 
@@ -18,7 +17,7 @@ namespace Kitchen.ChoppingBoard
         {
             if (_isInitialized) return;
             
-            _choppingBoard = choppingBoard;
+            _board = choppingBoard;
             
             _isInitialized = true;
         }

@@ -10,7 +10,7 @@ namespace Characters
         private CharactersFactory _factory;
 
         [Inject]
-        public void Construct(CharactersFactory factory)
+        private void Construct(CharactersFactory factory)
         {
             _factory = factory;
         }

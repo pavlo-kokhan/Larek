@@ -9,7 +9,13 @@ namespace Core.Localization
     {
         [SerializeField] private TMP_Dropdown _languageDropdown;
         
-        [Inject] private Localizer _localizer;
+        private Localizer _localizer;
+
+        [Inject]
+        private void Construct(Localizer localizer)
+        {
+            _localizer = localizer;
+        }
 
         private void Start()
         {
@@ -22,21 +28,21 @@ namespace Core.Localization
             _languageDropdown.options = new List<TMP_Dropdown.OptionData>
             {
                 new ("English"),
-                new ("Солов'їна"),
+                new ("Українська"),
                 new ("Русский")
             };
 
-            var currentLanguage = _localizer.CurrentLanguageKey;
+            var currentLanguage = _localizer.CurrentLanguageType;
             
             switch (currentLanguage)
             {
-                case "en":
+                case LanguageType.English:
                     _languageDropdown.value = 0;
                     break;
-                case "ua":
+                case LanguageType.Ukrainian:
                     _languageDropdown.value = 1;
                     break;
-                case "ru":
+                case LanguageType.Russian:
                     _languageDropdown.value = 2;
                     break;
             }

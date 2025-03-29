@@ -2,7 +2,7 @@
 
 namespace Core.CameraComponents
 {
-    [CreateAssetMenu(fileName = "HorizontalCameraMovementConfig", menuName = "Scriptable Objects/Configs/HorizontalCameraMovementConfig")]
+    [CreateAssetMenu(fileName = "HorizontalCameraMovementConfig", menuName = "Configs/Camera/HorizontalCameraMovementConfig")]
     public class HorizontalCameraMovementConfig : ScriptableObject
     {
         [field: SerializeField] 

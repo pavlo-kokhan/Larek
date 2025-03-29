@@ -4,21 +4,22 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Core.Localization
 {
-    public class LocalizationLoader
+    public class LocalizationProvider
     {
         private readonly LocalizationConfig _localizationConfig;
 
-        private TextAsset _cachedTextAsset;
+        private AsyncOperationHandle<TextAsset> _handle;
 
-        public LocalizationLoader(LocalizationConfig localizationConfig)
+        public LocalizationProvider(LocalizationConfig localizationConfig)
         {
             _localizationConfig = localizationConfig;
         }
         
-        public async Task<Dictionary<string, string>> LoadLocalization(LanguageType language)
+        public async Task<Dictionary<string, string>> Load(LanguageType language)
         {
             var referencesDictionary = _localizationConfig.AssetReferences;
             
@@ -30,16 +31,16 @@ namespace Core.Localization
             
             try
             {
-                var handle = Addressables.LoadAssetAsync<TextAsset>(assetReference);
-                _cachedTextAsset = await handle.Task;
+                _handle = Addressables.LoadAssetAsync<TextAsset>(assetReference);
+                var textAsset = await _handle.Task;
                 
-                if (_cachedTextAsset is null)
+                if (textAsset is null)
                 {
                     Debug.LogError($"Localization file for {language} is missing.");
                     return new Dictionary<string, string>();
                 }
                 
-                return JsonConvert.DeserializeObject<Dictionary<string, string>>(_cachedTextAsset.text)
+                return JsonConvert.DeserializeObject<Dictionary<string, string>>(textAsset.text)
                        ?? new Dictionary<string, string>();
             }
             catch (Exception e)
@@ -51,7 +52,10 @@ namespace Core.Localization
 
         public void Unload()
         {
-            
+            if (_handle.IsValid())
+            {
+                Addressables.Release(_handle);
+            }
         }
     }
 }

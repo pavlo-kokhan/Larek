@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Core.Localization
@@ -6,62 +7,71 @@ namespace Core.Localization
     public class Localizer
     {
         private const string LanguagePreferenceKey = "SelectedLanguage";
+        private const string EnglishKey = "en";
+        private const string UkrainianKey = "ua";
+        private const string RussianKey = "ru";
         
-        private LocalizationLoader _localizationLoader;
-        private readonly Dictionary<string, string> _enTexts;
-        private readonly Dictionary<string, string> _uaTexts;
-        private readonly Dictionary<string, string> _ruTexts;
-        
-        private Dictionary<string, string> _currentLanguageDictionary;
+        private readonly LocalizationProvider _localizationProvider;
         
         private readonly HashSet<LocalizedText> _localizedTextComponents = new();
-     
-        public string CurrentLanguageKey => PlayerPrefs.GetString(LanguagePreferenceKey);
-        public LanguageType CurrentLanguageType => LocalizationLoader.GetLanguageType(CurrentLanguageKey);
         
-        public Localizer(LocalizationLoader localizationLoader)
-        {
-            _enTexts = localizationLoader.LoadLocalization(LanguageType.English);
-            _uaTexts = localizationLoader.LoadLocalization(LanguageType.Ukrainian);
-            _ruTexts = localizationLoader.LoadLocalization(LanguageType.Russian);
-            SetLanguageByKey(CurrentLanguageKey);
-        }
-        
-        public void SetLanguage(LanguageType language)
-        {
-            var languageKey = LocalizationLoader.GetLanguageKey(language);
-            
-            SetLanguageByKey(languageKey);
-        }
+        private Dictionary<string, string> _currentLanguageDictionary = new();
 
-        private void SetLanguageByKey(string languageKey)
+        private bool _loadedFirstLocalization;
+     
+        public string CurrentLanguageKey => PlayerPrefs.GetString(LanguagePreferenceKey, EnglishKey);
+        public LanguageType CurrentLanguageType => GetLanguageType(CurrentLanguageKey);
+        
+        public Localizer(LocalizationProvider localizationProvider)
         {
-            PlayerPrefs.SetString(LanguagePreferenceKey, languageKey);
+            _localizationProvider = localizationProvider;
+            SetLanguage(CurrentLanguageType);
+            _loadedFirstLocalization = true;
+        }
+        
+        public async void SetLanguage(LanguageType language)
+        {
+            _currentLanguageDictionary = await _localizationProvider.Load(language);
+            _localizationProvider.Unload();
+
+            var newKey = GetLanguageKey(language);
+            
+            PlayerPrefs.SetString(LanguagePreferenceKey, newKey);
             PlayerPrefs.Save();
             
-            _currentLanguageDictionary = GetCurrentLocalization(languageKey);
-
             UpdateAllLocalizedTextComponents();
-        }
-
-        private Dictionary<string, string> GetCurrentLocalization(string languageKey)
-        {
-            switch (languageKey)
-            {
-                case "ua":
-                    return _uaTexts;
-                case "ru":
-                    return _ruTexts;
-                default:
-                    return _enTexts;
-            }
         }
 
         public string GetLocalizedText(string textKey)
         {
-            return _currentLanguageDictionary.TryGetValue(textKey, out var text) 
-                ? text 
-                : $"[Missing: {textKey}]";
+            if (_loadedFirstLocalization)
+            {
+                return _currentLanguageDictionary.GetValueOrDefault(textKey);   
+            }
+
+            return null;
+        }
+        
+        private string GetLanguageKey(LanguageType language)
+        {
+            return language switch
+            {
+                LanguageType.English => EnglishKey,
+                LanguageType.Ukrainian => UkrainianKey,
+                LanguageType.Russian => RussianKey,
+                _ => throw new InvalidOperationException($"Key of language type {language} is not found.")
+            };
+        }
+        
+        private LanguageType GetLanguageType(string languageKey)
+        {
+            return languageKey switch
+            {
+                EnglishKey => LanguageType.English,
+                UkrainianKey => LanguageType.Ukrainian,
+                RussianKey => LanguageType.Russian,
+                _ => throw new InvalidOperationException($"Language type of language key {languageKey} is not found.")
+            };
         }
 
         public void RegisterText(LocalizedText localizedText)

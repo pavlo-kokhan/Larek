@@ -15,7 +15,7 @@ namespace Core.Dialogs
         private bool _canStartDialogue;
 
         [Inject]
-        public void Construct(DialogueService dialogueService)
+        private void Construct(DialogueService dialogueService)
         {
             _dialogueService = dialogueService;
         }

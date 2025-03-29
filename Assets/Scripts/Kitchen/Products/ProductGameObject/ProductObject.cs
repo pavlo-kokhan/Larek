@@ -9,22 +9,24 @@ namespace Kitchen.Products.ProductGameObject
         private ProductCookingBehaviour _cookingBehaviour;
         private ProductChoppingBehaviour _choppingBehaviour;
 
-        private ProductConfigsStorage _productConfigsStorage;
-        
         private bool _isInitialized;
         
         public Product Product { get; private set; }
-
-        [Inject]
-        public void Construct(ProductConfigsStorage productConfigsStorage)
-        {
-            _productConfigsStorage = productConfigsStorage;
-        }
 
         private void Awake()
         {
             _cookingBehaviour = GetComponent<ProductCookingBehaviour>();
             _choppingBehaviour = GetComponent<ProductChoppingBehaviour>();
+        }
+        
+        private void OnEnable()
+        {
+            _cookingBehaviour.ProductUpdateRequested += UpdateProduct;
+        }
+
+        private void OnDisable()
+        {
+            _cookingBehaviour.ProductUpdateRequested -= UpdateProduct;
         }
 
         public void Initialize(Product product)
@@ -36,25 +38,11 @@ namespace Kitchen.Products.ProductGameObject
             _isInitialized = true;
         }
 
-        private void OnEnable()
+        private void UpdateProduct(ProductConfig newConfig)
         {
-            _cookingBehaviour.ProductUpdateRequested += UpdateProduct;
-            _choppingBehaviour.ProductUpdateRequested += UpdateProduct;
-        }
-
-        private void OnDisable()
-        {
-            _cookingBehaviour.ProductUpdateRequested -= UpdateProduct;
-            _choppingBehaviour.ProductUpdateRequested -= UpdateProduct;
-        }
-
-        private void UpdateProduct(ProductId newId)
-        {
-            var newConfig = _productConfigsStorage.GetConfig(newId);
-            
             if (newConfig is null)
             {
-                Debug.LogWarning($"No config for type {newId}");
+                Debug.LogWarning($"{nameof(newConfig)} can not be null");
                 return;
             }
             

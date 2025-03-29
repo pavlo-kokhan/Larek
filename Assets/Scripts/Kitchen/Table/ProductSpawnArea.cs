@@ -36,7 +36,7 @@ namespace Kitchen.Table
         }
 
         [Inject]
-        public void Construct(ProductObjectsFactory factory, ProductHolder productHolder, ProductConfigsStorage productConfigsStorage)
+        private void Construct(ProductObjectsFactory factory, ProductHolder productHolder, ProductConfigsStorage productConfigsStorage)
         {
             _factory = factory;
             _productHolder = productHolder;
@@ -50,11 +50,11 @@ namespace Kitchen.Table
         {
             if (eventData.button == PointerEventData.InputButton.Left)
             {
-                OnLeftButtonClicked();
+                SpawnProduct();
             }
         }
 
-        private void OnLeftButtonClicked()
+        public void SpawnProduct()
         {
             if (Camera.main is null)
             {
@@ -78,27 +78,43 @@ namespace Kitchen.Table
             spriteRenderer.sortingOrder = ++_maxSortingLayer;
         }
 
+        // completely unsafe code
         private void Test()
         {
             var product = new Product(_productConfigsStorage.GetConfig(ProductType.Patty, ProductCookingStage.Raw,
-                ProductChoppingStage.Unchopped));
+                ProductChoppingStage.Unchopped, ProductShapeType.None, ProductAssemblyType.None));
             var test = _factory.Create(product, Vector3.zero);
-            test.transform.localPosition = new Vector3(0, 0, 0);
+            test.transform.localPosition = Vector3.zero;
             
             var product2 = new Product(_productConfigsStorage.GetConfig(ProductType.Patty, ProductCookingStage.Medium,
-                ProductChoppingStage.Unchopped));
+                ProductChoppingStage.Unchopped, ProductShapeType.None, ProductAssemblyType.None));
             var test2 = _factory.Create(product2, Vector3.zero);
-            test2.transform.localPosition = new Vector3(0, 0, 5);
+            test2.transform.localPosition = Vector3.zero;
             
             var product3 = new Product(_productConfigsStorage.GetConfig(ProductType.Patty, ProductCookingStage.Done,
-                ProductChoppingStage.Unchopped));
+                ProductChoppingStage.Unchopped, ProductShapeType.None, ProductAssemblyType.None));
             var test3 = _factory.Create(product3, Vector3.zero);
-            test3.transform.localPosition = new Vector3(0, 0, 10);
+            test3.transform.localPosition = Vector3.zero;
             
             var product4 = new Product(_productConfigsStorage.GetConfig(ProductType.Patty, ProductCookingStage.Burned,
-                ProductChoppingStage.Unchopped));
+                ProductChoppingStage.Unchopped, ProductShapeType.None, ProductAssemblyType.None));
             var test4 = _factory.Create(product4, Vector3.zero);
-            test4.transform.localPosition = new Vector3(0, 0, 15);
+            test4.transform.localPosition = Vector3.zero;
+            
+            var product5 = new Product(_productConfigsStorage.GetConfig(ProductType.Bun, ProductCookingStage.Done,
+                ProductChoppingStage.Unchopped, ProductShapeType.None, ProductAssemblyType.None));
+            var test5 = _factory.Create(product5, Vector3.zero);
+            test5.transform.localPosition = Vector3.zero;
+            
+            var product6 = new Product(_productConfigsStorage.GetConfig(ProductType.BunBase, ProductCookingStage.Done,
+                ProductChoppingStage.Unchopped, ProductShapeType.None, ProductAssemblyType.Initializer));
+            var test6 = _factory.Create(product6, Vector3.zero);
+            test6.transform.localPosition = Vector3.zero;
+            
+            var product7 = new Product(_productConfigsStorage.GetConfig(ProductType.BunTop, ProductCookingStage.Done,
+                ProductChoppingStage.Unchopped, ProductShapeType.None, ProductAssemblyType.Finalizer));
+            var test7 = _factory.Create(product7, Vector3.zero);
+            test7.transform.localPosition = Vector3.zero;
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Core.CameraComponents
 {
-    [CreateAssetMenu(fileName = "DefaultCameraMovementConfig", menuName = "Scriptable Objects/Configs/DefaultCameraMovementConfig")]
+    [CreateAssetMenu(fileName = "DefaultCameraMovementConfig", menuName = "Configs/Camera/DefaultCameraMovementConfig")]
     public class DefaultCameraMovementConfig : ScriptableObject
     {
         [field: SerializeField] 

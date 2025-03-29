@@ -13,18 +13,7 @@ namespace Kitchen.ChoppingBoard
         
         private void OnEnable()
         {
-            var product = _choppingBoardPanel.ProductObject.Product;
-            
-            if (product is null)
-            {
-                _productImage.sprite = null;
-                _productImage.color = new Color(0, 0, 0, 0);
-            }
-            else
-            {
-                _productImage.sprite = product.OnChoppingBoardPanelSprite;
-                _productImage.color = new Color(255, 255, 255, 255);
-            }
+            UpdateProductImage();
         }
         
         public void OnPointerClick(PointerEventData eventData)
@@ -37,7 +26,7 @@ namespace Kitchen.ChoppingBoard
 
         private void OnLeftButtonClicked()
         {
-            var productObject = _choppingBoardPanel.ProductObject;
+            var productObject = _choppingBoardPanel.Board.FirstProductObject;
 
             if (productObject is null) return;
 
@@ -48,6 +37,30 @@ namespace Kitchen.ChoppingBoard
             }
             
             choppingBehaviour.UpdateChoppingStage();
+            UpdateProductImage();
+        }
+
+        private void UpdateProductImage()
+        {
+            if (_choppingBoardPanel.Board is null) return;
+            
+            var productObject = _choppingBoardPanel.Board.FirstProductObject;
+            
+            if (productObject is null)
+            {
+                _productImage.sprite = null;
+                _productImage.color = new Color(0, 0, 0, 0);
+            }
+            else
+            {
+                var sprite = productObject.Product.OnChoppingBoardPanelSprite;
+                
+                if (sprite is not null)
+                {
+                    _productImage.sprite = sprite;
+                    _productImage.color = new Color(255, 255, 255, 255);
+                }
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using AYellowpaper.SerializedCollections;
 using JetBrains.Annotations;
 using Kitchen.Products.Enums;
@@ -7,71 +8,30 @@ using UnityEngine;
 
 namespace Kitchen.Products
 {
-    [CreateAssetMenu(fileName = "Product", menuName = "Scriptable Objects/Configs/Product")]
+    [CreateAssetMenu(fileName = "Product", menuName = "Configs/Products/Product")]
     public class ProductConfig : ScriptableObject
     {
-        // --------------------------------------------------------------------------------------------------------
         [field: SerializeField] public ProductId Id { get; private set; }
-        // --------------------------------------------------------------------------------------------------------
         
-        // --------------------------------------------------------------------------------------------------------
-        [field: SerializeField, Header("Prefabs")] public GameObject Prefab { get; private set; }
-        // --------------------------------------------------------------------------------------------------------
+        [field: SerializeField] public GameObject Prefab { get; private set; }
+        [field: SerializeField] public GameObject OnChoppingBoardPrefab { get; private set; }
         
-        // --------------------------------------------------------------------------------------------------------
-        [field: SerializeField, Header("Properties")] 
-        public bool CanBeSpawned { get; private set; } = true;
-        [field: SerializeField] public bool CanBeFried { get; private set; } = true;
+        [field: SerializeField] public ProductConfig NextFryingConfig { get; private set; }
+        [field: SerializeField] public ProductConfig NextBakingConfig { get; private set; }
+        [field: SerializeField] public List<ProductConfig> ChoppingParticles { get; private set; }
+        
         [field: SerializeField] public float FryingTime { get; private set; } = 5f;
-        [field: SerializeField] public bool CanBeBaked { get; private set; } = true;
         [field: SerializeField] public float BakingTime { get; private set; } = 5f;
-        [field: SerializeField] public bool CanBeInFridge { get; private set; } = true;
-        [field: SerializeField] public bool CanBeInContainer { get; private set; } = true;
-        [field: SerializeField] public bool CanBeStackedInContainer { get; private set; } = true;
-        [field: SerializeField] public bool CanBeChopped { get; private set; } = true;
         [field: SerializeField] public int SlicesCount { get; private set; } = 1;
         [field: SerializeField] public bool CanBeAssembled { get; private set; } = true;
-        [field: SerializeField] public bool CanBeMixed { get; private set; } = true;
-        // --------------------------------------------------------------------------------------------------------
         
-        // --------------------------------------------------------------------------------------------------------
         [SerializedDictionary] [field: SerializeField, Header("Sprites")]
         public SerializedDictionary<TablePerspectiveType, ProductObjectSprite> ProductPerspectiveSprites { get; private set; } = new();
-        [field: SerializeField] public Sprite PickupCursorSprite { get; private set; }
-        [field: SerializeField] public Sprite InContainerSprite { get; private set; }
+        [field: SerializeField] public List<Sprite> PickupCursorSprites { get; private set; } = new();
+        [field: SerializeField] public List<Sprite> InContainerSprites { get; private set; }
         [field: SerializeField] public Sprite OnChoppingBoardPanelSprite { get; private set; }
         [field: SerializeField] public Sprite OnOvenPanelSprite { get; private set; }
         [field: SerializeField] public Sprite[] InRefrigeratorSprites { get; private set; } = Array.Empty<Sprite>();
-        // --------------------------------------------------------------------------------------------------------
-        
-        private void OnValidate()
-        {
-            if (CanBeSpawned == false)
-            {
-                Prefab = null;
-                ProductPerspectiveSprites = null;
-            }
-            
-            if (CanBeInFridge == false)
-            {
-                InRefrigeratorSprites = Array.Empty<Sprite>();
-            }
-
-            if (CanBeInFridge == false)
-            {
-                InRefrigeratorSprites = null;
-            }
-            
-            if (CanBeInContainer == false)
-            {
-                InContainerSprite = null;
-            }
-            
-            if (CanBeBaked == false)
-            {
-                OnOvenPanelSprite = null;
-            }
-        }
     }
 
     [Serializable]
@@ -80,26 +40,35 @@ namespace Kitchen.Products
         [field: SerializeField] public ProductType Type { get; private set; }
         [field: SerializeField] public ProductCookingStage CookingStage { get; private set; }
         [field: SerializeField] public ProductChoppingStage ChoppingStage { get; private set; }
+        [field: SerializeField] public ProductShapeType ShapeType { get; private set; }
+        [field: SerializeField] public ProductAssemblyType AssemblyType { get; private set; }
 
-        public ProductId(ProductType type, ProductCookingStage cookingStage, ProductChoppingStage choppingStage)
+        public ProductId(ProductType type, ProductCookingStage cookingStage, ProductChoppingStage choppingStage, 
+            ProductShapeType shapeType, ProductAssemblyType assemblyType)
         {
             Type = type;
             CookingStage = cookingStage;
             ChoppingStage = choppingStage;
+            ShapeType = shapeType;
+            AssemblyType = assemblyType;
         }
 
         public override string ToString()
         {
             return $"{nameof(Type)}: {Type}" +
                    $"{nameof(CookingStage)}: {CookingStage}" +
-                   $"{nameof(ChoppingStage)}: {ChoppingStage}";
+                   $"{nameof(ChoppingStage)}: {ChoppingStage}" +
+                   $"{nameof(ShapeType)}: {ShapeType}" +
+                   $"{nameof(AssemblyType)}: {AssemblyType}";
         }
 
         public bool Equals(ProductId other)
         {
             return Type == other.Type 
                    && CookingStage == other.CookingStage 
-                   && ChoppingStage == other.ChoppingStage;
+                   && ChoppingStage == other.ChoppingStage
+                   && ShapeType == other.ShapeType
+                   && AssemblyType == other.AssemblyType;
         }
 
         public override bool Equals(object obj)
@@ -109,7 +78,11 @@ namespace Kitchen.Products
 
         public override int GetHashCode()
         {
-            return HashCode.Combine((int)Type, (int)CookingStage, (int)ChoppingStage);
+            return HashCode.Combine((int)Type, 
+                (int)CookingStage, 
+                (int)ChoppingStage, 
+                (int)ShapeType, 
+                (int)AssemblyType);
         }
     }
     

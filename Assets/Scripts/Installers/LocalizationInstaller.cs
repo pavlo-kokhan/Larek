@@ -1,20 +1,20 @@
-﻿using System.IO;
-using Core.Localization;
+﻿using Core.Localization;
+using UnityEngine;
 using Zenject;
 
 namespace Installers
 {
     public class LocalizationInstaller : MonoInstaller
     {
+        [SerializeField] private LocalizationConfig _localizationConfig;
+        
         public override void InstallBindings()
         {
-            Container.Bind<LocalizationLoader>()
-                .ToSelf()
+            Container.Bind<LocalizationProvider>()
                 .AsSingle()
-                .WithArguments(Path.Combine("Localization", "Global"));
+                .WithArguments(_localizationConfig);
 
             Container.Bind<Localizer>()
-                .ToSelf()
                 .AsSingle();
         }
     }

@@ -22,16 +22,12 @@ namespace Kitchen.ProductsContainer
             // Продукты разных видов можно смешивать создавая уникальные комбинации.
             
             // покишо так:
-            if (_currentProductsInSlot.Count == 0)
-            {
-                return product.CanBeInContainer;
-            }
+            if (_currentProductsInSlot.Count == 0) return true;
             
             var lastProduct = _currentProductsInSlot.Last();
 
-            return product.CanBeInContainer
-                   && product.ChoppingStage == ProductChoppingStage.Chopped
-                   && product.IsTheSameAs(lastProduct);
+            return product.Config.Equals(lastProduct.Config)
+                   && _currentProductsInSlot.Count < product.SlicesCount;
         }
     }
 }

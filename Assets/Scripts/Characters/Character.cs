@@ -16,7 +16,7 @@ namespace Characters
         private DialogueService _dialogueService;
         
         [Inject]
-        public void Construct(DialogueService dialogueService)
+        private void Construct(DialogueService dialogueService)
         {
             _dialogueService = dialogueService;
         }

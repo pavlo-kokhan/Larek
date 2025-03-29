@@ -1,7 +1,6 @@
 ﻿using Characters;
 using Core;
 using Core.Panels;
-using Kitchen.Products;
 using Kitchen.Products.ProductGameObject;
 using UnityEngine;
 using Zenject;
@@ -10,8 +9,9 @@ namespace Installers
 {
     public class FactoriesInstaller : MonoInstaller
     {
-        [Header("Interactive Panels")]
-        [SerializeField] private Transform _interactivePanelsContainer;
+        [Header("Panels Containers")]
+        [SerializeField] private Transform _middleCenterPanelsContainer;
+        [SerializeField] private Transform _stretchPanelsContainer;
         
         [Header("Characters")]
         [SerializeField] private Transform _charactersContainer;
@@ -26,9 +26,12 @@ namespace Installers
                 .AsSingle()
                 .WithArguments(Container);
             
+            var interactivePanelsFactory = new InteractivePanelsFactory(Container, 
+                _middleCenterPanelsContainer, _stretchPanelsContainer);
+            
             Container.Bind<InteractivePanelsFactory>()
-                .AsSingle()
-                .WithArguments(Container, _interactivePanelsContainer);
+                .FromInstance(interactivePanelsFactory)
+                .AsSingle();
             
             Container.Bind<CharactersFactory>()
                 .AsSingle()

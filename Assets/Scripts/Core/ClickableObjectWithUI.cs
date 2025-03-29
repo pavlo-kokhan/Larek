@@ -10,14 +10,21 @@ namespace Core
     {
         [SerializeField] protected GameObject _interactivePanelPrefab;
 
-        [Inject] private InteractivePanelsFactory _panelsFactory;
-        [Inject] private InteractivePanelsRegistrator _panelsRegistrator;
+        private InteractivePanelsFactory _panelsFactory;
+        private InteractivePanelsRegistrator _panelsRegistrator;
         
         protected GameObject _interactivePanelInstance;
+
+        [Inject]
+        private void Construct(InteractivePanelsFactory panelsFactory, InteractivePanelsRegistrator panelsRegistrator)
+        {
+            _panelsFactory = panelsFactory;
+            _panelsRegistrator = panelsRegistrator;
+        }
         
         protected void Start()
         {
-            _interactivePanelInstance = _panelsFactory.Create(_interactivePanelPrefab);
+            _interactivePanelInstance = _panelsFactory.Create(_interactivePanelPrefab, ContainerType.MiddleCenter);
             _interactivePanelInstance.SetActive(false);
             _panelsRegistrator.RegisterPanel(_interactivePanelInstance);
             
@@ -34,9 +41,9 @@ namespace Core
             }
         }
 
-        private void OnLeftButtonClicked()
+        protected virtual void OnLeftButtonClicked()
         {
-            if (_interactivePanelInstance == null) return;
+            if (_interactivePanelInstance is null) return;
             
             _panelsRegistrator.ManuallyOpenPanel(_interactivePanelInstance);
         }

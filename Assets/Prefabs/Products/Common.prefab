@@ -289,7 +289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _productSpriteRenderer: {fileID: 5243455192552851184}
   _movementSmoothTime: 0.05
-  _maxClickTime: 0.5
+  _maxClickTime: 0.1
 --- !u!114 &8792215683357546089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,7 +317,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66a599d1ebb34b298fcb31a51d5c7b63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _juiceSpriteRenderer: {fileID: 1582721527200332019}
 --- !u!114 &304860494983482256
 MonoBehaviour:
   m_ObjectHideFlags: 0

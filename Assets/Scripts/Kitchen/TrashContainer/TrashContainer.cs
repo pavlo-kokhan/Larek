@@ -11,7 +11,7 @@ namespace Kitchen.TrashContainer
         private IAcceptProductCondition _acceptCondition;
         
         [Inject]
-        public void Construct(ProductHolder productHolder)
+        private void Construct(ProductHolder productHolder)
         {
             _productHolder = productHolder;
             _acceptCondition = new TrashContainerAcceptCondition();

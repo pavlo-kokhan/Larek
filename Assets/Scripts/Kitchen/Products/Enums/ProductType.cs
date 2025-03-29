@@ -7,6 +7,9 @@
         Beef,
         Patty,
         Dough,
+        Bun,
+        BunBase,
+        BunTop,
         Burger
     }
 }

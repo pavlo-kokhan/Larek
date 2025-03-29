@@ -8,10 +8,17 @@ namespace Core.Localization
     public class LocalizedText : MonoBehaviour
     {
         [SerializeField] private string _localizedTextKey;
+        [SerializeField] private string _defaultText;
         
-        [Inject] private Localizer _localizer;
+        private Localizer _localizer;
         
         private TextMeshProUGUI _textMeshPro;
+
+        [Inject]
+        private void Construct(Localizer localizer)
+        {
+            _localizer = localizer;
+        }
         
         private void Awake()
         {
@@ -30,9 +37,17 @@ namespace Core.Localization
 
         public void RefreshText()
         {
-            if (_textMeshPro != null && _localizer != null)
+            if (_textMeshPro is not null && _localizer is not null)
             {
-                _textMeshPro.text = _localizer.GetLocalizedText(_localizedTextKey);
+                var text = _localizer.GetLocalizedText(_localizedTextKey);
+
+                if (text is null)
+                {
+                    _textMeshPro.text = _defaultText;
+                    return;
+                }
+                
+                _textMeshPro.text = text;
             }
         }
     }

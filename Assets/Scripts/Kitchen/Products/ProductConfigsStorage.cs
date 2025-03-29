@@ -21,16 +21,20 @@ namespace Kitchen.Products
             }
         }
 
-        public ProductConfig GetConfig(ProductType type, ProductCookingStage cookingStage, ProductChoppingStage choppingStage)
+        public ProductConfig GetConfig(ProductType type, 
+            ProductCookingStage cookingStage, 
+            ProductChoppingStage choppingStage,
+            ProductShapeType shapeType,
+            ProductAssemblyType assemblyType)
         {
-            var productId = new ProductId(type, cookingStage, choppingStage);
+            var productId = new ProductId(type, cookingStage, choppingStage, shapeType, assemblyType);
             
             return GetConfig(productId);
         }
         
         public ProductConfig GetConfig(ProductId productId)
         {
-            return _configLookup[productId];
+            return _configLookup.GetValueOrDefault(productId);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Kitchen.Products;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Kitchen.Products;
 using TMPro;
 using UnityEngine;
 
@@ -26,17 +28,27 @@ namespace Kitchen.ProductsContainer
             _counterText.SetText("0");
         }
 
-        private void UpdateView(ProductConfig config, int count)
+        private void UpdateView(IReadOnlyList<Product> products)
         {
-            _counterText.SetText(count.ToString());
+            _counterText.SetText(products.Count.ToString());
 
-            if (config is not null && count > 0)
+            if (products.Count == 0)
             {
-                _productSpriteRenderer.sprite = config.InContainerSprite;
+                _productSpriteRenderer.sprite = null;
                 return;
             }
+            
+            var index = products.Count - 1;
+            var countedSprite = products.First().InContainerSprites[index];
+            var firstSprite = products.First().InContainerSprites[0];
 
-            _productSpriteRenderer.sprite = null;
+            if (countedSprite is null)
+            {
+                _productSpriteRenderer.sprite = firstSprite;
+                return;
+            }
+            
+            _productSpriteRenderer.sprite = countedSprite;
         }
     }
 }

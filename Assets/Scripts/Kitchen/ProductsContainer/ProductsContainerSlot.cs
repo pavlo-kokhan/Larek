@@ -12,7 +12,7 @@ namespace Kitchen.ProductsContainer
     [RequireComponent(typeof(Collider2D))]
     public class ProductsContainerSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        public event Action<ProductConfig, int> ProductsCountChanged;
+        public event Action<IReadOnlyList<Product>> ProductsCountChanged;
         
         [SerializeField] private Texture2D _textureTake;
 
@@ -23,7 +23,7 @@ namespace Kitchen.ProductsContainer
         private CursorView _cursorView;
         
         [Inject]
-        public void Construct(ProductHolder productHolder, CursorView cursorView)
+        private void Construct(ProductHolder productHolder, CursorView cursorView)
         {
             _acceptProductCondition =
                 new ProductsContainerSlotAcceptCondition(_currentProducts.AsReadOnly());
@@ -54,6 +54,13 @@ namespace Kitchen.ProductsContainer
         
         private void OnLeftButtonClicked()
         {
+            if (_productHolder.TryReturnProduct(_acceptProductCondition, out var product))
+            {
+                _currentProducts.Add(product);
+                ProductsCountChanged?.Invoke(_currentProducts.AsReadOnly());
+                return;
+            }
+            
             if (_currentProducts.Count > 0)
             {
                 var lastProduct = _currentProducts.Last();
@@ -61,15 +68,8 @@ namespace Kitchen.ProductsContainer
                 if (_productHolder.TryTakeNewProduct(lastProduct))
                 {
                     _currentProducts.Remove(lastProduct);
-                    ProductsCountChanged?.Invoke(lastProduct.Config, _currentProducts.Count);
-                    return;
+                    ProductsCountChanged?.Invoke(_currentProducts.AsReadOnly());
                 }
-            }
-
-            if (_productHolder.TryReturnProduct(_acceptProductCondition, out var product))
-            {
-                _currentProducts.Add(product);
-                ProductsCountChanged?.Invoke(product.Config, _currentProducts.Count);
             }
         }
     }

@@ -1,31 +1,44 @@
 ﻿using System;
+using Kitchen.Products.Enums;
 using UnityEngine;
+using Zenject;
 
 namespace Kitchen.Products.ProductGameObject
 {
     [RequireComponent(typeof(ProductObject))]
     public class ProductChoppingBehaviour : MonoBehaviour
     {
-        public event Action<ProductId> ProductUpdateRequested;
-        
         private ProductObject _productObject;
+        private ProductObjectsFactory _productObjectsFactory;
         
-        public Product Product => _productObject.Product;
+        private Product Product => _productObject.Product;
+
+        [Inject]
+        private void Construct(ProductObjectsFactory productObjectsFactory)
+        {
+            _productObjectsFactory = productObjectsFactory;
+        }
         
-        private void Awake()
+        private void Awake() 
         {
             _productObject = GetComponent<ProductObject>();
         }
 
         public void UpdateChoppingStage()
         {
-            var product = _productObject.Product;
+            var newConfigs = Product.ChoppingParticles;
+
+            if (newConfigs.Count == 0) return;
+
+            var position = transform.position;
             
-            var newId = new ProductId(product.Type, 
-                product.CookingStage, 
-                product.NextChoppingStage);
+            foreach (var config in newConfigs)
+            {
+                var product = new Product(config);
+                _productObjectsFactory.Create(product, position);
+            }
             
-            ProductUpdateRequested?.Invoke(newId);
+            Destroy(gameObject);
         }
     }
 }

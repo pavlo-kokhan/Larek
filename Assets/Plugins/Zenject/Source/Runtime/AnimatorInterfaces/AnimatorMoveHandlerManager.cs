@@ -8,7 +8,7 @@ namespace Zenject
         List<IAnimatorMoveHandler> _handlers;
 
         [Inject]
-        public void Construct(
+        private void Construct(
             // Use local to avoid inheriting handlers from a parent context
             [Inject(Source = InjectSources.Local)]
             List<IAnimatorMoveHandler> handlers)

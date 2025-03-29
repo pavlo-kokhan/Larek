@@ -1,13 +1,11 @@
 {
-    "MENU_GAME_NAME_TEXT": "Узкие пидарасы",
-    "MENU_NEW_GAME_TEXT": "Новая Игра",
-    "MENU_CONTINUE_GAME_TEXT": "Продолжить Игру",
-    "MENU_SETTINGS_TEXT": "Настройки",
-    "MENU_GALLERY_TEXT": "Галерея",
-    "MENU_QUIT_TEXT": "Выйти с Игры",
-    "MENU_LANGUAGE_TEXT": "Язык",
-    "MENU_APPLY_TEXT": "Подтвердить",
-    "MENU_BACK_TEXT": "Назад",
-    "CONGRAT_TEXT": "Поздравляем!",
-    "HELLO_TEXT": "Привет!"
+    "MENU_GAME_NAME": "Larek",
+    "MENU_NEW_GAME": "Новая Игра",
+    "MENU_CONTINUE_GAME": "Продолжить Игру",
+    "MENU_SETTINGS": "Настройки",
+    "MENU_GALLERY": "Галерея",
+    "MENU_QUIT": "Выйти с Игры",
+    "MENU_LANGUAGE": "Язык",
+    "MENU_APPLY": "Подтвердить",
+    "MENU_BACK": "Назад"
 }

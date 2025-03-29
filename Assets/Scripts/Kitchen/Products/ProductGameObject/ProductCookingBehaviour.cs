@@ -6,9 +6,10 @@ namespace Kitchen.Products.ProductGameObject
     [RequireComponent(typeof(ProductObject))]
     public class ProductCookingBehaviour : MonoBehaviour
     {
-        public event Action<ProductId> ProductUpdateRequested;
+        public event Action<ProductConfig> ProductUpdateRequested;
         
         private ProductObject _productObject;
+        private ProductMovement _productMovement;
         
         public Product Product => _productObject.Product;
 
@@ -18,15 +19,16 @@ namespace Kitchen.Products.ProductGameObject
         private void Awake()
         {
             _productObject = GetComponent<ProductObject>();
+            _productMovement = GetComponent<ProductMovement>();
         }
 
         private void Update()
         {
-            if (_currentCookingType is null) return;
+            if (_currentCookingType is null || _productMovement.IsMovable) return;
             
             _cookingTimer += Time.deltaTime;
             
-            var requiredTime = GetCookingTime(_currentCookingType.Value);
+            var requiredTime = GetCookingTime();
             
             if (_cookingTimer >= requiredTime)
             {
@@ -44,23 +46,39 @@ namespace Kitchen.Products.ProductGameObject
         {
             _currentCookingType = null;
         }
-
-        private float GetCookingTime(CookingType cookingType) => cookingType switch
-        {
-            CookingType.Frying => Product.FryingTime,
-            CookingType.Baking => Product.BakingTime,
-            _ => float.MaxValue
-        };
         
         private void UpdateCookingStage()
         {
-            var product = _productObject.Product;
+            var newConfig = GetNextConfig();
+
+            if (newConfig is not null)
+            {
+                ProductUpdateRequested?.Invoke(newConfig);
+            }
+        }
+
+        private float GetCookingTime()
+        {
+            if (!_currentCookingType.HasValue) return float.MaxValue;
             
-            var newId = new ProductId(product.Type, 
-                product.NextCookingStage, 
-                product.ChoppingStage);
+            return _currentCookingType.Value switch
+            {
+                CookingType.Frying => Product.FryingTime,
+                CookingType.Baking => Product.BakingTime,
+                _ => float.MaxValue
+            };
+        }
+
+        private ProductConfig GetNextConfig()
+        {
+            if (!_currentCookingType.HasValue) return null;
             
-            ProductUpdateRequested?.Invoke(newId);
+            return _currentCookingType.Value switch
+            {
+                CookingType.Frying => Product.NextFryingConfig,
+                CookingType.Baking => Product.NextBakingConfig,
+                _ => null
+            };
         }
     }
 }

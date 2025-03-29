@@ -23,10 +23,14 @@ namespace Kitchen.Products
 
         public void LoadDefaultProducts()
         {
-            var tomatoConfig = _productConfigsStorage.GetConfig(ProductType.Tomato, ProductCookingStage.Raw, ProductChoppingStage.Unchopped);
-            var beefConfig = _productConfigsStorage.GetConfig(ProductType.Beef, ProductCookingStage.Raw, ProductChoppingStage.Unchopped);
-            var saladConfig = _productConfigsStorage.GetConfig(ProductType.Salad, ProductCookingStage.Raw, ProductChoppingStage.Unchopped);
-            var doughConfig = _productConfigsStorage.GetConfig(ProductType.Dough, ProductCookingStage.Raw, ProductChoppingStage.Unchopped);
+            var tomatoConfig = _productConfigsStorage.GetConfig(ProductType.Tomato, ProductCookingStage.Raw, 
+                ProductChoppingStage.Unchopped, ProductShapeType.None, ProductAssemblyType.None);
+            var beefConfig = _productConfigsStorage.GetConfig(ProductType.Beef, ProductCookingStage.Raw, 
+                ProductChoppingStage.Unchopped, ProductShapeType.None, ProductAssemblyType.None);
+            var saladConfig = _productConfigsStorage.GetConfig(ProductType.Salad, ProductCookingStage.Raw, 
+                ProductChoppingStage.Unchopped, ProductShapeType.None, ProductAssemblyType.None);
+            var doughConfig = _productConfigsStorage.GetConfig(ProductType.Dough, ProductCookingStage.Raw, 
+                ProductChoppingStage.Unchopped, ProductShapeType.None, ProductAssemblyType.None);
             
             _products.Add(new Product(tomatoConfig));
             _products.Add(new Product(tomatoConfig));

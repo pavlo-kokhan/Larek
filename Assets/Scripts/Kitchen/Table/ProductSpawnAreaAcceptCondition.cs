@@ -6,7 +6,7 @@ namespace Kitchen.Table
     {
         public bool CanAcceptProduct(Product product)
         {
-            return product.CanBeSpawned && product.Prefab is not null;
+            return product.Prefab is not null;
         }
     }
 }
